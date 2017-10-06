@@ -11,7 +11,8 @@ import UIKit
 class PaperCell: UITableViewCell, Reusable {
 
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,11 +27,13 @@ class PaperCell: UITableViewCell, Reusable {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        print(bounds.width)
-        //여기서 더보기 히든 시킬 지 말지를 결정
-        //여기서 width 컨스트레인트를 결정
+        //TODO: 여기서 더보기 히든 시킬 지 말지를 결정
         
-        widthConstraint.constant = bounds.width < 415 ? bounds.width : bounds.width * 0.9
+        
+        //여기서 width 컨스트레인트를 결정
+        let margin = Global.textMargin(by: bounds.width)
+        leftConstraint.constant = margin
+        rightConstraint.constant = margin
     }
 
 

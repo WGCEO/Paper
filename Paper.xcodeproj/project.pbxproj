@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		DA3F2BAA1F82AE6200A556F5 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BA91F82AE6200A556F5 /* DefaultViewController.swift */; };
+		DA3F2BAC1F836B4500A556F5 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BAB1F836B4500A556F5 /* Global.swift */; };
+		DA3F2BAE1F83A2FA00A556F5 /* AnimatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */; };
+		DA3F2BB21F85D19900A556F5 /* PaperTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */; };
+		DA3F2BB41F85D2FB00A556F5 /* PianoTextView_UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BB31F85D2FB00A556F5 /* PianoTextView_UITextViewDelegate.swift */; };
+		DA3F2BB61F85D34600A556F5 /* PianoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BB51F85D34600A556F5 /* PianoEditor.swift */; };
+		DA3F2BB81F85D3DB00A556F5 /* PianoTextView_Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BB71F85D3DB00A556F5 /* PianoTextView_Notification.swift */; };
 		DAD3D6161F7A291C00FC029D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D6151F7A291C00FC029D /* AppDelegate.swift */; };
 		DAD3D61B1F7A291C00FC029D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD3D6191F7A291C00FC029D /* Main.storyboard */; };
 		DAD3D61D1F7A291C00FC029D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAD3D61C1F7A291C00FC029D /* Assets.xcassets */; };
@@ -29,6 +35,12 @@
 
 /* Begin PBXFileReference section */
 		DA3F2BA91F82AE6200A556F5 /* DefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
+		DA3F2BAB1F836B4500A556F5 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorFactory.swift; sourceTree = "<group>"; };
+		DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperTransition.swift; sourceTree = "<group>"; };
+		DA3F2BB31F85D2FB00A556F5 /* PianoTextView_UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_UITextViewDelegate.swift; sourceTree = "<group>"; };
+		DA3F2BB51F85D34600A556F5 /* PianoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoEditor.swift; sourceTree = "<group>"; };
+		DA3F2BB71F85D3DB00A556F5 /* PianoTextView_Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Notification.swift; sourceTree = "<group>"; };
 		DAD3D6121F7A291C00FC029D /* Paper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD3D6151F7A291C00FC029D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAD3D61A1F7A291C00FC029D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,11 +94,13 @@
 			children = (
 				DAD3D6151F7A291C00FC029D /* AppDelegate.swift */,
 				DAD3D6191F7A291C00FC029D /* Main.storyboard */,
+				DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */,
 				DA3F2BA91F82AE6200A556F5 /* DefaultViewController.swift */,
 				DAD3D62D1F7A2C3C00FC029D /* Reusable.swift */,
 				DAD3D63E1F7A36CF00FC029D /* CoreData.swift */,
 				DAD3D6421F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift */,
 				DAD3D6441F7A60A200FC029D /* ImageAttachment.swift */,
+				DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */,
 				DAD3D63C1F7A30D400FC029D /* PaperListViewController */,
 				DAD3D6391F7A30CE00FC029D /* PaperModel.xcdatamodeld */,
 				DAD3D63D1F7A35D400FC029D /* PaperViewController */,
@@ -102,6 +116,7 @@
 			children = (
 				DAD3D6271F7A29C500FC029D /* PaperListViewController.swift */,
 				DADD555C1F8297E500822753 /* PaperListHeaderView.swift */,
+				DA3F2BAB1F836B4500A556F5 /* Global.swift */,
 				DAD3D64A1F7B7D8400FC029D /* TagCollectionView.swift */,
 				DAD3D64C1F7B7F3E00FC029D /* PaperTableView.swift */,
 				DAD3D62B1F7A2C2C00FC029D /* PaperCell.swift */,
@@ -115,6 +130,9 @@
 			children = (
 				DAD3D6291F7A29DA00FC029D /* PaperViewController.swift */,
 				DAD3D6401F7A378A00FC029D /* PianoTextView.swift */,
+				DA3F2BB71F85D3DB00A556F5 /* PianoTextView_Notification.swift */,
+				DA3F2BB31F85D2FB00A556F5 /* PianoTextView_UITextViewDelegate.swift */,
+				DA3F2BB51F85D34600A556F5 /* PianoEditor.swift */,
 			);
 			path = PaperViewController;
 			sourceTree = "<group>";
@@ -198,10 +216,16 @@
 				DAD3D6281F7A29C500FC029D /* PaperListViewController.swift in Sources */,
 				DAD3D6471F7B1CE500FC029D /* TagCell.swift in Sources */,
 				DAD3D64B1F7B7D8400FC029D /* TagCollectionView.swift in Sources */,
+				DA3F2BAE1F83A2FA00A556F5 /* AnimatorFactory.swift in Sources */,
 				DADD555D1F8297E500822753 /* PaperListHeaderView.swift in Sources */,
+				DA3F2BB81F85D3DB00A556F5 /* PianoTextView_Notification.swift in Sources */,
+				DA3F2BAC1F836B4500A556F5 /* Global.swift in Sources */,
+				DA3F2BB61F85D34600A556F5 /* PianoEditor.swift in Sources */,
+				DA3F2BB41F85D2FB00A556F5 /* PianoTextView_UITextViewDelegate.swift in Sources */,
 				DAD3D6431F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift in Sources */,
 				DAD3D63F1F7A36CF00FC029D /* CoreData.swift in Sources */,
 				DAD3D62C1F7A2C2C00FC029D /* PaperCell.swift in Sources */,
+				DA3F2BB21F85D19900A556F5 /* PaperTransition.swift in Sources */,
 				DAD3D62A1F7A29DA00FC029D /* PaperViewController.swift in Sources */,
 				DAD3D6451F7A60A200FC029D /* ImageAttachment.swift in Sources */,
 				DAD3D63B1F7A30CE00FC029D /* PaperModel.xcdatamodeld in Sources */,

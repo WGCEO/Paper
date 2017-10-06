@@ -12,6 +12,7 @@ import CoreData
 class PaperTableView: UITableView {
     
     private var paperResultsController: NSFetchedResultsController<Paper>!
+    weak var paperListViewController: PaperListViewController?
     
 
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +37,7 @@ class PaperTableView: UITableView {
         } else {
             predicate = NSPredicate(format: "inTrash == false")
         }
-        let order = NSSortDescriptor(key: #keyPath(Paper.date), ascending: false)
+        let order = NSSortDescriptor(key: #keyPath(Paper.modifiedDate), ascending: false)
         request.predicate = predicate
         request.sortDescriptors = [order]
         paperResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
@@ -72,7 +73,9 @@ extension PaperTableView : UITableViewDataSource {
         mutableStr.addAttributes([.paragraphStyle: mutableParagraph], range: NSMakeRange(0, mutableStr.length))
         cell.label.attributedText = mutableStr
         
-        cell.widthConstraint.constant = bounds.width < 415 ? bounds.width : bounds.width * 0.9
+        let margin = Global.textMargin(by: bounds.width)
+        cell.leftConstraint.constant = margin
+        cell.rightConstraint.constant = margin
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,7 +85,7 @@ extension PaperTableView : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 30
         return paperResultsController.sections?[section].numberOfObjects ?? 0
     }
     
@@ -95,6 +98,9 @@ extension PaperTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let generator = UISelectionFeedbackGenerator()
         generator.selectionChanged()
+        let cell = cellForRow(at: indexPath) as! PaperCell
+        paperListViewController?.transition.paperCell = cell
+        paperListViewController?.performSegue(withIdentifier: "PaperViewController", sender: cell.label.attributedText)
         
     }
     

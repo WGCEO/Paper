@@ -10,16 +10,18 @@ import UIKit
 
 class DefaultViewController: UIViewController {
     
-    private lazy var statusView: UIView = {
+    lazy var statusView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.95)
+        view.backgroundColor = UIColor.groupTableViewBackground.withAlphaComponent(0.95)
         view.frame = UIApplication.shared.statusBarFrame
+        view.tag = 10
         return view
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(statusView)
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

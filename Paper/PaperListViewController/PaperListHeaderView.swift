@@ -10,12 +10,17 @@ import UIKit
 
 class PaperListHeaderView: UIView {
 
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
     
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        widthConstraint.constant = bounds.width < 415 ? bounds.width : bounds.width * 0.9
+        
+        //여기서 width 컨스트레인트를 결정
+        let margin = Global.textMargin(by: bounds.width)
+        leftConstraint.constant = margin
+        rightConstraint.constant = margin
     }
 
 }
