@@ -12,6 +12,7 @@ extension PianoTextView {
     
     internal func updateAllCalculateAttr(){
         defaultAttributes = calculateDefaultAttributes()
+        defaultAttributesWithoutParaStyle = calculateDefaultAttributesWithoutParagraph()
         circleKern = calculateCircleKern()
         starKern = calculateStarKern()
         refKern = calculateRefKern()

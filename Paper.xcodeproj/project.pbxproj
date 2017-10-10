@@ -18,6 +18,7 @@
 		DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */; };
 		DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */; };
 		DAC697271F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697261F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift */; };
+		DAC6BF0B1F8C95D700702485 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6BF0A1F8C95D700702485 /* TestViewController.swift */; };
 		DACBCACE1F8B186C003DEC7F /* PianoPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACBCACD1F8B186C003DEC7F /* PianoPickerView.xib */; };
 		DACBCAD21F8B1A1E003DEC7F /* PianoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBCAD11F8B1A1E003DEC7F /* PianoPickerView.swift */; };
 		DACBCAD41F8B3502003DEC7F /* PianoAttributeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBCAD31F8B3502003DEC7F /* PianoAttributeStyle.swift */; };
@@ -75,6 +76,7 @@
 		DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Effectable.swift; sourceTree = "<group>"; };
 		DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Cursor.swift; sourceTree = "<group>"; };
 		DAC697261F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PianoTextView_UITextViewDelegate.swift; path = ../../Shared/PianoTextView_UITextViewDelegate.swift; sourceTree = "<group>"; };
+		DAC6BF0A1F8C95D700702485 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		DACBCACD1F8B186C003DEC7F /* PianoPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PianoPickerView.xib; sourceTree = "<group>"; };
 		DACBCAD11F8B1A1E003DEC7F /* PianoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoPickerView.swift; sourceTree = "<group>"; };
 		DACBCAD31F8B3502003DEC7F /* PianoAttributeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoAttributeStyle.swift; sourceTree = "<group>"; };
@@ -140,7 +142,6 @@
 				DACBCAD51F8B35D3003DEC7F /* PianoView.swift */,
 				DACBCAD71F8B38C6003DEC7F /* PianoViewData.swift */,
 				DACBCAD31F8B3502003DEC7F /* PianoAttributeStyle.swift */,
-				DAC6971E1F8B57A7008071E4 /* PianoTextView_Form.swift */,
 				DACBCACD1F8B186C003DEC7F /* PianoPickerView.xib */,
 				DACBCAD11F8B1A1E003DEC7F /* PianoPickerView.swift */,
 				DACBCADB1F8B3906003DEC7F /* PianoControl.swift */,
@@ -190,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				DAD3D6191F7A291C00FC029D /* Main.storyboard */,
+				DAC6BF0A1F8C95D700702485 /* TestViewController.swift */,
 				DAD3D61E1F7A291C00FC029D /* LaunchScreen.storyboard */,
 				DAD3D61C1F7A291C00FC029D /* Assets.xcassets */,
 			);
@@ -222,6 +224,7 @@
 				DAC697261F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift */,
 				DACBCADD1F8B47B0003DEC7F /* PianoTextView_NSAttributedStringKey.swift */,
 				DA6E023A1F88592E0082576A /* PianoTextView_CoreData.swift */,
+				DAC6971E1F8B57A7008071E4 /* PianoTextView_Form.swift */,
 				DACBCAE11F8B505F003DEC7F /* PianoTextView_PhotoViewDelegate.swift */,
 				DAD3D6441F7A60A200FC029D /* ImageAttachment.swift */,
 				DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */,
@@ -389,6 +392,7 @@
 			files = (
 				DA3F2BAA1F82AE6200A556F5 /* DefaultViewController.swift in Sources */,
 				DAD3D64D1F7B7F3E00FC029D /* PaperTableView.swift in Sources */,
+				DAC6BF0B1F8C95D700702485 /* TestViewController.swift in Sources */,
 				DACBCAE41F8B51F4003DEC7F /* ImageCell.swift in Sources */,
 				DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */,
 				DAD3D6161F7A291C00FC029D /* AppDelegate.swift in Sources */,

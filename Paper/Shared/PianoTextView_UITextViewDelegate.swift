@@ -31,7 +31,7 @@ extension PianoTextView: UITextViewDelegate {
             && !attributedText.containsAttachments(in: range)
             && text != "\n"
             && text != "" {
-            jumpCursorToBothSide(paragraphRange: currentParagraphRange)
+            jumpCursorToRightSide(paragraphRange: currentParagraphRange)
         }
         
         return removeAttrOrInsertFormAtNextLineifNeeded(in: currentParagraphRange, replacementText: text)

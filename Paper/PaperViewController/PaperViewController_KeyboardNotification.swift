@@ -26,7 +26,7 @@ extension PaperViewController {
             else { return }
         
         
-        textView.kbHeight = UIScreen.main.bounds.height - kbFrame.origin.y
+        kbHeight = UIScreen.main.bounds.height - kbFrame.origin.y
         let bottom = UIScreen.main.bounds.height - kbFrame.origin.y
         textView.contentInset.bottom = bottom
         textView.scrollIndicatorInsets.bottom = bottom
@@ -49,7 +49,7 @@ extension PaperViewController {
         }
     }
     @objc internal func keyboardDidHide(notification: Notification){
-         textView.photoView.reset()
+         textView.inputView = nil
     }
     
 }

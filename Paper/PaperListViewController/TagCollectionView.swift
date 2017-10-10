@@ -17,7 +17,7 @@ class TagCollectionView: UICollectionView {
     
     weak var table: Filterable?
     var batchUpdateOperation: [BlockOperation] = []
-    private var selectedTags: [Tag] = [] {
+    internal var selectedTags: [Tag] = [] {
         didSet {
             table?.filter(before: oldValue, after: selectedTags)
         }

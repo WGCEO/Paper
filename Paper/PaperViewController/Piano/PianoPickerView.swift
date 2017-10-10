@@ -19,6 +19,27 @@ class PianoPickerView: UIView {
     @IBOutlet weak var headerButton: UIButton!
     @IBOutlet var pickerButtons: [UIButton]!
     
+    //페이퍼의 color에 맞춰 세팅
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        guard let colorString = CoreData.sharedInstance.paper.color else { return }
+        for button in pickerButtons {
+            switch button.tag {
+            case 0:
+                let image = UIImage(named: colorString + "Color")
+                button.setImage(image, for: .normal)
+            case 3:
+                let image = UIImage(named: colorString + "Underline")
+                button.setImage(image, for: .normal)
+            case 4:
+                let image = UIImage(named: colorString + "Strikethrough")
+                button.setImage(image, for: .normal)
+            default:
+                ()
+            }
+        }
+    }
+    
     @IBAction func tapPickerButton(_ sender: UIButton) {
         if wasDoubleTappedHeader(button: sender) {
             headerPickerView.isHidden = false
@@ -44,27 +65,4 @@ class PianoPickerView: UIView {
             })
         }
     }
-    
-    internal func updatePianoPickerView(colorName: String){
-        
-        for button in pickerButtons {
-            switch button.tag {
-            case 0:
-                let image = UIImage(named: colorName + "Color")
-                button.setImage(image, for: .normal)
-                
-                //4. 첫번째 컬러 세팅하기(첫번째 버튼이 탭된 것처럼 델리게이트에 전달해주기)
-                delegate?.pianoPickerView(self, didSelectPickerAt: 0)
-            case 3:
-                let image = UIImage(named: colorName + "Underline")
-                button.setImage(image, for: .normal)
-            case 4:
-                let image = UIImage(named: colorName + "Strikethrough")
-                button.setImage(image, for: .normal)
-            default:
-                ()
-            }
-        }
-    }
-    
 }

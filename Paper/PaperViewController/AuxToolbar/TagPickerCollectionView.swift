@@ -62,6 +62,13 @@ extension TagPickerCollectionView: UICollectionViewDataSource {
     private func configure(cell: TagPickerCell, indexPath: IndexPath) {
         let tag = tagResultsController.object(at: indexPath)
         cell.label.text = tag.name
+        
+        if let tags = CoreData.sharedInstance.paper.tags, tags.contains(tag) {
+            cell.backgroundColor = UIColor.red
+        } else {
+            cell.backgroundColor = UIColor.white
+        }
+        
     }
 }
 

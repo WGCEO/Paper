@@ -31,22 +31,10 @@ class PianoTextView: UITextView {
         super.init(coder: aDecoder)
         setup()
     }
-
-    //MARK: ReactCursor
-    internal var kbHeight: CGFloat?
     
     //MARK: Piano
     public var control = PianoControl()
     internal var coverView: UIView?
-    
-    //MARK: InputView
-    internal lazy var photoView: PhotoView = {
-        let nib = UINib(nibName: "PhotoView", bundle: nil)
-        let photoView: PhotoView = nib.instantiate(withOwner: self, options: nil).first as! PhotoView
-        photoView.delegate = self
-        photoView.frame.size.height = self.kbHeight ?? 0
-        return photoView
-    }()
  
     //MARK: Attribute
     lazy var defaultAttributes: [NSAttributedStringKey : Any] = {
@@ -120,30 +108,3 @@ extension PianoTextView: NSTextStorageDelegate {
         }
     }
 }
-
-//MARK: IBAction
-extension PianoTextView {
-    @IBAction func tapImageButton(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        inputView = sender.isSelected ? photoView : nil
-        mirrorScrollView.isHidden = sender.isSelected ? true : false
-        reloadInputViews()
-        if !sender.isSelected {
-            photoView.reset()
-            keyboardType = .default
-            reloadInputViews()
-        } else {
-            photoView.fetchImages()
-        }
-    }
-    
-    @IBAction func tapMirroringButton(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-        mirrorScrollView.isHidden = sender.isSelected && !imageButton.isSelected ? false : true
-    }
-    
-    @IBAction func tapHideKeyboardButton(_ sender: UIButton) {
-        resignFirstResponder()
-    }
-}
-

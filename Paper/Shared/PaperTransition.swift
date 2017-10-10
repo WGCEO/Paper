@@ -12,6 +12,7 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
     
     internal var operation: UINavigationControllerOperation = .push
     weak var paperCell: PaperCell?
+    weak var createPaperButton: UIButton?
     var interactive = false
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
@@ -54,13 +55,15 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut)
         
-        if let cell = paperCell,
-            let navHeight = transitionContext.viewController(forKey: .from)?
+        guard let navHeight = transitionContext.viewController(forKey: .from)?
             .navigationController?.navigationBar.bounds.height,
             let isNavigationBarHidden = transitionContext.viewController(forKey: .from)?
-                .navigationController?.isNavigationBarHidden {
+                .navigationController?.isNavigationBarHidden
+            else { return animator }
+        
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        if let cell = paperCell {
             animator.addAnimations {
-                let statusBarHeight = UIApplication.shared.statusBarFrame.height
                 let textView = from.viewWithTag(20) as! PianoTextView
                 
                 let offsetY = !isNavigationBarHidden ?
@@ -70,11 +73,24 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
                 textView.contentOffset.y += offsetY
                 from.frame = cell.label.convert(cell.label.bounds, to: from)
             }
+        } else if let button = createPaperButton {
+            animator.addAnimations {
+                let textView = from.viewWithTag(20) as! PianoTextView
+                
+                let offsetY = !isNavigationBarHidden ?
+                    (statusBarHeight + navHeight + textView.textContainerInset.top) :
+                    (statusBarHeight + textView.textContainerInset.top)
+                
+                textView.contentOffset.y += offsetY
+                from.frame = button.convert(button.bounds, to: from)
+            }
         }
         
         //4. UIKit에게 트랜지션이 끝났다는 걸 알려야 함
-        animator.addCompletion {_ in
+        animator.addCompletion {[weak self]_ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            self?.paperCell = nil
+            self?.createPaperButton = nil
         }
         return animator
     }
@@ -93,6 +109,10 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
         if let cell = paperCell {
             let textView = to.viewWithTag(20) as! PianoTextView
             to.frame = cell.label.convert(cell.label.bounds, to: to)
+            to.frame.origin.y -= textView.textContainerInset.top
+        } else if let button = createPaperButton {
+            let textView = to.viewWithTag(20) as! PianoTextView
+            to.frame = button.convert(button.bounds, to: to)
             to.frame.origin.y -= textView.textContainerInset.top
         }
         

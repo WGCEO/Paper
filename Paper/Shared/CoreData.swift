@@ -16,7 +16,11 @@ class CoreData: NSPersistentContainer {
     }()
     
     weak var textView: PianoTextView?
-    internal var paper: Paper!
+    internal var paper: Paper!{
+        didSet {
+            //TODO: 텍스트뷰를 유저가 편집했다면 기존 올드 페이퍼는 비동기로 저장시키기
+        }
+    }
     internal lazy var privateMOC: NSManagedObjectContext = {
         let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         moc.parent = self.viewContext
@@ -190,18 +194,18 @@ extension CoreData {
 //    }
     
     //세팅 없다면 생성하기
-//    internal func createSettingIfNeeded(){
-//        do {
-//            let request: NSFetchRequest<Setting> = Setting.fetchRequest()
-//            let count = try viewContext.count(for: request)
-//            if count == 0 {
-//                let setting = Setting(context: viewContext)
-//                setting.typoProcess = 0
-//                saveViewContext()
-//            }
-//            
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//    }
+    internal func createPreferenceIfNeeded(){
+        do {
+            let request: NSFetchRequest<Preference> = Preference.fetchRequest()
+            let count = try viewContext.count(for: request)
+            if count == 0 {
+                let preference = Preference(context: viewContext)
+                preference.showMirroring = false
+                saveViewContext()
+            }
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

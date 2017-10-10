@@ -95,4 +95,9 @@ struct Global {
             return screenWidth / 6.7
         }
     }
+    
+    static func userFeedback() {
+        let generator = UISelectionFeedbackGenerator()
+        generator.selectionChanged()
+    }
 }

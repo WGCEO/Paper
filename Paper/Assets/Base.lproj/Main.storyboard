@@ -24,14 +24,25 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKt-Kc-k7Y">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uKt-Kc-k7Y">
                                             <rect key="frame" x="0.0" y="4" width="375" height="52"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="52" id="xpn-F8-c6w"/>
                                             </constraints>
                                             <inset key="titleEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="새로운 글을 작성해보세요."/>
+                                            <state key="normal">
+                                                <attributedString key="attributedTitle">
+                                                    <fragment content="새로운 글을 작성해보세요.">
+                                                        <attributes>
+                                                            <font key="NSFont" metaFont="system" size="15"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                            </state>
+                                            <connections>
+                                                <action selector="tapCreatePaperButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z7e-Jf-eLh"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -231,7 +242,6 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
-                                    <outlet property="imageButton" destination="sxd-nM-oJg" id="4OO-TP-6aD"/>
                                     <outlet property="mirrorScrollView" destination="ntm-AW-Gwr" id="xi9-fK-eQ3"/>
                                     <outlet property="mirrorScrollViewBottom" destination="JpB-iE-saq" id="bEe-mY-WqU"/>
                                 </connections>
@@ -273,7 +283,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                 </constraints>
                                 <state key="normal" image="image"/>
                                 <connections>
-                                    <action selector="tapImageButton:" destination="lYK-Yn-3LW" eventType="touchUpInside" id="WBA-Ka-g4d"/>
+                                    <action selector="tapImageButton:" destination="emW-bc-vcM" eventType="touchUpInside" id="JVQ-4I-Yku"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2n-g8-djy">
@@ -284,7 +294,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                 </constraints>
                                 <state key="normal" image="keyboardDown"/>
                                 <connections>
-                                    <action selector="tapHideKeyboardButton:" destination="lYK-Yn-3LW" eventType="touchUpInside" id="OdW-UZ-HB0"/>
+                                    <action selector="tapHideKeyboardButton:" destination="emW-bc-vcM" eventType="touchUpInside" id="5aD-w9-wpS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkm-cM-Ayy">
@@ -295,7 +305,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                 </constraints>
                                 <state key="normal" image="mirroringOn"/>
                                 <connections>
-                                    <action selector="tapMirroringButton:" destination="lYK-Yn-3LW" eventType="touchUpInside" id="HyQ-Zb-ASi"/>
+                                    <action selector="tapMirroringButton:" destination="emW-bc-vcM" eventType="touchUpInside" id="zYn-ga-RmD"/>
                                 </connections>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="30" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="759-AZ-MU0">
@@ -303,7 +313,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                 <items>
                                     <barButtonItem style="plain" id="7r3-8v-8d8">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tqL-z2-Lom">
-                                            <rect key="frame" x="16" y="10" width="35" height="24"/>
+                                            <rect key="frame" x="16" y="10" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="hashtag"/>
                                             <state key="selected" image="xClose"/>
@@ -312,7 +322,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="fcG-yH-B2p"/>
                                     <barButtonItem style="plain" id="5Ni-Ic-06w">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aCS-lX-rqz">
-                                            <rect key="frame" x="103" y="10" width="24" height="24"/>
+                                            <rect key="frame" x="97" y="10" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="highlight"/>
                                             <state key="selected" image="xClose"/>
@@ -321,7 +331,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="u0Y-hF-lNM"/>
                                     <barButtonItem style="plain" id="VdT-4U-QPX">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FqF-hu-n3h">
-                                            <rect key="frame" x="178.5" y="10" width="24" height="24"/>
+                                            <rect key="frame" x="177.5" y="10" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="image"/>
                                             <state key="selected" image="xClose"/>
@@ -330,7 +340,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cPO-Sn-MWc"/>
                                     <barButtonItem style="plain" id="FjD-pi-zoC">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g4O-Wn-aPp">
-                                            <rect key="frame" x="254.5" y="10" width="24" height="24"/>
+                                            <rect key="frame" x="258.5" y="10" width="24" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="fontsize"/>
                                             <state key="selected" image="xClose"/>
@@ -339,7 +349,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="goI-bL-4y4"/>
                                     <barButtonItem style="plain" id="LrR-Uk-nio">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aab-cI-afJ">
-                                            <rect key="frame" x="330" y="8.5" width="29" height="27"/>
+                                            <rect key="frame" x="339" y="8.5" width="20" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="export"/>
                                             <state key="selected" image="xClose"/>
@@ -377,6 +387,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="imageButton" destination="sxd-nM-oJg" id="PaL-5z-hqb"/>
                         <outlet property="textView" destination="lYK-Yn-3LW" id="IfN-wM-9Ur"/>
                         <outlet property="textViewTop" destination="gVW-ZC-6k8" id="i5r-0a-uMb"/>
                         <outlet property="toolbar" destination="759-AZ-MU0" id="8vg-hc-a8q"/>
@@ -401,6 +412,37 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1741.5999999999999" y="32.833583208395808"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="Y2h-lo-Wez">
+            <objects>
+                <viewController id="V3Q-wg-dMh" customClass="TestViewController" customModule="Paper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Pv-qX-c3S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="16" maxValue="23" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9I-jy-rkd">
+                                <rect key="frame" x="14" y="110" width="347" height="31"/>
+                                <connections>
+                                    <action selector="changeValue:" destination="V3Q-wg-dMh" eventType="valueChanged" id="uDf-xB-MWZ"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="p9I-jy-rkd" firstAttribute="leading" secondItem="Mc5-D8-uhC" secondAttribute="leading" constant="16" id="Rp8-7v-8mw"/>
+                            <constraint firstItem="Mc5-D8-uhC" firstAttribute="trailing" secondItem="p9I-jy-rkd" secondAttribute="trailing" constant="16" id="gug-p9-DpZ"/>
+                            <constraint firstItem="p9I-jy-rkd" firstAttribute="top" secondItem="Mc5-D8-uhC" secondAttribute="top" constant="90" id="vNE-De-ZJF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Mc5-D8-uhC"/>
+                    </view>
+                    <connections>
+                        <outlet property="slider" destination="p9I-jy-rkd" id="Mg1-Bp-qyi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BNa-z8-Aqu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3141" y="-187"/>
         </scene>
         <!--Paper Navigation View Controller-->
         <scene sceneID="vJq-SC-t0j">

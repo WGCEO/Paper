@@ -85,7 +85,6 @@ extension PaperTableView : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
         return paperResultsController.sections?[section].numberOfObjects ?? 0
     }
     
@@ -96,12 +95,15 @@ extension PaperTableView : UITableViewDataSource {
 
 extension PaperTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let generator = UISelectionFeedbackGenerator()
-        generator.selectionChanged()
+        Global.userFeedback()
+        
         let cell = cellForRow(at: indexPath) as! PaperCell
         if let navVC = paperListViewController?.navigationController as? PaperNavigationViewController {
             navVC.transition.paperCell = cell
         }
+        
+        let paper = paperResultsController.object(at: indexPath)
+        CoreData.sharedInstance.paper = paper
         paperListViewController?.performSegue(withIdentifier: "PaperViewController", sender: cell.label.attributedText)
         
     }

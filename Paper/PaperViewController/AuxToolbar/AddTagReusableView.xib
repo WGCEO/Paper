@@ -38,7 +38,7 @@
             <connections>
                 <outlet property="label" destination="ast-L3-dPv" id="lqR-RV-bXK"/>
             </connections>
-            <point key="canvasLocation" x="-42" y="51.5"/>
+            <point key="canvasLocation" x="-42" y="51"/>
         </collectionReusableView>
     </objects>
 </document>
