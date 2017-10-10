@@ -99,7 +99,9 @@ extension PaperTableView: UITableViewDelegate {
         let generator = UISelectionFeedbackGenerator()
         generator.selectionChanged()
         let cell = cellForRow(at: indexPath) as! PaperCell
-        paperListViewController?.transition.paperCell = cell
+        if let navVC = paperListViewController?.navigationController as? PaperNavigationViewController {
+            navVC.transition.paperCell = cell
+        }
         paperListViewController?.performSegue(withIdentifier: "PaperViewController", sender: cell.label.attributedText)
         
     }

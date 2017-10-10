@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import CoreData
 
 class PianoTextView: UITextView {
-    
-    weak var editor: PianoEditor?
+
     var userEdited: Bool = false
-    var paper: Paper!
+    @IBOutlet weak var mirrorScrollView: MirrorScrollView!
+    @IBOutlet weak var imageButton: UIButton!
+    @IBOutlet weak var mirrorScrollViewBottom: NSLayoutConstraint!
     
-     /*
     override var typingAttributes: [String : Any] {
         get {
             var attributes: [String : Any] = [:]
@@ -26,57 +25,29 @@ class PianoTextView: UITextView {
         } set {
         }
     }
-    */
+    
     //MARK: Init
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
-        registerKeyboardNotification()
     }
-    
-    deinit {
-        unRegisterKeyboardNotification()
-    }
-    /*
-    //MARK: CoreData
-    //휴지통을 눌러서 계속 지워나갈 때 마다, 지운 메모를 제외한 최신 메모를 가져옴. 만약 메모가 없을 경우, 직접 노트 생성
-    internal var note: Note! = CoreData.sharedInstance.fetchNote() {
-        didSet {
-            if userEdited {
-                CoreData.sharedInstance.asyncSave(attrString: attributedText, to: oldValue)
-                userEdited = false
-            }
-     
-            updateTextView()
-            //폰트에 의해 바뀌어야 하는 값들 업데이트
-            updateAllCalculateAttr()
-            editor?.updatePianoViews()
- 
-            changeCreateNoteButtonState()
-        }
-    }
-    */
+
     //MARK: ReactCursor
     internal var kbHeight: CGFloat?
     
     //MARK: Piano
-    /*
     public var control = PianoControl()
- 
-     */
     internal var coverView: UIView?
     
-    /*
     //MARK: InputView
-    internal lazy var imagePickerView: ImagePickerView = {
-        let nib = UINib(nibName: "ImagePickerView", bundle: nil)
-        let imagePickerView: ImagePickerView = nib.instantiate(withOwner: self, options: nil).first as! ImagePickerView
-        imagePickerView.delegate = self
-        imagePickerView.frame.size.height = self.kbHeight ?? 0
-        imagePickerView.setup()
-        return imagePickerView
+    internal lazy var photoView: PhotoView = {
+        let nib = UINib(nibName: "PhotoView", bundle: nil)
+        let photoView: PhotoView = nib.instantiate(withOwner: self, options: nil).first as! PhotoView
+        photoView.delegate = self
+        photoView.frame.size.height = self.kbHeight ?? 0
+        return photoView
     }()
-    
+ 
     //MARK: Attribute
     lazy var defaultAttributes: [NSAttributedStringKey : Any] = {
         return calculateDefaultAttributes()
@@ -91,59 +62,46 @@ class PianoTextView: UITextView {
     lazy var starKern: CGFloat = { calculateStarKern() }()
     lazy var refKern: CGFloat = { calculateRefKern() }()
  
- 
-     */
 }
 
 //MARK: setup
 extension PianoTextView {
-    
-    private func setup(){
-        //임시코드
-        let mutableParagraph = NSMutableParagraphStyle()
-        mutableParagraph.lineSpacing = 8
-        mutableParagraph.firstLineHeadIndent = 30
-        mutableParagraph.headIndent = 30
-        mutableParagraph.tailIndent = -30
+    internal func setup(){
+        guard let paper = CoreData.sharedInstance.paper else { return }
+        textColor = Global.textColor
+        font = Global.transformToFont(name: paper.font!)
+        attributedText = CoreData.sharedInstance.paperFullContent()
+        tintColor = Global.transFormToColor(name: paper.color!)
+        updateAllCalculateAttr()
         
-        let mutableStr = NSMutableAttributedString(attributedString: attributedText!)
-        mutableStr.addAttributes([.paragraphStyle: mutableParagraph], range: NSMakeRange(0, mutableStr.length))
-        attributedText = mutableStr
-        //임시코드 여기까지
-        
-        /*
-        tintColor = Global.transFormToColor(name: note.color)
-         */
         delegate = self
         textContainer.lineFragmentPadding = 0
         textContainerInset.top = 16
         textContainerInset.bottom = 80
+        
         //코어데이터 세팅
-        /*xb
         CoreData.sharedInstance.textView = self
-        updateTextView()
+        
         //typingAttribute의 문단 세팅
         for (key, value) in defaultAttributes {
             typingAttributes[key.rawValue] = value
         }
         
         layoutManager.usesFontLeading = false
-        
         textStorage.delegate = self
-         */
         
         //TODO: 아이패드의 하단 바를 숨기기위한 방법. 이거 나중에 체크하기
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
+        
+        if CoreData.sharedInstance.preference.showMirroring {
+            mirrorScrollView.isHidden = false
+        }
     }
-    /*
-    internal func changeCreateNoteButtonState() {
-        editor?.createNoteButton.isEnabled = attributedText.length != 0 ? true : false
-    }
-     */
+    
 }
 
-/*
+
 extension PianoTextView: NSTextStorageDelegate {
     //    func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
     //        if editedMask.rawValue == 3 && editedRange.length == 1 && self.isEditable  {
@@ -152,6 +110,7 @@ extension PianoTextView: NSTextStorageDelegate {
     //        print("\(editedMask) \(editedRange), \(delta)")
     //    }
     
+    
     func textStorage(_ textStorage: NSTextStorage, willProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
         if editedMask.rawValue == 3 &&
             self.isEditable &&
@@ -159,24 +118,32 @@ extension PianoTextView: NSTextStorageDelegate {
             
             textStorage.addAttributes(defaultAttributesWithoutParaStyle, range: editedRange)
         }
-        //        print("\(editedMask) \(editedRange), \(delta)")
     }
-    
 }
 
+//MARK: IBAction
 extension PianoTextView {
     @IBAction func tapImageButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        inputView = sender.isSelected ? imagePickerView : nil
-        editor?.mirrorScrollView.isHidden = sender.isSelected ? true : false
+        inputView = sender.isSelected ? photoView : nil
+        mirrorScrollView.isHidden = sender.isSelected ? true : false
         reloadInputViews()
         if !sender.isSelected {
-            imagePickerView.reset()
+            photoView.reset()
             keyboardType = .default
             reloadInputViews()
         } else {
-            imagePickerView.fetchImages()
+            photoView.fetchImages()
         }
     }
+    
+    @IBAction func tapMirroringButton(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        mirrorScrollView.isHidden = sender.isSelected && !imageButton.isSelected ? false : true
+    }
+    
+    @IBAction func tapHideKeyboardButton(_ sender: UIButton) {
+        resignFirstResponder()
+    }
 }
- */
+

@@ -15,15 +15,32 @@ class CoreData: NSPersistentContainer {
         return createContainer()
     }()
     
+    weak var textView: PianoTextView?
+    internal var paper: Paper!
     internal lazy var privateMOC: NSManagedObjectContext = {
         let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         moc.parent = self.viewContext
         return moc
     }()
+    private var cache: [NSAttributedString : Paper] = [:]
+    internal func paperFullContent() -> NSAttributedString {
+        for (key, value) in self.cache {
+            if value == paper {
+                return key
+            }
+        }
+        return NSKeyedUnarchiver.unarchiveObject(with: paper.fullContent!) as! NSAttributedString
+    }
     
-    internal var cache: [NSAttributedString : Paper] = [:]
+    internal var paperFont: UIFont {
+        get {
+            return Global.transformToFont(name: paper.font!)
+        }
+    }
     
-    weak var textView: PianoTextView!
+    internal var paperColor: UIColor {
+        return Global.transFormToColor(name: paper.color!)
+    }
     
     lazy var preference: Preference = {
         do {
@@ -31,7 +48,7 @@ class CoreData: NSPersistentContainer {
             let preference = try viewContext.fetch(request).first!
             return preference
         } catch {
-            print("세팅 초기화 하는 도중 에러")
+            print("Preference 초기화 하는 도중 에러")
         }
         let preference = Preference(context: viewContext)
         saveViewContext()
@@ -101,8 +118,8 @@ extension CoreData {
     
     internal func syncSaveAllNote(){
         //TODO: 프라이빗 큐에서 정상 저장되는 지 체크해보기, unowned self가 되는지 체크
-        let attrText = textView.attributedText.copy() as! NSAttributedString
-        cache[attrText] = textView.paper
+        guard let attrText = textView?.attributedText.copy() as? NSAttributedString else { return }
+        cache[attrText] = paper
         privateMOC.performAndWait { [unowned self] in
             for (attrString, paper) in self.cache {
                 

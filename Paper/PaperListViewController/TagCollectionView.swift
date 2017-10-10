@@ -57,7 +57,6 @@ class TagCollectionView: UICollectionView {
         }
         return tagResultsController
     }()
-
 }
 
 extension TagCollectionView: UICollectionViewDataSource {

@@ -1,14 +1,14 @@
 //
-//  PianoEditor.swift
+//  FontPickerView.swift
 //  Paper
 //
-//  Created by changi kim on 2017. 10. 5..
+//  Created by changi kim on 2017. 10. 10..
 //  Copyright © 2017년 Piano. All rights reserved.
 //
 
 import UIKit
 
-class PianoEditor: UIView {
+class FontPickerView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.

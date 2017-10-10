@@ -208,66 +208,204 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dEE-Tq-8Hu">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ds6-BQ-qsQ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="20" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lYK-Yn-3LW" customClass="PianoTextView" customModule="Paper" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="손가락이 형광펜이 되어, 글자들을 편집합니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbH-WW-Br9">
+                                        <rect key="frame" x="125.5" y="7" width="123.5" height="31.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="lYK-Yn-3LW" secondAttribute="trailing" id="HpO-qX-8rt"/>
-                                    <constraint firstAttribute="bottom" secondItem="lYK-Yn-3LW" secondAttribute="bottom" id="RP9-MC-6yZ"/>
-                                    <constraint firstItem="lYK-Yn-3LW" firstAttribute="leading" secondItem="dEE-Tq-8Hu" secondAttribute="leading" id="Tk8-pe-an6"/>
-                                    <constraint firstItem="lYK-Yn-3LW" firstAttribute="top" secondItem="dEE-Tq-8Hu" secondAttribute="top" id="nSq-lR-lqa"/>
+                                    <constraint firstItem="QbH-WW-Br9" firstAttribute="centerX" secondItem="Ds6-BQ-qsQ" secondAttribute="centerX" id="AyV-d4-psu"/>
+                                    <constraint firstAttribute="height" constant="44" id="DD5-V9-eqg"/>
+                                    <constraint firstItem="QbH-WW-Br9" firstAttribute="centerY" secondItem="Ds6-BQ-qsQ" secondAttribute="centerY" id="nVL-nD-Bj2"/>
                                 </constraints>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="20" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="lYK-Yn-3LW" customClass="PianoTextView" customModule="Paper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="imageButton" destination="sxd-nM-oJg" id="4OO-TP-6aD"/>
+                                    <outlet property="mirrorScrollView" destination="ntm-AW-Gwr" id="xi9-fK-eQ3"/>
+                                    <outlet property="mirrorScrollViewBottom" destination="JpB-iE-saq" id="bEe-mY-WqU"/>
+                                </connections>
+                            </textView>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ntm-AW-Gwr" customClass="MirrorScrollView" customModule="Paper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="667" width="375" height="37"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="d" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yK-D4-3O4">
+                                        <rect key="frame" x="0.0" y="0.0" width="18" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQK-sA-aNh">
+                                        <rect key="frame" x="0.0" y="0.0" width="1" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="5yK-D4-3O4" secondAttribute="bottom" id="GeG-vN-VVf"/>
+                                    <constraint firstAttribute="trailing" secondItem="5yK-D4-3O4" secondAttribute="trailing" id="M1E-Eq-xrC"/>
+                                    <constraint firstItem="5yK-D4-3O4" firstAttribute="height" secondItem="ntm-AW-Gwr" secondAttribute="height" id="PZE-hj-CGE"/>
+                                    <constraint firstItem="5yK-D4-3O4" firstAttribute="leading" secondItem="ntm-AW-Gwr" secondAttribute="leading" id="TqK-4H-Teu"/>
+                                    <constraint firstItem="5yK-D4-3O4" firstAttribute="top" secondItem="ntm-AW-Gwr" secondAttribute="top" id="yjs-Wq-ZH7"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="mrCursorView" destination="PQK-sA-aNh" id="ajC-WU-1Hd"/>
+                                    <outlet property="mrLabel" destination="5yK-D4-3O4" id="lQx-11-UYE"/>
+                                    <outletCollection property="gestureRecognizers" destination="bYn-rc-CjJ" appends="YES" id="Nhn-VF-6tk"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sxd-nM-oJg">
+                                <rect key="frame" x="0.0" y="667" width="40" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="7Pf-sD-sJA"/>
+                                    <constraint firstAttribute="width" constant="40" id="sjZ-4M-7z3"/>
+                                </constraints>
+                                <state key="normal" image="image"/>
+                                <connections>
+                                    <action selector="tapImageButton:" destination="lYK-Yn-3LW" eventType="touchUpInside" id="WBA-Ka-g4d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2n-g8-djy">
+                                <rect key="frame" x="335" y="667.5" width="40" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="2SW-UG-Z9Y"/>
+                                    <constraint firstAttribute="height" constant="37" id="mAa-Y3-7YN"/>
+                                </constraints>
+                                <state key="normal" image="keyboardDown"/>
+                                <connections>
+                                    <action selector="tapHideKeyboardButton:" destination="lYK-Yn-3LW" eventType="touchUpInside" id="OdW-UZ-HB0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkm-cM-Ayy">
+                                <rect key="frame" x="291" y="668" width="40" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="HTy-uF-tl8"/>
+                                    <constraint firstAttribute="width" constant="40" id="wYu-ko-Eue"/>
+                                </constraints>
+                                <state key="normal" image="mirroringOn"/>
+                                <connections>
+                                    <action selector="tapMirroringButton:" destination="lYK-Yn-3LW" eventType="touchUpInside" id="HyQ-Zb-ASi"/>
+                                </connections>
+                            </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" tag="30" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="759-AZ-MU0">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem image="tag" id="gch-yo-iWZ">
-                                        <connections>
-                                            <action selector="dismiss:" destination="emW-bc-vcM" id="SE7-sq-ryW"/>
-                                        </connections>
+                                    <barButtonItem style="plain" id="7r3-8v-8d8">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tqL-z2-Lom">
+                                            <rect key="frame" x="16" y="10" width="35" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="hashtag"/>
+                                            <state key="selected" image="xClose"/>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fcG-yH-B2p"/>
+                                    <barButtonItem style="plain" id="5Ni-Ic-06w">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aCS-lX-rqz">
+                                            <rect key="frame" x="103" y="10" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="highlight"/>
+                                            <state key="selected" image="xClose"/>
+                                        </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="u0Y-hF-lNM"/>
-                                    <barButtonItem image="highlight" id="G2b-ux-xS1"/>
+                                    <barButtonItem style="plain" id="VdT-4U-QPX">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FqF-hu-n3h">
+                                            <rect key="frame" x="178.5" y="10" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="image"/>
+                                            <state key="selected" image="xClose"/>
+                                        </button>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cPO-Sn-MWc"/>
-                                    <barButtonItem image="fontsize" id="AE3-hN-ErB"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Y5n-HP-6Zv"/>
-                                    <barButtonItem image="share" id="xOc-1o-Ggh"/>
+                                    <barButtonItem style="plain" id="FjD-pi-zoC">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g4O-Wn-aPp">
+                                            <rect key="frame" x="254.5" y="10" width="24" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="fontsize"/>
+                                            <state key="selected" image="xClose"/>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="goI-bL-4y4"/>
+                                    <barButtonItem style="plain" id="LrR-Uk-nio">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aab-cI-afJ">
+                                            <rect key="frame" x="330" y="8.5" width="29" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="export"/>
+                                            <state key="selected" image="xClose"/>
+                                        </button>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="dEE-Tq-8Hu" firstAttribute="leading" secondItem="7BV-77-IOd" secondAttribute="leading" id="Ajc-CX-6by"/>
-                            <constraint firstItem="7BV-77-IOd" firstAttribute="bottom" secondItem="dEE-Tq-8Hu" secondAttribute="bottom" id="OG8-h4-m5G"/>
-                            <constraint firstItem="dEE-Tq-8Hu" firstAttribute="top" secondItem="Lg5-Qp-5S2" secondAttribute="top" id="U5a-23-tqm"/>
+                            <constraint firstItem="Ds6-BQ-qsQ" firstAttribute="leading" secondItem="7BV-77-IOd" secondAttribute="leading" id="3wh-ko-qem"/>
+                            <constraint firstItem="7BV-77-IOd" firstAttribute="trailing" secondItem="x2n-g8-djy" secondAttribute="trailing" id="4t9-sc-LVe"/>
+                            <constraint firstItem="sxd-nM-oJg" firstAttribute="leading" secondItem="7BV-77-IOd" secondAttribute="leading" id="4tQ-G2-BcK"/>
+                            <constraint firstItem="7BV-77-IOd" firstAttribute="bottom" secondItem="lYK-Yn-3LW" secondAttribute="bottom" id="8Uf-YN-71s"/>
+                            <constraint firstItem="lYK-Yn-3LW" firstAttribute="leading" secondItem="7BV-77-IOd" secondAttribute="leading" id="BgT-iv-fFi"/>
+                            <constraint firstItem="x2n-g8-djy" firstAttribute="centerY" secondItem="kkm-cM-Ayy" secondAttribute="centerY" id="I1V-CX-dMc"/>
+                            <constraint firstAttribute="bottom" secondItem="ntm-AW-Gwr" secondAttribute="bottom" constant="-37" id="JpB-iE-saq"/>
+                            <constraint firstItem="ntm-AW-Gwr" firstAttribute="leading" secondItem="Lg5-Qp-5S2" secondAttribute="leading" id="JsL-Nh-8vb"/>
+                            <constraint firstItem="7BV-77-IOd" firstAttribute="trailing" secondItem="Ds6-BQ-qsQ" secondAttribute="trailing" id="KIX-Th-OHV"/>
+                            <constraint firstItem="lYK-Yn-3LW" firstAttribute="trailing" secondItem="7BV-77-IOd" secondAttribute="trailing" id="O50-fI-0v5"/>
                             <constraint firstItem="759-AZ-MU0" firstAttribute="leading" secondItem="7BV-77-IOd" secondAttribute="leading" id="bfz-sZ-TYT"/>
-                            <constraint firstItem="7BV-77-IOd" firstAttribute="trailing" secondItem="dEE-Tq-8Hu" secondAttribute="trailing" id="fKB-Uq-xbW"/>
+                            <constraint firstItem="Ds6-BQ-qsQ" firstAttribute="top" secondItem="7BV-77-IOd" secondAttribute="top" id="cMT-rq-syh"/>
+                            <constraint firstAttribute="trailing" secondItem="ntm-AW-Gwr" secondAttribute="trailing" id="dFh-ct-gJj"/>
                             <constraint firstItem="7BV-77-IOd" firstAttribute="bottom" secondItem="759-AZ-MU0" secondAttribute="bottom" id="fzq-fZ-A4h"/>
+                            <constraint firstItem="lYK-Yn-3LW" firstAttribute="top" secondItem="Lg5-Qp-5S2" secondAttribute="top" id="gVW-ZC-6k8"/>
+                            <constraint firstItem="ntm-AW-Gwr" firstAttribute="centerY" secondItem="x2n-g8-djy" secondAttribute="centerY" id="mAL-zi-ddS"/>
                             <constraint firstItem="759-AZ-MU0" firstAttribute="trailing" secondItem="7BV-77-IOd" secondAttribute="trailing" id="pFH-gL-FrP"/>
+                            <constraint firstItem="x2n-g8-djy" firstAttribute="leading" secondItem="kkm-cM-Ayy" secondAttribute="trailing" constant="4" id="yoT-MM-KOC"/>
+                            <constraint firstItem="ntm-AW-Gwr" firstAttribute="centerY" secondItem="sxd-nM-oJg" secondAttribute="centerY" id="zlf-5S-fcg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7BV-77-IOd"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="xnx-rY-hX2" appends="YES" id="8qq-Vg-ZU4"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="textView" destination="lYK-Yn-3LW" id="IfN-wM-9Ur"/>
+                        <outlet property="textViewTop" destination="gVW-ZC-6k8" id="i5r-0a-uMb"/>
                         <outlet property="toolbar" destination="759-AZ-MU0" id="8vg-hc-a8q"/>
+                        <outletCollection property="toolbarButtons" destination="tqL-z2-Lom" collectionClass="NSMutableArray" id="QNg-JP-9Vm"/>
+                        <outletCollection property="toolbarButtons" destination="aCS-lX-rqz" collectionClass="NSMutableArray" id="2NV-Yp-g5h"/>
+                        <outletCollection property="toolbarButtons" destination="FqF-hu-n3h" collectionClass="NSMutableArray" id="muh-du-nTj"/>
+                        <outletCollection property="toolbarButtons" destination="g4O-Wn-aPp" collectionClass="NSMutableArray" id="PcD-aR-Shj"/>
+                        <outletCollection property="toolbarButtons" destination="aab-cI-afJ" collectionClass="NSMutableArray" id="Rua-OV-PUT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Zp-LN-i8i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="xnx-rY-hX2">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="screenEdgePan:" destination="emW-bc-vcM" id="CZL-Ml-om6"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+                <tapGestureRecognizer id="bYn-rc-CjJ">
+                    <connections>
+                        <action selector="tap:" destination="ntm-AW-Gwr" id="WhI-b0-ZlJ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1743" y="33"/>
+            <point key="canvasLocation" x="1741.5999999999999" y="32.833583208395808"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Paper Navigation View Controller-->
         <scene sceneID="vJq-SC-t0j">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" id="Q5t-9d-Dgm" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" id="Q5t-9d-Dgm" customClass="PaperNavigationViewController" customModule="Paper" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q1O-vV-S5y">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -285,9 +423,13 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
     </scenes>
     <resources>
         <image name="delete" width="20" height="24"/>
+        <image name="export" width="20" height="27"/>
         <image name="fontsize" width="24" height="24"/>
+        <image name="hashtag" width="24" height="24"/>
         <image name="highlight" width="24" height="24"/>
-        <image name="share" width="40" height="40"/>
-        <image name="tag" width="24" height="24"/>
+        <image name="image" width="24" height="24"/>
+        <image name="keyboardDown" width="24" height="24"/>
+        <image name="mirroringOn" width="24" height="24"/>
+        <image name="xClose" width="24" height="24"/>
     </resources>
 </document>

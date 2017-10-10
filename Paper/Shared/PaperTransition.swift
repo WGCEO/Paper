@@ -11,9 +11,8 @@ import UIKit
 class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAnimatedTransitioning {
     
     internal var operation: UINavigationControllerOperation = .push
-//    weak var storedContext: UIViewControllerContextTransitioning?
     weak var paperCell: PaperCell?
-    
+    var interactive = false
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
     }
@@ -29,6 +28,17 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
         }
     }
     
+//    func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
+//        switch operation {
+//        case .push:
+//            return pushAnimator(using: transitionContext)
+//        case .pop:
+//            return popAnimator(using: transitionContext)
+//        default:
+//            return pushAnimator(using: transitionContext)
+//        }
+//    }
+    
     private func popAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         //1. duration을 얻어 타겟 뷰 컨트롤러의 뷰를 fetch 해 트랜지션 컨테이너에 추가한다.
         let duration = transitionDuration(using: transitionContext)
@@ -37,21 +47,28 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
         let to = transitionContext.view(forKey: UITransitionContextViewKey.to)!
         container.addSubview(to)
         container.addSubview(from)
+        
 
-        if let navHeight = transitionContext.viewController(forKey: .from)?
-            .navigationController?.navigationBar.bounds.height {
-            let statusBarHeight = UIApplication.shared.statusBarFrame.height
-            from.viewWithTag(10)?.alpha = 0
-            from.viewWithTag(30)?.alpha = 0
-            let textView = from.viewWithTag(20) as! PianoTextView
-            textView.contentOffset.y += (statusBarHeight + navHeight)
-        }
+        from.viewWithTag(10)?.alpha = 0
+        from.viewWithTag(30)?.alpha = 0
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut)
         
-        if let cell = paperCell {
+        if let cell = paperCell,
+            let navHeight = transitionContext.viewController(forKey: .from)?
+            .navigationController?.navigationBar.bounds.height,
+            let isNavigationBarHidden = transitionContext.viewController(forKey: .from)?
+                .navigationController?.isNavigationBarHidden {
             animator.addAnimations {
-                from.frame = cell.convert(cell.bounds, to: from)
+                let statusBarHeight = UIApplication.shared.statusBarFrame.height
+                let textView = from.viewWithTag(20) as! PianoTextView
+                
+                let offsetY = !isNavigationBarHidden ?
+                    (statusBarHeight + navHeight + textView.textContainerInset.top) :
+                    (statusBarHeight + textView.textContainerInset.top)
+                
+                textView.contentOffset.y += offsetY
+                from.frame = cell.label.convert(cell.label.bounds, to: from)
             }
         }
         
@@ -74,8 +91,9 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
         //2. 나타날 뷰에 대한 세팅
         let originalFrame = to.frame
         if let cell = paperCell {
-            to.frame = cell.convert(cell.bounds, to: to)
-            to.frame.origin.y -= 4
+            let textView = to.viewWithTag(20) as! PianoTextView
+            to.frame = cell.label.convert(cell.label.bounds, to: to)
+            to.frame.origin.y -= textView.textContainerInset.top
         }
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut)
