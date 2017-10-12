@@ -35,6 +35,4 @@ class PaperCell: UITableViewCell, Reusable {
         leftConstraint.constant = margin
         rightConstraint.constant = margin
     }
-
-
 }

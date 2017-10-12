@@ -16,11 +16,7 @@ class CoreData: NSPersistentContainer {
     }()
     
     weak var textView: PianoTextView?
-    internal var paper: Paper!{
-        didSet {
-            //TODO: 텍스트뷰를 유저가 편집했다면 기존 올드 페이퍼는 비동기로 저장시키기
-        }
-    }
+    internal var paper: Paper!
     internal lazy var privateMOC: NSManagedObjectContext = {
         let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         moc.parent = self.viewContext
@@ -77,9 +73,9 @@ extension CoreData {
     private func deleteImage(){
         
     }
-
     
     internal func asyncSave(attrString: NSAttributedString, to paper: Paper){
+        
         //1. 캐시에 임시로 저장
         let attrText = attrString.copy() as! NSAttributedString
         //TODO: 여기까지 제작완료
@@ -89,20 +85,8 @@ extension CoreData {
         
         privateMOC.perform { [weak self] in
             do {
-                
-                let thumbnailAttrText = NSMutableAttributedString(attributedString: attrText)
-                if thumbnailAttrText.length > 300 {
-                    thumbnailAttrText.attributedSubstring(from: NSMakeRange(0, 300))
-                }
-                thumbnailAttrText.removeImages()
-
-                let thumbnailData = NSKeyedArchiver.archivedData(withRootObject: thumbnailAttrText)
-                paper.thumbnailContent = thumbnailData
-                
-                
-                
                 let data = NSKeyedArchiver.archivedData(withRootObject: attrText)
-                paper.fullContent = data
+                self?.paper.fullContent = data
                 
                 //3. 저장
                 try self?.privateMOC.save()
@@ -127,14 +111,12 @@ extension CoreData {
         privateMOC.performAndWait { [unowned self] in
             for (attrString, paper) in self.cache {
                 
-                let thumbnailAttrText = NSMutableAttributedString(attributedString: attrString)
-                if thumbnailAttrText.length > 300 {
-                    thumbnailAttrText.attributedSubstring(from: NSMakeRange(0, 300))
-                }
-                thumbnailAttrText.removeImages()
+               let thumbnailAttrstring =  attrText.thumbnailAttrString()
                 
-                let thumbnailData = NSKeyedArchiver.archivedData(withRootObject: thumbnailAttrText)
-                paper.thumbnailContent = thumbnailData
+                paper.thumbnailContent
+                    = thumbnailAttrstring != nil
+                ? NSKeyedArchiver.archivedData(withRootObject: thumbnailAttrstring!)
+                : nil
                 
                 let data = NSKeyedArchiver.archivedData(withRootObject: attrString)
                 paper.fullContent = data

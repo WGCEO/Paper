@@ -12,6 +12,9 @@
 		DA3F2BAE1F83A2FA00A556F5 /* AnimatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */; };
 		DA3F2BB21F85D19900A556F5 /* PaperTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */; };
 		DA6E023B1F88592E0082576A /* PianoTextView_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6E023A1F88592E0082576A /* PianoTextView_CoreData.swift */; };
+		DA9F066A1F8F444100EA5F18 /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9F06691F8F444100EA5F18 /* PhotoView.xib */; };
+		DA9F066C1F8F4B1300EA5F18 /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066B1F8F4B1300EA5F18 /* PhotoCollectionView.swift */; };
+		DA9F066E1F8F50BC00EA5F18 /* MirroringButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066D1F8F50BC00EA5F18 /* MirroringButton.swift */; };
 		DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */; };
 		DAC6971F1F8B57A7008071E4 /* PianoTextView_Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6971E1F8B57A7008071E4 /* PianoTextView_Form.swift */; };
 		DAC697211F8B5845008071E4 /* Primitive_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697201F8B5845008071E4 /* Primitive_Extension.swift */; };
@@ -70,6 +73,9 @@
 		DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorFactory.swift; sourceTree = "<group>"; };
 		DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperTransition.swift; sourceTree = "<group>"; };
 		DA6E023A1F88592E0082576A /* PianoTextView_CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_CoreData.swift; sourceTree = "<group>"; };
+		DA9F06691F8F444100EA5F18 /* PhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoView.xib; sourceTree = "<group>"; };
+		DA9F066B1F8F4B1300EA5F18 /* PhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
+		DA9F066D1F8F50BC00EA5F18 /* MirroringButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringButton.swift; sourceTree = "<group>"; };
 		DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperNavigationViewController.swift; sourceTree = "<group>"; };
 		DAC6971E1F8B57A7008071E4 /* PianoTextView_Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Form.swift; sourceTree = "<group>"; };
 		DAC697201F8B5845008071E4 /* Primitive_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitive_Extension.swift; sourceTree = "<group>"; };
@@ -201,6 +207,7 @@
 		DACBCAE71F8B530A003DEC7F /* Mirroring */ = {
 			isa = PBXGroup;
 			children = (
+				DA9F066D1F8F50BC00EA5F18 /* MirroringButton.swift */,
 				DACBCAE51F8B5302003DEC7F /* MirrorScrollView.swift */,
 			);
 			path = Mirroring;
@@ -210,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				DACBCADF1F8B4FA0003DEC7F /* PhotoView.swift */,
+				DA9F06691F8F444100EA5F18 /* PhotoView.xib */,
+				DA9F066B1F8F4B1300EA5F18 /* PhotoCollectionView.swift */,
 				DACBCAE31F8B51F4003DEC7F /* ImageCell.swift */,
 				DACBCAEA1F8B5379003DEC7F /* ImageCell.xib */,
 			);
@@ -377,6 +386,7 @@
 				DAE92F541F8C42430004A824 /* AddTagReusableView.xib in Resources */,
 				DAE92F3F1F8C321B0004A824 /* ColorPickerView.xib in Resources */,
 				DAE92F391F8C31BF0004A824 /* TagPickerCell.xib in Resources */,
+				DA9F066A1F8F444100EA5F18 /* PhotoView.xib in Resources */,
 				DAE92F431F8C32880004A824 /* FontPickerView.xib in Resources */,
 				DAD3D61B1F7A291C00FC029D /* Main.storyboard in Resources */,
 				DACBCACE1F8B186C003DEC7F /* PianoPickerView.xib in Resources */,
@@ -395,6 +405,7 @@
 				DAC6BF0B1F8C95D700702485 /* TestViewController.swift in Sources */,
 				DACBCAE41F8B51F4003DEC7F /* ImageCell.swift in Sources */,
 				DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */,
+				DA9F066E1F8F50BC00EA5F18 /* MirroringButton.swift in Sources */,
 				DAD3D6161F7A291C00FC029D /* AppDelegate.swift in Sources */,
 				DACBCAE21F8B505F003DEC7F /* PianoTextView_PhotoViewDelegate.swift in Sources */,
 				DAD3D6411F7A378A00FC029D /* PianoTextView.swift in Sources */,
@@ -431,6 +442,7 @@
 				DAE92F3B1F8C31DB0004A824 /* TagPickerCell.swift in Sources */,
 				DAD3D63B1F7A30CE00FC029D /* PaperModel.xcdatamodeld in Sources */,
 				DAC697211F8B5845008071E4 /* Primitive_Extension.swift in Sources */,
+				DA9F066C1F8F4B1300EA5F18 /* PhotoCollectionView.swift in Sources */,
 				DACBCAD61F8B35D3003DEC7F /* PianoView.swift in Sources */,
 				DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */,
 				DAD3D62E1F7A2C3C00FC029D /* Reusable.swift in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="17B25c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="17B35a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Paper" representedClassName="Paper" syncable="YES" codeGenerationType="class">
         <attribute name="color" attributeType="String" defaultValueString="red" syncable="YES"/>
         <attribute name="creationDate" attributeType="Date" defaultDateTimeInterval="528101760" usesScalarValueType="NO" syncable="YES"/>
@@ -7,7 +7,6 @@
         <attribute name="fullContent" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="inTrash" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modifiedDate" attributeType="Date" defaultDateTimeInterval="528682440" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="seeMore" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="thumbnailContent" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="papers" inverseEntity="Tag" syncable="YES"/>
     </entity>
@@ -21,7 +20,7 @@
         <relationship name="papers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Paper" inverseName="tags" inverseEntity="Paper" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Paper" positionX="-54" positionY="-9" width="128" height="180"/>
+        <element name="Paper" positionX="-54" positionY="-9" width="128" height="165"/>
         <element name="Preference" positionX="-18" positionY="27" width="128" height="60"/>
         <element name="Tag" positionX="-36" positionY="9" width="128" height="105"/>
     </elements>

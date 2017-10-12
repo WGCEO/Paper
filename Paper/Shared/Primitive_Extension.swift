@@ -17,6 +17,76 @@ extension NSAttributedString {
         }
         return mutableAttrString
     }
+    
+    //썸네일이 존재하면(nil이 아니면), 무조건 더보기가 있어야 함.
+    //1. 썸네일은 첫 3문단 안에 이미지가 있을 경우 생김
+    //2. 썸네일은 첫 3문단이 300글자를 넘어갈 경우 생김(300글자를 잘라줌)
+    //3. 썸네일은 전체 스트링이 3문단을 넘어갈 경우 생김
+    
+    //1. 전체 스트링이 4문단 이상이면 3문단까지 자른 썸네일 생성
+    //1-1. 3문단까지 자른 썸네일을 문단을 돌면서 이미지가 있다면 거기까지 잘라 썸네일 생성
+    //1-1. 3문단까지 자른 썸네일을 문단을 돌면서 300글자가 넘어가면 거기까지 잘라 썸네일 생성
+    
+    //2. 전체 스트링이 4문단 미만인데 이미지 존재하면 거기까지 잘라 썸네일 생성(단, 전체 스트링이 이미지 존재하는 문단까지만 있다면 nil, 이걸 확인하기 위해선 다음문단이 없어야 함)
+    //3. 전체 스트링이 4문단 미만인데 300글자를 넘어가면 300글자까지 잘라 썸네일 생성
+    //4. 전체 스트링이 4문단 미만인데 300글자를 넘지 않고, 전체 스트링의 길이와 같다면 nil
+    
+    func thumbnailAttrString() -> NSAttributedString? {
+        var index = 0
+        var paragraphCount = 1
+        let result = NSMutableAttributedString()
+        
+        if string.split(separator: "\n").count > 3 {
+            //4문단 이상이면 3문단까지만 문단을 돌고, 이미지가 있다면 거기까지 잘라 썸네일 생성
+            //4문단 이상이면 3문단까지만 문단을 돌고, 300글자가 넘어간다면 거기까지 잘라 썸네일 생성
+            while paragraphCount < 4 {
+                let range = NSMakeRange(index, 0)
+                let paragraphRange = (string as NSString).paragraphRange(for: range)
+                result.append(self.attributedSubstring(from: paragraphRange))
+                
+                //1. 썸네일은 첫 3문단 안에 이미지가 있을 경우 생김
+                if result.containsAttachments(in: paragraphRange) {
+                    return result
+                }
+                
+                //2. 썸네일은 첫 3문단이 300글자를 넘어갈 경우 생김(300글자를 잘라줌)
+                if result.length > 300 {
+                    return result.attributedSubstring(from: NSMakeRange(0, 300))
+                }
+                
+                index = paragraphRange.location + paragraphRange.length
+                paragraphCount += 1
+            }
+            
+            return (result.length != 0 && self.length != result.length)
+                ? result
+                : nil
+            
+        } else {
+            //4문단 미만
+            
+            while index < self.length {
+                let range = NSMakeRange(index, 0)
+                let paragraphRange = (string as NSString).paragraphRange(for: range)
+                result.append(self.attributedSubstring(from: paragraphRange))
+    
+                if result.containsAttachments(in: paragraphRange) {
+                    //4문단 미만인데 이미지 존재하면 거기까지 잘라 썸네일 생성(단, 전체 스트링이 이미지 존재하는 문단까지만 있다면 nil, 이걸 확인하기 위해선 다음문단이 없어야 함)
+                    return self.length != result.length ? result : nil
+                }
+                
+                //2. 썸네일은 첫 3문단이 300글자를 넘어갈 경우 생김(300글자를 잘라줌)
+                if result.length > 300 {
+                    return result.attributedSubstring(from: NSMakeRange(0, 300))
+                }
+                
+                index = paragraphRange.location + paragraphRange.length
+            }
+            return (result.length != 0 && self.length != result.length)
+                ? result
+                : nil
+        }
+    }
 }
 
 extension CGPoint {

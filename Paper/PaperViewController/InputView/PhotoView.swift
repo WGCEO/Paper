@@ -25,35 +25,26 @@ class PhotoView: UIView {
 
     weak var delegate: PhotoViewDelegate?
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var imagePickerButton: UIButton!
     private var allPhotos: PHFetchResult<PHAsset>?
     
     fileprivate lazy var imageManager = PHCachingImageManager()
     fileprivate var previousPreheatRect = CGRect.zero
     fileprivate var thumbnailSize: CGSize!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(PhotoView.keyboardDidHide), name: Notification.Name.UIKeyboardDidHide, object: nil)
-        let nib = UINib(nibName: "ImageCell", bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: ImageCell.reuseIdentifier)
-    }
-    
-    @objc func keyboardDidHide(){
-        reset()
-    }
-    
-    func reset(){
+    deinit {
+        print("포토뷰 deinit")
         allPhotos = nil
         collectionView.reloadData()
         collectionView.isHidden = true
-        imagePickerButton.isHidden = true
         resetCachedAssets()
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
+
+    
+    
     internal func fetchImages(){
+        
         //이미지 가져오기
         let allPhotosOptions = PHFetchOptions()
         let date = Date()
@@ -68,7 +59,7 @@ class PhotoView: UIView {
         collectionView.isHidden = false
         collectionView.reloadData()
         
-        
+
         
         //버튼 보여주기
         //        imagePickerButton.isHidden = false

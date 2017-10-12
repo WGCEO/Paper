@@ -37,6 +37,8 @@ extension PianoTextView: UITextViewDelegate {
         return removeAttrOrInsertFormAtNextLineifNeeded(in: currentParagraphRange, replacementText: text)
     }
     
+    //현재 문단에 이미지가 있는데, 양 옆에 개행이 없는 곳이 있다면 넣어주기
+    
     func textViewDidChange(_ textView: UITextView) {
         userEdited = true
         CoreData.sharedInstance.paper.modifiedDate = Date()

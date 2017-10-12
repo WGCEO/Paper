@@ -62,16 +62,14 @@ extension PaperTableView: Filterable {
 
 extension PaperTableView : UITableViewDataSource {
     internal func configure(cell: PaperCell, indexPath: IndexPath) {
-        
-        let mutableParagraph = NSMutableParagraphStyle()
-        mutableParagraph.lineSpacing = 8
-        mutableParagraph.firstLineHeadIndent = 30
-        mutableParagraph.headIndent = 30
-        mutableParagraph.tailIndent = -30
-        
-        let mutableStr = NSMutableAttributedString(attributedString: cell.label.attributedText!)
-        mutableStr.addAttributes([.paragraphStyle: mutableParagraph], range: NSMakeRange(0, mutableStr.length))
-        cell.label.attributedText = mutableStr
+        let paper = paperResultsController.object(at: indexPath)
+        if let thumbnailData = paper.thumbnailContent {
+            let attrString = NSKeyedUnarchiver.unarchiveObject(with: thumbnailData) as! NSAttributedString
+            cell.label.attributedText = attrString
+        } else if let fullData = paper.fullContent {
+            let attrString = NSKeyedUnarchiver.unarchiveObject(with: fullData) as! NSAttributedString
+            cell.label.attributedText = attrString
+        }
         
         let margin = Global.textMargin(by: bounds.width)
         cell.leftConstraint.constant = margin
@@ -104,7 +102,7 @@ extension PaperTableView: UITableViewDelegate {
         
         let paper = paperResultsController.object(at: indexPath)
         CoreData.sharedInstance.paper = paper
-        paperListViewController?.performSegue(withIdentifier: "PaperViewController", sender: cell.label.attributedText)
+        paperListViewController?.performSegue(withIdentifier: "PaperViewController", sender: nil)
         
     }
     

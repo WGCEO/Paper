@@ -12,7 +12,6 @@ class PianoTextView: UITextView {
 
     var userEdited: Bool = false
     @IBOutlet weak var mirrorScrollView: MirrorScrollView!
-    @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var mirrorScrollViewBottom: NSLayoutConstraint!
     
     override var typingAttributes: [String : Any] {
@@ -62,6 +61,7 @@ extension PianoTextView {
         tintColor = Global.transFormToColor(name: paper.color!)
         updateAllCalculateAttr()
         
+        control.effectable = self
         delegate = self
         textContainer.lineFragmentPadding = 0
         textContainerInset.top = 16
@@ -82,9 +82,6 @@ extension PianoTextView {
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         
-        if CoreData.sharedInstance.preference.showMirroring {
-            mirrorScrollView.isHidden = false
-        }
     }
     
 }

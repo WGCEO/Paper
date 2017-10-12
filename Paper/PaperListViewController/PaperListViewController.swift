@@ -21,6 +21,18 @@ class PaperListViewController: DefaultViewController {
         setup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //TODO: paper가 nil이 아니고, length = 0이면 지우기
+        if let paper = CoreData.sharedInstance.paper,
+            let data = paper.fullContent,
+            let attrString = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSAttributedString,
+            attrString.length == 0 {
+            CoreData.sharedInstance.viewContext.delete(paper)
+        }
+    }
+    
     @IBAction func tapTrash(_ sender: UIButton) {
         //TODO: 휴지통 화면 띄우기
     }
@@ -32,6 +44,7 @@ class PaperListViewController: DefaultViewController {
     
     @IBAction func tapCreatePaperButton(_ sender: UIButton) {
         //1. 페이퍼 생성
+        print("tapCreatePaperButton")
         let paragraphStyle = Global.defaultParagraphStyle
         let defaultFontStr = "system17"
         let defaultColorStr = "red"
@@ -42,13 +55,14 @@ class PaperListViewController: DefaultViewController {
         let data = NSKeyedArchiver.archivedData(withRootObject: attrString)
         let newPaper = Paper(context: CoreData.sharedInstance.viewContext)
         newPaper.fullContent = data
+        newPaper.thumbnailContent = data
         newPaper.color = defaultColorStr
-        
+        newPaper.creationDate = Date()
+        newPaper.modifiedDate = Date()
         //2. 현재 선택되어 있는 카테고리 append
         let selectedTags = NSSet(array: collectionView.selectedTags)
         newPaper.addToTags(selectedTags)
         newPaper.font = defaultFontStr
-        newPaper.thumbnailContent = data
         
         if let navVC = navigationController as? PaperNavigationViewController {
             navVC.transition.createPaperButton = sender
@@ -60,16 +74,13 @@ class PaperListViewController: DefaultViewController {
         Global.userFeedback()
         
         //4. 이동
-         performSegue(withIdentifier: "PaperViewController", sender: sender.attributedTitle(for: .normal))
+         performSegue(withIdentifier: "PaperViewController", sender: true)
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PaperViewController" {
-            let des = segue.destination as! PaperViewController
-            if let attrText = sender as? NSAttributedString {
-                des.thumbnailAttrText = attrText
-            }
+        if let des = segue.destination as? PaperViewController,
+            let shouldAppearKeyboard = sender as? Bool {
+            des.shouldAppearKeyboard = shouldAppearKeyboard
         }
     }
     

@@ -244,3 +244,31 @@ extension PianoView: Pianoable {
         animateToOriginalPosition(completion: completion)
     }
 }
+
+extension PianoView: PianoPickerViewDelegate {
+    func pianoPickerView(_ pickerView: PianoPickerView, didSelectPickerAt index: Int) {
+        guard let paper = CoreData.sharedInstance.paper
+            else { return }
+        
+        let color = Global.transFormToColor(name: paper.color!)
+        let font = Global.transformToFont(name: paper.font!)
+        switch index {
+        case 0:
+            attributeStyle = PianoAttributeStyle.color(color)
+        case 1:
+            attributeStyle = PianoAttributeStyle.bold(font.pointSize)
+        case 2:
+            attributeStyle = PianoAttributeStyle.header1(font.pointSize)
+        case 3:
+            attributeStyle = PianoAttributeStyle.underline(color)
+        case 4:
+            attributeStyle = PianoAttributeStyle.strikeThrough(color)
+        case 5:
+            attributeStyle = PianoAttributeStyle.header2(font.pointSize)
+        case 6:
+            attributeStyle = PianoAttributeStyle.header3(font.pointSize)
+        default:
+            ()
+        }
+    }
+}

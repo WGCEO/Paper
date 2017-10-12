@@ -17,6 +17,7 @@ class MirrorScrollView: UIScrollView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setContentInset()
+        isHidden = !CoreData.sharedInstance.preference.showMirroring
     }
     
     private func setContentInset(){
