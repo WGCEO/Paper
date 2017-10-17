@@ -32,16 +32,12 @@ class PhotoView: UIView {
     fileprivate var thumbnailSize: CGSize!
     
     deinit {
-        print("포토뷰 deinit")
         allPhotos = nil
         collectionView.reloadData()
         collectionView.isHidden = true
         resetCachedAssets()
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
-    
-
-    
     
     internal func fetchImages(){
         

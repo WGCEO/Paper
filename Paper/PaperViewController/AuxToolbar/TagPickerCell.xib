@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,26 +19,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="164" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYT-RC-Tbm">
-                        <rect key="frame" x="143.5" y="0.0" width="20.5" height="44"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dd" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cYT-RC-Tbm">
+                        <rect key="frame" x="6" y="0.0" width="152" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XYu-vA-GGW">
-                        <rect key="frame" x="0.0" y="0.0" width="31" height="45"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="cYT-RC-Tbm" secondAttribute="bottom" id="6WN-Vi-Qcg"/>
                 <constraint firstItem="cYT-RC-Tbm" firstAttribute="top" secondItem="woK-RW-diJ" secondAttribute="top" id="9BU-Nb-f8O"/>
-                <constraint firstAttribute="trailing" secondItem="cYT-RC-Tbm" secondAttribute="trailing" id="x2X-36-6hR"/>
+                <constraint firstItem="cYT-RC-Tbm" firstAttribute="leading" secondItem="woK-RW-diJ" secondAttribute="leading" constant="6" id="Nsm-xG-QXX"/>
+                <constraint firstAttribute="trailing" secondItem="cYT-RC-Tbm" secondAttribute="trailing" constant="6" id="x2X-36-6hR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="aXX-11-sKd"/>
             <size key="customSize" width="164" height="45"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="6"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="label" destination="cYT-RC-Tbm" id="ojq-RX-Dvw"/>
             </connections>

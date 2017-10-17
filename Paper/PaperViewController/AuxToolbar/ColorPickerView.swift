@@ -11,21 +11,6 @@ import UIKit
 class ColorPickerView: UIView {
     @IBOutlet var buttons: [UIButton]!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        //TODO: 초기 버튼 선택(코어데이터가 갖고 있는 페이퍼의 컬러를 기준으로)
-        guard let colorString = CoreData.sharedInstance.paper.color else { return }
-        colorLoop: for (index, str) in Global.colorStrs.enumerated() {
-            if  colorString == str {
-                for button in buttons {
-                    if button.tag == index {
-                        button.isSelected = true
-                        break colorLoop
-                    }
-                }
-            }
-        }
-    }
     @IBAction func tapColorButton(_ sender: UIButton) {
         for button in buttons {
             button.isSelected = button != sender ? false : true
@@ -43,6 +28,20 @@ class ColorPickerView: UIView {
             guard let textColor = value as? UIColor,
                 !textColor.equal(Global.textColor) else { return }
             textView.textStorage.addAttributes([.foregroundColor : newColor], range: range)
+            textView.userEdited = true
+        }
+        
+        attrText.enumerateAttribute(.underlineColor, in: NSMakeRange(0, attrText.length), options: []) { (value, range, stop) in
+            guard let textColor = value as? UIColor,
+            !textColor.equal(Global.textColor) else { return }
+            textView.textStorage.addAttributes([.underlineColor : newColor], range: range)
+            textView.userEdited = true
+        }
+        
+        attrText.enumerateAttribute(.strikethroughColor, in: NSMakeRange(0, attrText.length), options: []) { (value, range, stop) in
+            guard let textColor = value as? UIColor,
+                !textColor.equal(Global.textColor) else { return }
+            textView.textStorage.addAttributes([.strikethroughColor : newColor], range: range)
             textView.userEdited = true
         }
         

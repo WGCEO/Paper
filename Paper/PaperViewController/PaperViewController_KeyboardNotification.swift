@@ -41,6 +41,7 @@ extension PaperViewController {
     @objc internal func keyboardWillHide(notification: Notification){
         guard let userInfo = notification.userInfo,
             let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as AnyObject).doubleValue else { return }
+        kbHeight = nil
         textView.scrollIndicatorInsets.bottom = 0
         UIView.animate(withDuration: duration) { [weak self] in
             self?.textView.contentInset = UIEdgeInsets.zero

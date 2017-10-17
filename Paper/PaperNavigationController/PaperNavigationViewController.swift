@@ -47,7 +47,7 @@ extension PaperNavigationViewController: UINavigationControllerDelegate {
             , let attributedText = paperVC.textView.attributedText
             , operation == .pop
             , paperVC.textView.userEdited {
-            let thumbnailAttrString = attributedText.thumbnailAttrString()
+            let thumbnailAttrString = attributedText.thumbnail()
             
             CoreData.sharedInstance.paper.thumbnailContent
                 = thumbnailAttrString != nil

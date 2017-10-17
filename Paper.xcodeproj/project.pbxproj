@@ -7,20 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA0F0E321F8F898E00729572 /* PianoPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F0E311F8F898E00729572 /* PianoPickerButton.swift */; };
+		DA0F0E341F8F90E600729572 /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F0E331F8F90E600729572 /* ColorPickerButton.swift */; };
 		DA3F2BAA1F82AE6200A556F5 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BA91F82AE6200A556F5 /* DefaultViewController.swift */; };
 		DA3F2BAC1F836B4500A556F5 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BAB1F836B4500A556F5 /* Global.swift */; };
 		DA3F2BAE1F83A2FA00A556F5 /* AnimatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */; };
 		DA3F2BB21F85D19900A556F5 /* PaperTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */; };
 		DA6E023B1F88592E0082576A /* PianoTextView_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6E023A1F88592E0082576A /* PianoTextView_CoreData.swift */; };
+		DA7D306A1F946B9B00A659E6 /* TagPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D30691F946B9B00A659E6 /* TagPickerView.swift */; };
+		DA7D306C1F946BC300A659E6 /* TagPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7D306B1F946BC300A659E6 /* TagPickerView.xib */; };
+		DA9133151F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9133141F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift */; };
+		DA9133171F956B3F002C4DBE /* AddTagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9133161F956B3F002C4DBE /* AddTagCollectionView.swift */; };
+		DA9133191F95B2FE002C4DBE /* AddTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9133181F95B2FE002C4DBE /* AddTagCell.swift */; };
 		DA9F066A1F8F444100EA5F18 /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA9F06691F8F444100EA5F18 /* PhotoView.xib */; };
 		DA9F066C1F8F4B1300EA5F18 /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066B1F8F4B1300EA5F18 /* PhotoCollectionView.swift */; };
 		DA9F066E1F8F50BC00EA5F18 /* MirroringButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066D1F8F50BC00EA5F18 /* MirroringButton.swift */; };
+		DA9F06701F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066F1F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift */; };
 		DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */; };
 		DAC6971F1F8B57A7008071E4 /* PianoTextView_Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6971E1F8B57A7008071E4 /* PianoTextView_Form.swift */; };
 		DAC697211F8B5845008071E4 /* Primitive_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697201F8B5845008071E4 /* Primitive_Extension.swift */; };
 		DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */; };
 		DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */; };
-		DAC697271F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697261F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift */; };
 		DAC6BF0B1F8C95D700702485 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6BF0A1F8C95D700702485 /* TestViewController.swift */; };
 		DACBCACE1F8B186C003DEC7F /* PianoPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACBCACD1F8B186C003DEC7F /* PianoPickerView.xib */; };
 		DACBCAD21F8B1A1E003DEC7F /* PianoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBCAD11F8B1A1E003DEC7F /* PianoPickerView.swift */; };
@@ -35,6 +42,8 @@
 		DACBCAE41F8B51F4003DEC7F /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBCAE31F8B51F4003DEC7F /* ImageCell.swift */; };
 		DACBCAE61F8B5302003DEC7F /* MirrorScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACBCAE51F8B5302003DEC7F /* MirrorScrollView.swift */; };
 		DACBCAEB1F8B5379003DEC7F /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACBCAEA1F8B5379003DEC7F /* ImageCell.xib */; };
+		DACE45951F90CA8100E22091 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE45941F90CA8100E22091 /* AppNavigator.swift */; };
+		DACE45971F90CD0400E22091 /* AddTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE45961F90CD0400E22091 /* AddTagViewController.swift */; };
 		DAD3D6161F7A291C00FC029D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D6151F7A291C00FC029D /* AppDelegate.swift */; };
 		DAD3D61B1F7A291C00FC029D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD3D6191F7A291C00FC029D /* Main.storyboard */; };
 		DAD3D61D1F7A291C00FC029D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAD3D61C1F7A291C00FC029D /* Assets.xcassets */; };
@@ -53,7 +62,6 @@
 		DAD3D64D1F7B7F3E00FC029D /* PaperTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D64C1F7B7F3E00FC029D /* PaperTableView.swift */; };
 		DADD555D1F8297E500822753 /* PaperListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD555C1F8297E500822753 /* PaperListHeaderView.swift */; };
 		DAE92F2F1F8B9E810004A824 /* PaperViewController_KeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE92F2E1F8B9E810004A824 /* PaperViewController_KeyboardNotification.swift */; };
-		DAE92F371F8C315E0004A824 /* TagPickerCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAE92F361F8C315E0004A824 /* TagPickerCollectionView.xib */; };
 		DAE92F391F8C31BF0004A824 /* TagPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAE92F381F8C31BF0004A824 /* TagPickerCell.xib */; };
 		DAE92F3B1F8C31DB0004A824 /* TagPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE92F3A1F8C31DB0004A824 /* TagPickerCell.swift */; };
 		DAE92F3D1F8C31FB0004A824 /* TagPickerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE92F3C1F8C31FB0004A824 /* TagPickerCollectionView.swift */; };
@@ -68,20 +76,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA0F0E311F8F898E00729572 /* PianoPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoPickerButton.swift; sourceTree = "<group>"; };
+		DA0F0E331F8F90E600729572 /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
 		DA3F2BA91F82AE6200A556F5 /* DefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
 		DA3F2BAB1F836B4500A556F5 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorFactory.swift; sourceTree = "<group>"; };
 		DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperTransition.swift; sourceTree = "<group>"; };
 		DA6E023A1F88592E0082576A /* PianoTextView_CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_CoreData.swift; sourceTree = "<group>"; };
+		DA7D30691F946B9B00A659E6 /* TagPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPickerView.swift; sourceTree = "<group>"; };
+		DA7D306B1F946BC300A659E6 /* TagPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagPickerView.xib; sourceTree = "<group>"; };
+		DA9133141F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagViewController_KeyboardNotification.swift; sourceTree = "<group>"; };
+		DA9133161F956B3F002C4DBE /* AddTagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagCollectionView.swift; sourceTree = "<group>"; };
+		DA9133181F95B2FE002C4DBE /* AddTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagCell.swift; sourceTree = "<group>"; };
 		DA9F06691F8F444100EA5F18 /* PhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoView.xib; sourceTree = "<group>"; };
 		DA9F066B1F8F4B1300EA5F18 /* PhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
 		DA9F066D1F8F50BC00EA5F18 /* MirroringButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringButton.swift; sourceTree = "<group>"; };
+		DA9F066F1F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViewController_UITextViewDelegate.swift; sourceTree = "<group>"; };
 		DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperNavigationViewController.swift; sourceTree = "<group>"; };
 		DAC6971E1F8B57A7008071E4 /* PianoTextView_Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Form.swift; sourceTree = "<group>"; };
 		DAC697201F8B5845008071E4 /* Primitive_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitive_Extension.swift; sourceTree = "<group>"; };
 		DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Effectable.swift; sourceTree = "<group>"; };
 		DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Cursor.swift; sourceTree = "<group>"; };
-		DAC697261F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PianoTextView_UITextViewDelegate.swift; path = ../../Shared/PianoTextView_UITextViewDelegate.swift; sourceTree = "<group>"; };
 		DAC6BF0A1F8C95D700702485 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		DACBCACD1F8B186C003DEC7F /* PianoPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PianoPickerView.xib; sourceTree = "<group>"; };
 		DACBCAD11F8B1A1E003DEC7F /* PianoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoPickerView.swift; sourceTree = "<group>"; };
@@ -96,6 +111,8 @@
 		DACBCAE31F8B51F4003DEC7F /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		DACBCAE51F8B5302003DEC7F /* MirrorScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirrorScrollView.swift; sourceTree = "<group>"; };
 		DACBCAEA1F8B5379003DEC7F /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		DACE45941F90CA8100E22091 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
+		DACE45961F90CD0400E22091 /* AddTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagViewController.swift; sourceTree = "<group>"; };
 		DAD3D6121F7A291C00FC029D /* Paper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD3D6151F7A291C00FC029D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAD3D61A1F7A291C00FC029D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,7 +133,6 @@
 		DAD3D64C1F7B7F3E00FC029D /* PaperTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperTableView.swift; sourceTree = "<group>"; };
 		DADD555C1F8297E500822753 /* PaperListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperListHeaderView.swift; sourceTree = "<group>"; };
 		DAE92F2E1F8B9E810004A824 /* PaperViewController_KeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViewController_KeyboardNotification.swift; sourceTree = "<group>"; };
-		DAE92F361F8C315E0004A824 /* TagPickerCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagPickerCollectionView.xib; sourceTree = "<group>"; };
 		DAE92F381F8C31BF0004A824 /* TagPickerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagPickerCell.xib; sourceTree = "<group>"; };
 		DAE92F3A1F8C31DB0004A824 /* TagPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPickerCell.swift; sourceTree = "<group>"; };
 		DAE92F3C1F8C31FB0004A824 /* TagPickerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPickerCollectionView.swift; sourceTree = "<group>"; };
@@ -149,6 +165,7 @@
 				DACBCAD71F8B38C6003DEC7F /* PianoViewData.swift */,
 				DACBCAD31F8B3502003DEC7F /* PianoAttributeStyle.swift */,
 				DACBCACD1F8B186C003DEC7F /* PianoPickerView.xib */,
+				DA0F0E311F8F898E00729572 /* PianoPickerButton.swift */,
 				DACBCAD11F8B1A1E003DEC7F /* PianoPickerView.swift */,
 				DACBCADB1F8B3906003DEC7F /* PianoControl.swift */,
 			);
@@ -165,8 +182,20 @@
 				DA3F2BAB1F836B4500A556F5 /* Global.swift */,
 				DAD3D6421F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift */,
 				DAC697201F8B5845008071E4 /* Primitive_Extension.swift */,
+				DACE45941F90CA8100E22091 /* AppNavigator.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		DA9133131F95660D002C4DBE /* AddTagViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DACE45961F90CD0400E22091 /* AddTagViewController.swift */,
+				DA9133141F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift */,
+				DA9133161F956B3F002C4DBE /* AddTagCollectionView.swift */,
+				DA9133181F95B2FE002C4DBE /* AddTagCell.swift */,
+			);
+			path = AddTagViewController;
 			sourceTree = "<group>";
 		};
 		DAB994251F8B0CEE007AF6CD /* PaperNavigationController */ = {
@@ -230,7 +259,6 @@
 			children = (
 				DAD3D6401F7A378A00FC029D /* PianoTextView.swift */,
 				DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */,
-				DAC697261F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift */,
 				DACBCADD1F8B47B0003DEC7F /* PianoTextView_NSAttributedStringKey.swift */,
 				DA6E023A1F88592E0082576A /* PianoTextView_CoreData.swift */,
 				DAC6971E1F8B57A7008071E4 /* PianoTextView_Form.swift */,
@@ -269,6 +297,7 @@
 				DAB994251F8B0CEE007AF6CD /* PaperNavigationController */,
 				DAD3D63C1F7A30D400FC029D /* PaperListViewController */,
 				DAD3D63D1F7A35D400FC029D /* PaperViewController */,
+				DA9133131F95660D002C4DBE /* AddTagViewController */,
 			);
 			path = Paper;
 			sourceTree = "<group>";
@@ -291,6 +320,7 @@
 			children = (
 				DAD3D6291F7A29DA00FC029D /* PaperViewController.swift */,
 				DAE92F2E1F8B9E810004A824 /* PaperViewController_KeyboardNotification.swift */,
+				DA9F066F1F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift */,
 				DAE92F4A1F8C32D90004A824 /* AuxToolbar */,
 				DACBCAE71F8B530A003DEC7F /* Mirroring */,
 				DACBCAE81F8B5319003DEC7F /* InputView */,
@@ -303,7 +333,8 @@
 		DAE92F4A1F8C32D90004A824 /* AuxToolbar */ = {
 			isa = PBXGroup;
 			children = (
-				DAE92F361F8C315E0004A824 /* TagPickerCollectionView.xib */,
+				DA7D306B1F946BC300A659E6 /* TagPickerView.xib */,
+				DA7D30691F946B9B00A659E6 /* TagPickerView.swift */,
 				DAE92F3C1F8C31FB0004A824 /* TagPickerCollectionView.swift */,
 				DAE92F381F8C31BF0004A824 /* TagPickerCell.xib */,
 				DAE92F3A1F8C31DB0004A824 /* TagPickerCell.swift */,
@@ -311,6 +342,7 @@
 				DAE92F511F8C42430004A824 /* AddTagReusableView.swift */,
 				DAE92F3E1F8C321B0004A824 /* ColorPickerView.xib */,
 				DAE92F401F8C322C0004A824 /* ColorPickerView.swift */,
+				DA0F0E331F8F90E600729572 /* ColorPickerButton.swift */,
 				DAE92F421F8C32880004A824 /* FontPickerView.xib */,
 				DAE92F441F8C32940004A824 /* FontPickerView.swift */,
 				DAE92F461F8C32C30004A824 /* ConvertPickerView.xib */,
@@ -378,11 +410,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7D306C1F946BC300A659E6 /* TagPickerView.xib in Resources */,
 				DAD3D6201F7A291C00FC029D /* LaunchScreen.storyboard in Resources */,
 				DAD3D61D1F7A291C00FC029D /* Assets.xcassets in Resources */,
 				DAE92F471F8C32C30004A824 /* ConvertPickerView.xib in Resources */,
 				DACBCAEB1F8B5379003DEC7F /* ImageCell.xib in Resources */,
-				DAE92F371F8C315E0004A824 /* TagPickerCollectionView.xib in Resources */,
 				DAE92F541F8C42430004A824 /* AddTagReusableView.xib in Resources */,
 				DAE92F3F1F8C321B0004A824 /* ColorPickerView.xib in Resources */,
 				DAE92F391F8C31BF0004A824 /* TagPickerCell.xib in Resources */,
@@ -402,10 +434,13 @@
 			files = (
 				DA3F2BAA1F82AE6200A556F5 /* DefaultViewController.swift in Sources */,
 				DAD3D64D1F7B7F3E00FC029D /* PaperTableView.swift in Sources */,
+				DACE45951F90CA8100E22091 /* AppNavigator.swift in Sources */,
+				DA0F0E321F8F898E00729572 /* PianoPickerButton.swift in Sources */,
 				DAC6BF0B1F8C95D700702485 /* TestViewController.swift in Sources */,
 				DACBCAE41F8B51F4003DEC7F /* ImageCell.swift in Sources */,
 				DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */,
 				DA9F066E1F8F50BC00EA5F18 /* MirroringButton.swift in Sources */,
+				DA7D306A1F946B9B00A659E6 /* TagPickerView.swift in Sources */,
 				DAD3D6161F7A291C00FC029D /* AppDelegate.swift in Sources */,
 				DACBCAE21F8B505F003DEC7F /* PianoTextView_PhotoViewDelegate.swift in Sources */,
 				DAD3D6411F7A378A00FC029D /* PianoTextView.swift in Sources */,
@@ -419,6 +454,7 @@
 				DACBCAD81F8B38C6003DEC7F /* PianoViewData.swift in Sources */,
 				DA3F2BAE1F83A2FA00A556F5 /* AnimatorFactory.swift in Sources */,
 				DACBCADA1F8B38DB003DEC7F /* PianoResult.swift in Sources */,
+				DACE45971F90CD0400E22091 /* AddTagViewController.swift in Sources */,
 				DAE92F3D1F8C31FB0004A824 /* TagPickerCollectionView.swift in Sources */,
 				DADD555D1F8297E500822753 /* PaperListHeaderView.swift in Sources */,
 				DACBCAE01F8B4FA0003DEC7F /* PhotoView.swift in Sources */,
@@ -426,9 +462,10 @@
 				DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */,
 				DAE92F491F8C32CF0004A824 /* ConvertPickerView.swift in Sources */,
 				DAC6971F1F8B57A7008071E4 /* PianoTextView_Form.swift in Sources */,
-				DAC697271F8B5A2E008071E4 /* PianoTextView_UITextViewDelegate.swift in Sources */,
+				DA0F0E341F8F90E600729572 /* ColorPickerButton.swift in Sources */,
 				DAE92F531F8C42430004A824 /* AddTagReusableView.swift in Sources */,
 				DAD3D6431F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift in Sources */,
+				DA9F06701F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift in Sources */,
 				DAE92F411F8C322C0004A824 /* ColorPickerView.swift in Sources */,
 				DACBCADC1F8B3906003DEC7F /* PianoControl.swift in Sources */,
 				DA6E023B1F88592E0082576A /* PianoTextView_CoreData.swift in Sources */,
@@ -437,13 +474,16 @@
 				DA3F2BB21F85D19900A556F5 /* PaperTransition.swift in Sources */,
 				DACBCAE61F8B5302003DEC7F /* MirrorScrollView.swift in Sources */,
 				DAD3D62A1F7A29DA00FC029D /* PaperViewController.swift in Sources */,
+				DA9133191F95B2FE002C4DBE /* AddTagCell.swift in Sources */,
 				DAD3D6451F7A60A200FC029D /* ImageAttachment.swift in Sources */,
 				DAE92F2F1F8B9E810004A824 /* PaperViewController_KeyboardNotification.swift in Sources */,
 				DAE92F3B1F8C31DB0004A824 /* TagPickerCell.swift in Sources */,
 				DAD3D63B1F7A30CE00FC029D /* PaperModel.xcdatamodeld in Sources */,
+				DA9133171F956B3F002C4DBE /* AddTagCollectionView.swift in Sources */,
 				DAC697211F8B5845008071E4 /* Primitive_Extension.swift in Sources */,
 				DA9F066C1F8F4B1300EA5F18 /* PhotoCollectionView.swift in Sources */,
 				DACBCAD61F8B35D3003DEC7F /* PianoView.swift in Sources */,
+				DA9133151F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift in Sources */,
 				DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */,
 				DAD3D62E1F7A2C3C00FC029D /* Reusable.swift in Sources */,
 			);
@@ -585,6 +625,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
 				INFOPLIST_FILE = Paper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.piano.Paper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -600,6 +641,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U9KHV9D7LV;
 				INFOPLIST_FILE = Paper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.piano.Paper;
 				PRODUCT_NAME = "$(TARGET_NAME)";

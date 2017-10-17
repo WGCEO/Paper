@@ -16,4 +16,12 @@ class AddTagReusableView: UICollectionReusableView, Reusable {
         // Initialization code
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Global.userFeedback()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        AppNavigator.currentViewController?.performSegue(withIdentifier: "AddTagViewController", sender: nil)
+    }
+    
 }

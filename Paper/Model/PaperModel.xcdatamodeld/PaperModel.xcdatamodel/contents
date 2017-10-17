@@ -7,14 +7,14 @@
         <attribute name="fullContent" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="inTrash" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modifiedDate" attributeType="Date" defaultDateTimeInterval="528682440" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="thumbnailContent" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="thumbnailContent" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="papers" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="Preference" representedClassName="Preference" syncable="YES" codeGenerationType="class">
         <attribute name="showMirroring" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="Tag" representedClassName="Tag" syncable="YES" codeGenerationType="class">
-        <attribute name="date" attributeType="Date" defaultDateTimeInterval="528101820" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="date" attributeType="Date" defaultDateTimeInterval="529905780" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="papersCount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="papers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Paper" inverseName="tags" inverseEntity="Paper" syncable="YES"/>

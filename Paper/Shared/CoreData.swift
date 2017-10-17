@@ -111,7 +111,7 @@ extension CoreData {
         privateMOC.performAndWait { [unowned self] in
             for (attrString, paper) in self.cache {
                 
-               let thumbnailAttrstring =  attrText.thumbnailAttrString()
+               let thumbnailAttrstring =  attrText.thumbnail()
                 
                 paper.thumbnailContent
                     = thumbnailAttrstring != nil
@@ -183,6 +183,36 @@ extension CoreData {
             if count == 0 {
                 let preference = Preference(context: viewContext)
                 preference.showMirroring = false
+                saveViewContext()
+            }
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    //태그 없다면 생성하기
+    internal func createDefaultTagsIfNeeded() {
+        do {
+            let request: NSFetchRequest<Tag> = Tag.fetchRequest()
+            let count = try viewContext.count(for: request)
+            if count == 0 {
+                let tag1 = Tag(context: viewContext)
+                tag1.name = "일"
+                tag1.date = Date()
+                
+                let tag2 = Tag(context: viewContext)
+                tag2.name = "공부"
+                tag2.date = Date()
+                
+                let tag3 = Tag(context: viewContext)
+                tag3.name = "일상"
+                tag3.date = Date()
+                
+                let tag4 = Tag(context: viewContext)
+                tag4.name = "아이디어"
+                tag4.date = Date()
+                
                 saveViewContext()
             }
             

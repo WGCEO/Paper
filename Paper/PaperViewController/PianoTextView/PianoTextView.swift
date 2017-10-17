@@ -62,11 +62,9 @@ extension PianoTextView {
         updateAllCalculateAttr()
         
         control.effectable = self
-        delegate = self
         textContainer.lineFragmentPadding = 0
-        textContainerInset.top = 16
-        textContainerInset.bottom = 80
-        
+        textContainerInset.top = 20
+        textContainerInset.bottom = 120
         //코어데이터 세팅
         CoreData.sharedInstance.textView = self
         
@@ -81,7 +79,6 @@ extension PianoTextView {
         //TODO: 아이패드의 하단 바를 숨기기위한 방법. 이거 나중에 체크하기
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
-        
     }
     
 }

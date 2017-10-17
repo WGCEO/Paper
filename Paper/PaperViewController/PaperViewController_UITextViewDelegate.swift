@@ -1,48 +1,51 @@
 //
-//  PianoTextView_UITextViewDelegate.swift
+//  PaperViewController_UITextViewDelegate.swift
 //  Paper
 //
-//  Created by changi kim on 2017. 10. 9..
+//  Created by changi kim on 2017. 10. 12..
 //  Copyright © 2017년 Piano. All rights reserved.
 //
 
 import UIKit
 
-//MARK: TextViewDelegate
-extension PianoTextView: UITextViewDelegate {
-    
+extension PaperViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if CoreData.sharedInstance.preference.showMirroring {
-            mirrorScrollView.showMirroring(from: textView)
+        if let textView = textView as? PianoTextView,
+            CoreData.sharedInstance.preference.showMirroring,
+            kbHeight != nil {
+            textView.mirrorScrollView.showMirroring(from: textView)
         }
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if CoreData.sharedInstance.preference.showMirroring {
-            mirrorScrollView.showMirroring(from: textView)
+        if let textView = textView as? PianoTextView, CoreData.sharedInstance.preference.showMirroring, kbHeight != nil {
+            textView.mirrorScrollView.showMirroring(from: textView)
         }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard let textView = textView as? PianoTextView else { return true}
         
         let currentParagraphRange = textView.rangeForCurrentParagraph()
         
-        if attributedText.containsAttachments(in: currentParagraphRange)
-            && !attributedText.containsAttachments(in: range)
+        if textView.attributedText.containsAttachments(in: currentParagraphRange)
+            && !textView.attributedText.containsAttachments(in: range)
             && text != "\n"
             && text != "" {
-            jumpCursorToRightSide(paragraphRange: currentParagraphRange)
+            textView.jumpCursorToRightSide(paragraphRange: currentParagraphRange)
         }
         
-        return removeAttrOrInsertFormAtNextLineifNeeded(in: currentParagraphRange, replacementText: text)
+        return textView.removeAttrOrInsertFormAtNextLineifNeeded(in: currentParagraphRange, replacementText: text)
     }
     
     //현재 문단에 이미지가 있는데, 양 옆에 개행이 없는 곳이 있다면 넣어주기
     
     func textViewDidChange(_ textView: UITextView) {
-        userEdited = true
+        guard let textView = textView as? PianoTextView else { return }
+        
+        textView.userEdited = true
         CoreData.sharedInstance.paper.modifiedDate = Date()
-        addAttrToFormIfNeeded(in: rangeForCurrentParagraph())
+        textView.addAttrToFormIfNeeded(in: textView.rangeForCurrentParagraph())
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -59,4 +62,5 @@ extension PianoTextView: UITextViewDelegate {
         guard let textView = scrollView as? PianoTextView, !textView.isEditable else { return }
         textView.detachControl()
     }
+
 }

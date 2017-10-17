@@ -18,41 +18,41 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cBf-9A-VQF">
                     <rect key="frame" x="47.5" y="2" width="280" height="40"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVY-bS-etP">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVY-bS-etP" customClass="PianoPickerButton" customModule="Paper" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="ddo-AQ-5IU"/>
                                 <constraint firstAttribute="width" constant="40" id="ydu-76-7fq"/>
                             </constraints>
-                            <state key="normal" image="colorRed"/>
+                            <state key="normal" image="redColor"/>
                             <connections>
                                 <action selector="tapPickerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="kPl-Nj-yxl"/>
                             </connections>
                         </button>
-                        <button opaque="NO" alpha="0.29999999999999999" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujI-li-Y7i">
+                        <button opaque="NO" alpha="0.29999999999999999" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujI-li-Y7i" customClass="PianoPickerButton" customModule="Paper" customModuleProvider="target">
                             <rect key="frame" x="60" y="0.0" width="40" height="40"/>
                             <state key="normal" image="bold"/>
                             <connections>
                                 <action selector="tapPickerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="6Us-E7-3Y1"/>
                             </connections>
                         </button>
-                        <button opaque="NO" alpha="0.29999999999999999" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJh-gj-lvX">
+                        <button opaque="NO" alpha="0.29999999999999999" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJh-gj-lvX" customClass="PianoPickerButton" customModule="Paper" customModuleProvider="target">
                             <rect key="frame" x="120" y="0.0" width="40" height="40"/>
                             <state key="normal" image="h3"/>
                             <connections>
                                 <action selector="tapPickerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="aWm-av-BV4"/>
                             </connections>
                         </button>
-                        <button opaque="NO" alpha="0.29999999999999999" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWX-Tx-hTU">
+                        <button opaque="NO" alpha="0.29999999999999999" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWX-Tx-hTU" customClass="PianoPickerButton" customModule="Paper" customModuleProvider="target">
                             <rect key="frame" x="180" y="0.0" width="40" height="40"/>
-                            <state key="normal" image="underlineRed"/>
+                            <state key="normal" image="redUnderline"/>
                             <connections>
                                 <action selector="tapPickerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ec5-JN-s8L"/>
                             </connections>
                         </button>
-                        <button opaque="NO" alpha="0.29999999999999999" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vd0-nw-5KV">
+                        <button opaque="NO" alpha="0.29999999999999999" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vd0-nw-5KV" customClass="PianoPickerButton" customModule="Paper" customModuleProvider="target">
                             <rect key="frame" x="240" y="0.0" width="40" height="40"/>
-                            <state key="normal" image="strikelineRed"/>
+                            <state key="normal" image="redStrikethrough"/>
                             <connections>
                                 <action selector="tapPickerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="Mfl-1x-hZq"/>
                             </connections>
@@ -116,11 +116,11 @@
     </objects>
     <resources>
         <image name="bold" width="18" height="21"/>
-        <image name="colorRed" width="24" height="24"/>
         <image name="h1" width="26" height="21"/>
         <image name="h2" width="26" height="21"/>
         <image name="h3" width="26" height="21"/>
-        <image name="strikelineRed" width="20" height="22"/>
-        <image name="underlineRed" width="21" height="23"/>
+        <image name="redColor" width="24" height="24"/>
+        <image name="redStrikethrough" width="20" height="22"/>
+        <image name="redUnderline" width="21" height="23"/>
     </resources>
 </document>

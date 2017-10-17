@@ -9,6 +9,7 @@
 import UIKit
 
 class MirrorScrollView: UIScrollView {
+    
     weak private var textView: UITextView?
     @IBOutlet weak private var mrLabel: UILabel!
     @IBOutlet weak private var mrCursorView: UIView!
@@ -30,7 +31,7 @@ class MirrorScrollView: UIScrollView {
     public func showMirroring(from textView: UITextView){
         
         //1. 탭 중이거나, 숨겨져있을 때(하드웨어 키보드 연결)엔 미러링 보여주지 말기
-        guard !isTapped, !isHidden else { return }
+        guard !isTapped else { return }
         //2. 텍스트뷰 참조
         if self.textView == nil {
             self.textView = textView
@@ -85,6 +86,8 @@ class MirrorScrollView: UIScrollView {
     private func setAttrText( _ attrText: NSAttributedString) {
         mrLabel.attributedText = attrText
         self.layoutIfNeeded()
+        
+        isHidden = attrText.containsAttachments(in: NSMakeRange(0, attrText.length))
     }
     
     private func setScrollOffset(by frontWidth: CGFloat){

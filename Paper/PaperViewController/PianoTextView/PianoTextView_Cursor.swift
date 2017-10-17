@@ -27,7 +27,7 @@ extension PianoTextView {
 //            moveCursor(from: cursorRect)
 //        }
 //    }
-    
+//
 //    internal func moveCursor(from: CGRect){
 //        guard let kbHeight = self.kbHeight else { return }
 //        let screenHeight = UIScreen.main.bounds.height

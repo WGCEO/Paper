@@ -31,5 +31,14 @@ class DefaultViewController: UIViewController {
             self.statusView.frame = UIApplication.shared.statusBarFrame
         }
     }
+    
+    internal func topMargin() -> CGFloat {
+        var top: CGFloat = 20
+        top += UIApplication.shared.statusBarFrame.height
+        if let navigationBarHeight = navigationController?.navigationBar.bounds.height {
+            top += navigationBarHeight
+        }
+        return top
+    }
 
 }

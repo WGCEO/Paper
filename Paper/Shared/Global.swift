@@ -28,7 +28,7 @@ struct Global {
         UIColor(red: 6/255, green: 196/255, blue: 153/255, alpha: 1),
         UIColor(red: 249/255, green: 168/255, blue: 37/255, alpha: 1)]
     
-    static let colorStrs: [String] = ["red", "green", "yellow"]
+    static let colorStrs: [String] = ["red", "mint", "gold"]
     
     static let fontStrs: [String] = ["system16", "system17", "system19", "system21", "system23"]
     
@@ -73,9 +73,9 @@ struct Global {
         switch name {
         case "red":
             return colors[0]
-        case "green":
+        case "mint":
             return colors[1]
-        case "yellow":
+        case "gold":
             return colors[2]
         default:
             return colors[0]

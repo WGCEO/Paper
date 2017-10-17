@@ -13,18 +13,23 @@ class PaperViewController: DefaultViewController {
     internal var shouldAppearKeyboard = false
     
     @IBOutlet weak var textViewTop: NSLayoutConstraint!
+    @IBOutlet weak var descriptionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var textView: PianoTextView!
-    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var toolbarStackView: UIStackView!
     @IBOutlet var toolbarButtons: [UIButton]!
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var auxToolbarView: UIView!
     @IBOutlet weak var descriptionView: UIView!
+    @IBOutlet weak var auxToolbarViewBottom: NSLayoutConstraint!
     
     internal var kbHeight: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+
+        //TODO: 화면 방향 바뀌면 다시 세팅해줘야 하는 것들:
+        descriptionViewHeight.constant = topMargin()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,6 +37,7 @@ class PaperViewController: DefaultViewController {
         if shouldAppearKeyboard {
             textView.becomeFirstResponder()
         }
+        changeTextContainerInset(by: view.bounds.size)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +51,24 @@ class PaperViewController: DefaultViewController {
 
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        changeTextContainerInset(by: size)
+        
+        coordinator.animate(alongsideTransition: nil) {[unowned self] (_) in
+            if !self.textView.isEditable {
+                self.textView.attachControl()
+            }
+        }
+    }
+    
+    internal func changeTextContainerInset(by size: CGSize) {
+        textView.textContainerInset.left = Global.textMargin(by: size.width)
+        textView.textContainerInset.right = Global.textMargin(by: size.width)
+    }
+
+    
     @IBAction func screenEdgePan(_ sender: Any) {
         guard !panned else { return }
         navigationController?.popViewController(animated: true)
@@ -53,67 +77,106 @@ class PaperViewController: DefaultViewController {
     
     private func setup(){
         navigationController?.setNavigationBarHidden(false, animated: true)
-        toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .bottom, barMetrics: .default)
-        toolbar.setShadowImage(UIImage(), forToolbarPosition: .bottom)
-        toolbar.backgroundColor = UIColor.white.withAlphaComponent(0.95)
+        auxToolbarViewBottom.constant = -auxToolbarView.bounds.height
+        textView.delegate = self
+    }
+    
+    enum PickerViewType: Int {
+        case TagPickerView = 0
+        case PianoPickerView
+        case FontPickerView
+        case ColorPickerView
+        case ConvertPickerView
+        
+        func nibName() -> String {
+            return String(describing: self)
+        }
+    }
+    
+    private func setButtonsDeselected(exceptFor button: UIButton){
+        for toolbarButton in toolbarButtons {
+            if toolbarButton != button {
+                toolbarButton.isSelected = false
+            }
+        }
+    }
+    
+    private func animateTextViewTop(isSelected: Bool) {
+        textViewTop.constant = isSelected ? topMargin() : 0
+        view.layoutIfNeeded()
+    }
+    
+    private func animateAuxToolbar(isSelected: Bool) {
+        auxToolbarViewBottom.constant = isSelected ?
+            (view.bounds.height - toolbarStackView.frame.origin.y) :
+            -auxToolbarView.bounds.height
+        view.layoutIfNeeded()
+    }
+    
+    private func setPickerViewIfNeeded(sender: UIButton) {
+        removePickerViews()
+        if let nibName = PickerViewType(rawValue: sender.tag)?.nibName(), sender.isSelected {
+            addPickerView(nibName: nibName)
+        }
+    }
+    
+    private func setDescriptionViewIfNeeded(sender: UIButton) {
         
     }
     
-    //자신을 제외한 모든 버튼은 선택 풀기
-    @IBAction func tapTagButton(_ sender: UIButton) {
-        for button in toolbarButtons {
-            if sender != button {
-                button.isSelected = false
-            }
-        }
-        sender.isSelected = !sender.isSelected
-        
-        //TODO: if sender.isSelected 일 경우, auxToolBarView 애니메이션해서 튀어오르게 하고, 태그 피커 뷰만 보이게 하기
-        //TODO: 선택되지 않을 경우 auxToolBarView 애니메이션으로 내리게 하고, removeFromSuperView하기
+    private func setTextViewState(isSelected: Bool) {
+        textView.isEditable = !isSelected
+        textView.isSelectable = !isSelected
     }
     
-    @IBAction func tapPianoButton(_ sender: UIButton) {
+    private func animateNavigationBar(isSelected: Bool) {
+        navigationController?.hidesBarsOnSwipe = !isSelected
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    @IBAction func tapToolbarButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        setButtonsDeselected(exceptFor: sender)
         
-        for button in toolbarButtons {
-            if button != sender {
-                button.isSelected = false
+        CATransaction.setCompletionBlock { [weak self] in
+            let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut) {
+                self?.animateTextViewTop(isSelected: sender.isSelected)
             }
-        }
-        
-        if sender.isSelected {
-            //1. 애니메이션 시켜서 auxToolbar 튀어오르게 하기
-            //2. auxToolbar에 피아노피커 뷰 생성해 붙이기
-            //3. 피아노
-        } else {
             
+            animator.addAnimations {
+                self?.animateAuxToolbar(isSelected: sender.isSelected)
+            }
+            
+            animator.addCompletion({ [weak self](_) in
+                self?.setDescriptionViewIfNeeded(sender: sender)
+                self?.setTextViewState(isSelected: sender.isSelected)
+                self?.animateNavigationBar(isSelected: sender.isSelected)
+            })
+            
+            animator.startAnimation()
         }
+        setPickerViewIfNeeded(sender: sender)
     }
     
-    @IBAction func tapColorButton(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func tapFontButton(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func tapShareButton(_ sender: UIButton) {
-        
-    }
     
     @IBAction func tapImageButton(_ sender: UIButton) {
+        Global.userFeedback()
         sender.isSelected = !sender.isSelected
         
         if sender.isSelected {
+            textView.mirrorScrollView.isHidden = true
             addPhotoView()
         } else {
             removePhotoView()
+            if CoreData.sharedInstance.preference.showMirroring {
+                textView.mirrorScrollView.isHidden = false
+                textView.mirrorScrollView.showMirroring(from: textView)
+            }
         }
-        textView.mirrorScrollView.isHidden = sender.isSelected ? true : false
     }
     
     @IBAction func tapMirroringButton(_ sender: UIButton) {
+        Global.userFeedback()
         sender.isSelected = !sender.isSelected
         textView.mirrorScrollView.isHidden = sender.isSelected && !imageButton.isSelected ? false : true
         CoreData.sharedInstance.preference.showMirroring = sender.isSelected
@@ -123,12 +186,9 @@ class PaperViewController: DefaultViewController {
     }
     
     @IBAction func tapHideKeyboardButton(_ sender: UIButton) {
+        Global.userFeedback()
         textView.resignFirstResponder()
     }
-    
-
-    
-
     
     private func removePickerViews(){
         for subView in auxToolbarView.subviews {
@@ -136,6 +196,7 @@ class PaperViewController: DefaultViewController {
             
             if let pianoView = view.viewWithTag(1004) {
                 pianoView.removeFromSuperview()
+                textView.detachControl()
             }
         }
     }
@@ -144,20 +205,19 @@ class PaperViewController: DefaultViewController {
         let nib = UINib(nibName: nibName, bundle: nil)
         let pickerView = nib.instantiate(withOwner: nil, options: nil).first as! UIView
         pickerView.translatesAutoresizingMaskIntoConstraints = false
+        auxToolbarView.addSubview(pickerView)
         pickerView.topAnchor.constraint(equalTo: auxToolbarView.topAnchor).isActive = true
         pickerView.leadingAnchor.constraint(equalTo: auxToolbarView.leadingAnchor).isActive = true
         pickerView.trailingAnchor.constraint(equalTo: auxToolbarView.trailingAnchor).isActive = true
         pickerView.bottomAnchor.constraint(equalTo: auxToolbarView.bottomAnchor).isActive = true
-        auxToolbarView.addSubview(pickerView)
         
         if let pianoPickerView = pickerView as? PianoPickerView {
             let pianoView = addPianoView()
             pianoPickerView.delegate = pianoView
+            textView.attachControl()
         }
     }
-    
-   
-    
+
     private func addPhotoView(){
         let nib = UINib(nibName: "PhotoView", bundle: nil)
         let photoView: PhotoView = nib.instantiate(withOwner: nil, options: nil).first as! PhotoView
@@ -175,33 +235,18 @@ class PaperViewController: DefaultViewController {
     
     //TODO: 피아노피커뷰와 피아노 뷰도 동적으로 생성하고, 피커뷰 먼저 만들고, 그다음 피아노 뷰 만들어서 피아노 뷰에 어트리뷰트 세팅하기
     private func addPianoView() -> PianoView {
-        let view = PianoView()
-        view.tag = 1004
-        view.isUserInteractionEnabled = false
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        view.backgroundColor = UIColor.red.withAlphaComponent(0.3)
-        view.addSubview(view)
-        textView.control.pianoable = view
-        return view
+        let pianoView = PianoView()
+        pianoView.tag = 1004
+        pianoView.isUserInteractionEnabled = false
+        pianoView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(pianoView)
+        pianoView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topMargin()).isActive = true
+//        pianoView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        pianoView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        pianoView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        pianoView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        textView.control.pianoable = pianoView
+        
+        return pianoView
     }
-    
-//    private func animateToPiano(isReversed: Bool) {
-//        UIView.animate(withDuration: Global.duration, animations: { [weak self] in
-//            if !isReversed {
-//                self?.textViewTop.constant = 64
-//                self?.view.layoutIfNeeded()
-//
-//            }
-//
-//        }, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
-//    }
-    
-    
-    //TODO
-    //피아노 모드를 실행할 때 false하고, 종료할 때 true시키기
-//    navigationController?.hidesBarsOnSwipe = false
 }

@@ -15,7 +15,6 @@ class PaperListViewController: DefaultViewController {
     @IBOutlet weak var collectionView: TagCollectionView!
     @IBOutlet weak var trashButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -83,9 +82,7 @@ class PaperListViewController: DefaultViewController {
             des.shouldAppearKeyboard = shouldAppearKeyboard
         }
     }
-    
 }
-
 
 extension PaperListViewController {
     
