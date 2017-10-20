@@ -17,6 +17,11 @@ struct Global {
     static let opacity: CGFloat = 1
     static let transparent: CGFloat = 0.3
     static let mirrorFont: CGFloat = 31
+    static let iphone = UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.phone
+    static let headIndent: CGFloat = iphone ? 30 : 40
+    static let tailIndent: CGFloat = iphone ? -20 : -30
+    static let lineSpacing: CGFloat = 10
+    
     
     static let numRegex = "^\\s*(\\d+)(?=\\. )"
     static let listRegex = "^\\s*([-•])(?= )"
@@ -30,7 +35,7 @@ struct Global {
     
     static let colorStrs: [String] = ["red", "mint", "gold"]
     
-    static let fontStrs: [String] = ["system16", "system17", "system19", "system21", "system23"]
+    static let fontStrs: [String] = ["xSmall", "small", "medium", "large", "xLarge"]
     
     static let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -42,10 +47,10 @@ struct Global {
     
     static let defaultParagraphStyle: NSMutableParagraphStyle = {
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.firstLineHeadIndent = 30
-        paragraphStyle.headIndent = 30
-        paragraphStyle.tailIndent = -20
-        paragraphStyle.lineSpacing = 8
+        paragraphStyle.firstLineHeadIndent = headIndent
+        paragraphStyle.headIndent = headIndent
+        paragraphStyle.tailIndent = tailIndent
+        paragraphStyle.lineSpacing = lineSpacing
         return paragraphStyle
     }()
     
@@ -53,17 +58,18 @@ struct Global {
     
     
     static func transformToFont(name: String) -> UIFont {
+        let defaultSize: CGFloat = iphone ? 17 : 23
         switch name {
-        case "system16":
-            return UIFont.systemFont(ofSize: 16)
-        case "system17":
-            return UIFont.systemFont(ofSize: 17)
-        case "system19":
-            return UIFont.systemFont(ofSize: 19)
-        case "system21":
-            return UIFont.systemFont(ofSize: 21)
-        case "system23":
-            return UIFont.systemFont(ofSize: 23)
+        case "xSmall":
+            return UIFont.systemFont(ofSize: defaultSize - 1)
+        case "small":
+            return UIFont.systemFont(ofSize: defaultSize)
+        case "medium":
+            return UIFont.systemFont(ofSize: defaultSize + 2)
+        case "large":
+            return UIFont.systemFont(ofSize: defaultSize + 4)
+        case "xLarge":
+            return UIFont.systemFont(ofSize: defaultSize + 6)
         default:
             return UIFont.systemFont(ofSize: 17)
         }
@@ -82,19 +88,19 @@ struct Global {
         }
     }
     
-    static func textMargin(by screenWidth: CGFloat) -> CGFloat {
-        if screenWidth < 415 {
-            return 0
-        } else if screenWidth < 600 {
-            return screenWidth / 20
-        } else if screenWidth < 750 {
-            return screenWidth / 15
-        } else if screenWidth < 850 {
-            return screenWidth / 10
-        } else {
-            return screenWidth / 6.7
-        }
-    }
+//    static func textMargin(by screenWidth: CGFloat) -> CGFloat {
+//        if screenWidth < 415 {
+//            return 0
+//        } else if screenWidth < 600 {
+//            return screenWidth / 20
+//        } else if screenWidth < 750 {
+//            return screenWidth / 15
+//        } else if screenWidth < 850 {
+//            return screenWidth / 10
+//        } else {
+//            return screenWidth / 6.7
+//        }
+//    }
     
     static func userFeedback() {
         let generator = UISelectionFeedbackGenerator()

@@ -114,40 +114,8 @@ extension PhotoView: UICollectionViewDelegate {
         requestOptions.isSynchronous = true
         
         PHImageManager.default().requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.default, options: requestOptions) { [weak self](image, _) in
-            guard let wrappedImage = image else { return }
-            var croppedImage: UIImage? = wrappedImage
-            
-            //1. 비율 줄이기 ifNeeded
-            //가로 * 3  < 세로 * 4 이면 (4:3 비율보다 세로 이미지 비율이 더 크다면)
-            let width = wrappedImage.size.width
-            let height = wrappedImage.size.height
-            if width * 3 < height * 4 {
-                let x: CGFloat = 0
-                let y: CGFloat = (4 * height - 3 * width) / 8
-                let cropRect = CGRect(x: x, y: y, width: width, height: width * 3 / 4)
-                if let imageRef = wrappedImage.cgImage?.cropping(to: cropRect) {
-                    croppedImage = UIImage(cgImage: imageRef, scale: 0, orientation: wrappedImage.imageOrientation)
-                }
-            }
-            
-            guard let resultImage = croppedImage else { return }
-            
-            //2. 크기 줄이기 ifNeeded
-            let ratio = UIScreen.main.bounds.width / resultImage.size.width
-            if ratio < 1 {
-                let size = resultImage.size.applying(CGAffineTransform(scaleX: ratio, y: ratio))
-                UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
-                resultImage.draw(in: CGRect(origin: CGPoint.zero, size: size))
-                let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                
-                if let resultImage = scaledImage {
-                    self?.delegate?.photoView(self, didSelect: resultImage)
-                    return
-                }
-            }
-            self?.delegate?.photoView(self, didSelect: resultImage)
-            //TODO: 여기서 글로벌 인디케이터 해제하기
+            guard let wrappedImage = image, let transformImage = wrappedImage.transform3by4AndFitScreen() else { return }
+            self?.delegate?.photoView(self, didSelect: transformImage)
         }
     }
 }

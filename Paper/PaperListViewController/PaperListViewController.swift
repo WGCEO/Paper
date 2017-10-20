@@ -45,7 +45,7 @@ class PaperListViewController: DefaultViewController {
         //1. 페이퍼 생성
         print("tapCreatePaperButton")
         let paragraphStyle = Global.defaultParagraphStyle
-        let defaultFontStr = "system17"
+        let defaultFontStr = "small"
         let defaultColorStr = "red"
         let attrString = NSAttributedString(string: "", attributes: [
             .font : Global.transformToFont(name: defaultFontStr),

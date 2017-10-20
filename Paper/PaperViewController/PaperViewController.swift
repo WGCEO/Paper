@@ -9,18 +9,20 @@
 import UIKit
 
 class PaperViewController: DefaultViewController {
-    private var panned = false
     internal var shouldAppearKeyboard = false
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet var screenEdgePanGesture: UIScreenEdgePanGestureRecognizer!
     @IBOutlet weak var textViewTop: NSLayoutConstraint!
     @IBOutlet weak var descriptionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var textView: PianoTextView!
-    @IBOutlet weak var toolbarStackView: UIStackView!
+    @IBOutlet weak var toolbarView: UIView!
     @IBOutlet var toolbarButtons: [UIButton]!
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var auxToolbarView: UIView!
     @IBOutlet weak var descriptionView: UIView!
     @IBOutlet weak var auxToolbarViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var mirroringHelperView: UIView!
     
     internal var kbHeight: CGFloat?
     
@@ -37,7 +39,6 @@ class PaperViewController: DefaultViewController {
         if shouldAppearKeyboard {
             textView.becomeFirstResponder()
         }
-        changeTextContainerInset(by: view.bounds.size)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,13 +49,10 @@ class PaperViewController: DefaultViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unRegisterKeyboardNotification()
-
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-        changeTextContainerInset(by: size)
         
         coordinator.animate(alongsideTransition: nil) {[unowned self] (_) in
             if !self.textView.isEditable {
@@ -62,17 +60,12 @@ class PaperViewController: DefaultViewController {
             }
         }
     }
-    
-    internal func changeTextContainerInset(by size: CGSize) {
-        textView.textContainerInset.left = Global.textMargin(by: size.width)
-        textView.textContainerInset.right = Global.textMargin(by: size.width)
-    }
 
     
     @IBAction func screenEdgePan(_ sender: Any) {
-        guard !panned else { return }
+        guard textView.isSelectable == true else { return }
         navigationController?.popViewController(animated: true)
-        panned = true
+        screenEdgePanGesture.isEnabled = !screenEdgePanGesture.isEnabled
     }
     
     private func setup(){
@@ -91,6 +84,21 @@ class PaperViewController: DefaultViewController {
         func nibName() -> String {
             return String(describing: self)
         }
+        
+        func descriptionString() -> String {
+            switch self {
+            case .TagPickerView:
+                return "태그를 선택해 해당 메모를 분류하세요."
+            case .PianoPickerView:
+                return "형광펜처럼 손가락으로 글자를 칠해보세요."
+            case .FontPickerView:
+                return "글자의 크기를 조절해보세요."
+            case .ColorPickerView:
+                return "피아노 효과, 서식의 색상을 바꿔보세요."
+            case .ConvertPickerView:
+                return "이메일 혹은 PDF로 변환해보세요."
+            }
+        }
     }
     
     private func setButtonsDeselected(exceptFor button: UIButton){
@@ -108,7 +116,7 @@ class PaperViewController: DefaultViewController {
     
     private func animateAuxToolbar(isSelected: Bool) {
         auxToolbarViewBottom.constant = isSelected ?
-            (view.bounds.height - toolbarStackView.frame.origin.y) :
+            (view.bounds.height - toolbarView.frame.origin.y) :
             -auxToolbarView.bounds.height
         view.layoutIfNeeded()
     }
@@ -121,7 +129,9 @@ class PaperViewController: DefaultViewController {
     }
     
     private func setDescriptionViewIfNeeded(sender: UIButton) {
-        
+        if let desString = PickerViewType(rawValue: sender.tag)?.descriptionString() {
+            descriptionLabel.text = desString
+        }
     }
     
     private func setTextViewState(isSelected: Bool) {
@@ -137,6 +147,8 @@ class PaperViewController: DefaultViewController {
     @IBAction func tapToolbarButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         setButtonsDeselected(exceptFor: sender)
+        setPickerViewIfNeeded(sender: sender)
+        
         
         CATransaction.setCompletionBlock { [weak self] in
             let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeOut) {
@@ -151,11 +163,30 @@ class PaperViewController: DefaultViewController {
                 self?.setDescriptionViewIfNeeded(sender: sender)
                 self?.setTextViewState(isSelected: sender.isSelected)
                 self?.animateNavigationBar(isSelected: sender.isSelected)
+                self?.addPianoViewIfNeeded(sender: sender)
+                self?.setPanGestureEnabled(isSelected: sender.isSelected)
             })
             
             animator.startAnimation()
         }
-        setPickerViewIfNeeded(sender: sender)
+    }
+    
+    private func setPanGestureEnabled(isSelected: Bool) {
+        screenEdgePanGesture.isEnabled = !isSelected
+    }
+    
+    private func addPianoViewIfNeeded(sender: UIButton) {
+        
+        if let nibName = PickerViewType(rawValue: sender.tag)?.nibName(),
+            nibName == "PianoPickerView",
+            sender.isSelected,
+            let pianoPickerView =
+            auxToolbarView.subviews.first as? PianoPickerView {
+            let pianoView = addPianoView()
+            pianoPickerView.delegate = pianoView
+            pianoPickerView.delegate?.pianoPickerView(pianoPickerView, didSelectPickerAt: 0)
+            textView.attachControl()
+        }
     }
     
     
@@ -181,6 +212,15 @@ class PaperViewController: DefaultViewController {
         textView.mirrorScrollView.isHidden = sender.isSelected && !imageButton.isSelected ? false : true
         CoreData.sharedInstance.preference.showMirroring = sender.isSelected
         if sender.isSelected {
+            mirroringHelperView.isHidden = false
+            mirroringHelperView.alpha = 1
+            
+            UIView.animate(withDuration: 0.5, delay: 2.5, options: [], animations: { [weak self] in
+                self?.mirroringHelperView.alpha = 0.0
+                }, completion: { (_) in
+                    self.mirroringHelperView.isHidden = true
+            })
+            
             textView.mirrorScrollView.showMirroring(from: textView)
         }
     }
@@ -210,12 +250,6 @@ class PaperViewController: DefaultViewController {
         pickerView.leadingAnchor.constraint(equalTo: auxToolbarView.leadingAnchor).isActive = true
         pickerView.trailingAnchor.constraint(equalTo: auxToolbarView.trailingAnchor).isActive = true
         pickerView.bottomAnchor.constraint(equalTo: auxToolbarView.bottomAnchor).isActive = true
-        
-        if let pianoPickerView = pickerView as? PianoPickerView {
-            let pianoView = addPianoView()
-            pianoPickerView.delegate = pianoView
-            textView.attachControl()
-        }
     }
 
     private func addPhotoView(){

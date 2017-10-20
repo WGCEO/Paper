@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class PianoTextView: UITextView {
 
@@ -23,6 +24,10 @@ class PianoTextView: UITextView {
             return attributes
         } set {
         }
+    }
+    
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
     }
     
     //MARK: Init
@@ -48,7 +53,7 @@ class PianoTextView: UITextView {
     lazy var circleKern: CGFloat = { calculateCircleKern() }()
     lazy var starKern: CGFloat = { calculateStarKern() }()
     lazy var refKern: CGFloat = { calculateRefKern() }()
- 
+    
 }
 
 //MARK: setup
@@ -79,19 +84,18 @@ extension PianoTextView {
         //TODO: 아이패드의 하단 바를 숨기기위한 방법. 이거 나중에 체크하기
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
+        allowsEditingTextAttributes = true
     }
-    
 }
 
 
 extension PianoTextView: NSTextStorageDelegate {
-    //    func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
-    //        if editedMask.rawValue == 3 && editedRange.length == 1 && self.isEditable  {
-    //            textStorage.addAttributes(defaultAttributesWithoutParaStyle, range: editedRange)
-    //        }
-    //        print("\(editedMask) \(editedRange), \(delta)")
-    //    }
-    
+//        func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
+//            if editedMask.rawValue == 3 && editedRange.length == 1 && self.isEditable  {
+//                textStorage.addAttributes(defaultAttributesWithoutParaStyle, range: editedRange)
+//            }
+//            print("\(editedMask) \(editedRange), \(delta)")
+//        }
     
     func textStorage(_ textStorage: NSTextStorage, willProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
         if editedMask.rawValue == 3 &&

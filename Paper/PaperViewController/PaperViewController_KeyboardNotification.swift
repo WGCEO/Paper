@@ -27,7 +27,7 @@ extension PaperViewController {
         
         
         kbHeight = UIScreen.main.bounds.height - kbFrame.origin.y
-        let bottom = UIScreen.main.bounds.height - kbFrame.origin.y
+        let bottom = UIScreen.main.bounds.height - kbFrame.origin.y + 40
         textView.contentInset.bottom = bottom
         textView.scrollIndicatorInsets.bottom = bottom
         

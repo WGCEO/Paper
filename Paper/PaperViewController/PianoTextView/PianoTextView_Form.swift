@@ -259,88 +259,93 @@ extension PianoTextView {
 //MARK: formatter
 extension PianoTextView {
     
-    internal func addAttrToFormIfNeeded(in currentParaRange: NSRange) {
-        if detectNumbering(in: currentParaRange) {
+    internal func addAttrToFormIfNeeded(in currentParaRange: NSRange, mutableAttrString: NSMutableAttributedString) {
+        if var numRange = detectNumbering(in: currentParaRange) {
+            if numRange.length > 20 {
+                //예외처리(UInt가 감당할 수 있는 숫자 제한, true를 리턴하면, 숫자는 감지했지만 아무것도 할 수 없음을 의미함)
+                return
+            }
+            
+            replaceNumIfNeeded(currentParaRange: currentParaRange, numRange: &numRange)
+            let newParaRange = rangeForParagraph(with: numRange)
+            addAttributeForNumbering(paraRange: newParaRange ,numRange: numRange, mutableAttrString: mutableAttrString)
+            replaceNextNumsIfNeeded(numRange: &numRange)
+            
+            
             return
-        } else if detectListing(in: currentParaRange) {
+        } else if let listRange = detectListing(in: currentParaRange) {
+            replaceListIfNeeded(listRange: listRange)
+            addAttributeForListing(paraRange: currentParaRange, listRange: listRange, mutableAttrString: mutableAttrString)
+            
             return
-        } else if detectAsterisk(in: currentParaRange) {
+        } else if let asteriskRange = detectAsterisk(in: currentParaRange) {
+            replaceAsteriskIfNeeded(asteriskRange: asteriskRange)
+            addAttributeForAsterisk(paraRange: currentParaRange, asteriskRange: asteriskRange, mutableAttrString: mutableAttrString)
             return
-        } else if detectAt(in: currentParaRange) {
+        } else if let atRange = detectAt(in: currentParaRange) {
+            replaceAtIfNeeded(atRange: atRange)
+            addAttributeForAt(paraRange: currentParaRange, atRange: atRange, mutableAttrString: textStorage)
             return
-        } else if detectCircle(in: currentParaRange) {
+        } else if let circleRange = detectCircle(in: currentParaRange) {
+            addAttributeForCircle(paraRange: currentParaRange, circleRange: circleRange, mutableAttrString: mutableAttrString)
             return
-        } else if detectRef(in: currentParaRange){
+        } else if let _ = detectRef(in: currentParaRange){
             return
-        } else if detectStar(in: currentParaRange){
+        } else if let _ = detectStar(in: currentParaRange){
             return
         } else {
             //서식 없는 경우
-            textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: currentParaRange)
+            mutableAttrString.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: currentParaRange)
             return
         }
     }
     
     internal func detectCompletedForm(in range: NSRange) -> Bool {
-        return detectNumbering(in: range) || detectRef(in: range) || detectCircle(in: range) || detectStar(in:range)
+        return detectNumbering(in: range) != nil || detectRef(in: range) != nil || detectCircle(in: range) != nil || detectStar(in:range) != nil
     }
     
-    private func detectNumbering(in range: NSRange) -> Bool {
-        guard var numRange = formRange(paraRange: range, regexString: Global.numRegex)
-            else { return false }
-        
-        if numRange.length > 20 {
-            //예외처리(UInt가 감당할 수 있는 숫자 제한, true를 리턴하면, 숫자는 감지했지만 아무것도 할 수 없음을 의미함)
-            return true
-        }
-        
-        replaceNumIfNeeded(currentParaRange: range, numRange: &numRange)
-        addAttributeForNumbering(numRange: numRange)
-        replaceNextNumsIfNeeded(numRange: &numRange)
-        return true
+    private func detectNumbering(in range: NSRange) -> NSRange? {
+        guard let numRange = formRange(paraRange: range, regexString: Global.numRegex)
+            else { return nil }
+        return numRange
     }
     
-    private func detectListing(in range: NSRange) -> Bool {
+    
+    
+    private func detectListing(in range: NSRange) -> NSRange? {
         guard let listRange = formRange(paraRange: range, regexString: Global.listRegex)
-            else { return false }
-        replaceListIfNeeded(listRange: listRange)
-        addAttributeForListing(currentParaRange: range, listRange: listRange)
-        return true
+            else { return nil }
+        return listRange
     }
     
-    private func detectAsterisk(in range: NSRange) -> Bool {
+    private func detectAsterisk(in range: NSRange) -> NSRange? {
         guard let asteriskRange = formRange(paraRange: range, regexString: Global.asteriskRegex)
-            else { return false }
-        replaceAsteriskIfNeeded(asteriskRange: asteriskRange)
-        addAttributeForAsterisk(currentParaRange: range, asteriskRange: asteriskRange)
-        return true
+            else { return nil }
+        return asteriskRange
     }
     
-    private func detectAt(in range: NSRange) -> Bool {
+    private func detectAt(in range: NSRange) -> NSRange? {
         guard let atRange = formRange(paraRange: range, regexString: Global.atRegex)
-            else { return false }
-        replaceAtIfNeeded(atRange: atRange)
-        addAttributeForAt(currentParaRange: range, atRange: atRange)
-        return true
+            else { return nil }
+        return atRange
     }
     
-    private func detectCircle(in range: NSRange) -> Bool {
+    private func detectCircle(in range: NSRange) -> NSRange? {
         guard let circleRange = formRange(paraRange: range, regexString: Global.listRegex)
-            else { return false }
-        addAttributeForCircle(currentParaRange: range, circleRange: circleRange)
-        return true
+            else { return nil }
+        return circleRange
     }
     
-    private func detectStar(in range: NSRange) -> Bool {
-        guard formRange(paraRange: range, regexString: Global.asteriskRegex) != nil
-            else { return false }
-        return true
+    private func detectStar(in range: NSRange) -> NSRange? {
+        guard let starRange = formRange(paraRange: range, regexString: Global.asteriskRegex)
+            else { return nil }
+        return starRange
     }
     
-    private func detectRef(in range: NSRange) -> Bool {
-        guard formRange(paraRange: range, regexString: Global.atRegex) != nil
-            else { return false }
-        return true
+    private func detectRef(in range: NSRange) -> NSRange? {
+        guard let refRange = formRange(paraRange: range, regexString: Global.atRegex)
+            else { return nil }
+        return refRange
     }
     
     private func formRange(paraRange: NSRange, regexString: String) -> NSRange? {
@@ -405,7 +410,8 @@ extension PianoTextView {
             let correctNextNum = "\(Int(attributedText.attributedSubstring(from: numRange).string)! + 1)"
             textStorage.replaceCharacters(in: nextNumRange, with: correctNextNum)
             numRange = NSMakeRange(nextNumRange.location, correctNextNum.count)
-            addAttributeForNumbering(numRange: numRange)
+            let newParaRange = rangeForParagraph(with: numRange)
+            addAttributeForNumbering(paraRange: newParaRange,numRange: numRange, mutableAttrString: textStorage)
             currentParaRange = rangeForParagraph(with: numRange)
         }
     }
@@ -422,61 +428,123 @@ extension PianoTextView {
         textStorage.replaceCharacters(in: atRange, with: "※")
     }
     
-    private func addAttributeForNumbering(numRange: NSRange){
-        let paraRange = rangeForParagraph(with: numRange)
+    private func addAttributeForNumbering(paraRange: NSRange, numRange: NSRange, mutableAttrString: NSMutableAttributedString) {
         let numberingFont = UIFont(name: "Avenir Next",
                                    size: CoreData.sharedInstance.paperFont.pointSize)!
         
         let dotRange = NSMakeRange(numRange.location + numRange.length, 1)
         let gapRange = NSMakeRange(paraRange.location, numRange.location - paraRange.location)
-        textStorage.addAttributes([.font : numberingFont,
+        mutableAttrString.addAttributes([.font : numberingFont,
                                    .foregroundColor : CoreData.sharedInstance.paperColor],
                                   range: numRange)
-        textStorage.addAttributes([.foregroundColor : UIColor.lightGray,
+        mutableAttrString.addAttributes([.foregroundColor : UIColor.lightGray,
                                    .font : CoreData.sharedInstance.paperFont],
                                   range: dotRange)
-        textStorage.addAttributes([.paragraphStyle : numParagraphStyle(gapRange: gapRange)],
+        mutableAttrString.addAttributes([.paragraphStyle : numParagraphStyle(gapRange: gapRange)],
                                   range: paraRange)
     }
     
-    private func addAttributeForListing(currentParaRange: NSRange, listRange: NSRange) {
-        let gapRange = NSMakeRange(currentParaRange.location, listRange.location - currentParaRange.location)
+    private func addAttributeForListing(paraRange: NSRange, listRange: NSRange, mutableAttrString: NSMutableAttributedString) {
+        let gapRange = NSMakeRange(paraRange.location, listRange.location - paraRange.location)
         
-        textStorage.addAttributes([
+        mutableAttrString.addAttributes([
             .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : CoreData.sharedInstance.paperFont,
+            .foregroundColor : CoreData.sharedInstance.paperColor,
             .kern : circleKern], range: listRange)
-        textStorage.addAttributes([.paragraphStyle : circleParagraphStyle(gapRange: gapRange)], range: currentParaRange)
+        mutableAttrString.addAttributes([.paragraphStyle : circleParagraphStyle(gapRange: gapRange)], range: paraRange)
     }
     
-    private func addAttributeForAsterisk(currentParaRange: NSRange, asteriskRange: NSRange) {
-        let gapRange = NSMakeRange(currentParaRange.location, asteriskRange.location - currentParaRange.location)
-        textStorage.addAttributes([
+    private func addAttributeForAsterisk(paraRange: NSRange, asteriskRange: NSRange, mutableAttrString: NSMutableAttributedString) {
+        let gapRange = NSMakeRange(paraRange.location, asteriskRange.location - paraRange.location)
+        mutableAttrString.addAttributes([
             .font : CoreData.sharedInstance.paperFont,
             .foregroundColor : CoreData.sharedInstance.paperColor,
             .kern : starKern], range: asteriskRange)
         
-        textStorage.addAttributes([.paragraphStyle : starParagraphStyle(gapRange: gapRange)], range: currentParaRange)
+        mutableAttrString.addAttributes([.paragraphStyle : starParagraphStyle(gapRange: gapRange)], range: paraRange)
     }
     
-    private func addAttributeForAt(currentParaRange: NSRange, atRange: NSRange) {
-        let gapRange = NSMakeRange(currentParaRange.location, atRange.location - currentParaRange.location)
-        textStorage.addAttributes([
+    private func addAttributeForAt(paraRange: NSRange, atRange: NSRange, mutableAttrString: NSMutableAttributedString) {
+        let gapRange = NSMakeRange(paraRange.location, atRange.location - paraRange.location)
+        mutableAttrString.addAttributes([
             .font : CoreData.sharedInstance.paperFont,
             .foregroundColor : CoreData.sharedInstance.paperColor,
             .kern : refKern], range: atRange)
         
-        textStorage.addAttributes([.paragraphStyle : refParagraphStyle(gapRange: gapRange)], range: currentParaRange)
+        mutableAttrString.addAttributes([.paragraphStyle : refParagraphStyle(gapRange: gapRange)], range: paraRange)
     }
     
-    private func addAttributeForCircle(currentParaRange: NSRange, circleRange: NSRange) {
-        let gapRange = NSMakeRange(currentParaRange.location, circleRange.location - currentParaRange.location)
-        textStorage.addAttributes([
+    private func addAttributeForCircle(paraRange: NSRange, circleRange: NSRange, mutableAttrString: NSMutableAttributedString) {
+        let gapRange = NSMakeRange(paraRange.location, circleRange.location - paraRange.location)
+        mutableAttrString.addAttributes([
             .font : CoreData.sharedInstance.paperFont,
             .foregroundColor : CoreData.sharedInstance.paperColor,
             .kern : circleKern], range: circleRange)
         
-        textStorage.addAttributes([.paragraphStyle : circleParagraphStyle(gapRange: gapRange)], range: currentParaRange)
+        mutableAttrString.addAttributes([.paragraphStyle : circleParagraphStyle(gapRange: gapRange)], range: paraRange)
+    }
+}
+
+//MARK: Paste
+extension PianoTextView {
+    override func paste(_ sender: Any?) {
+        
+        if let attrString = transformAttrStringFromPasteboard() {
+            textStorage.replaceCharacters(in: selectedRange, with: attrString)
+        }
+    }
+    
+    private func transformAttrStringFromPasteboard() -> NSAttributedString? {
+        var attrString: NSAttributedString? = nil
+        if let data = UIPasteboard.general.data(forPasteboardType: "com.apple.flat-rtfd") {
+            do {
+                attrString = try NSAttributedString(data: data, options: [:], documentAttributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else if let data = UIPasteboard.general.data(forPasteboardType: "com.apple/webarchive") {
+            do {
+                attrString = try NSAttributedString(data: data, options: [:], documentAttributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        if let attrText = attrString {
+            let mutableAttrText = NSMutableAttributedString(attributedString: attrText)
+            
+            //이미지는 ImageAttachment로 바꿔서 저장
+            mutableAttrText.enumerateAttribute(.attachment, in: NSMakeRange(0, mutableAttrText.length), options: [], using: { (value, range, stop) in
+                guard let attachment = value as? NSTextAttachment else { return }
+                
+                if let image = attachment.image {
+                    let transformImage = image.transform3by4AndFitScreen()
+                    let imageAttachment = ImageAttachment()
+                    imageAttachment.image = transformImage
+                    let imageAttrString = NSAttributedString(attachment: imageAttachment)
+                    mutableAttrText.replaceCharacters(in: range, with: imageAttrString)
+                } else if let fileWrapper = attachment.fileWrapper,
+                    let data = fileWrapper.regularFileContents {
+                    let image = UIImage(data: data)
+                    let transformImage = image?.transform3by4AndFitScreen()
+                    let imageAttachment = ImageAttachment()
+                    imageAttachment.image = transformImage
+                    let imageAttrString = NSAttributedString(attachment: imageAttachment)
+                    mutableAttrText.replaceCharacters(in: range, with: imageAttrString)
+                } else {
+                    print("예외상황발생!!!! 처리해야함")
+                }
+                //
+            })
+            
+            //폰트, 글자 색상 변경
+            mutableAttrText.addAttributes([.foregroundColor : Global.textColor,
+                                           .font: Global.transformToFont(name: CoreData.sharedInstance.paper.font!),
+                                           .paragraphStyle: Global.defaultParagraphStyle],
+                                          range: NSMakeRange(0, mutableAttrText.length))
+            attrString = mutableAttrText
+        }
+        return attrString
     }
 }
 

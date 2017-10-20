@@ -120,6 +120,40 @@ extension UIImage {
         
         return image!
     }
+    
+    func transform3by4AndFitScreen() -> UIImage? {
+        var croppedImage: UIImage? = self
+        
+        //1. 비율 줄이기 ifNeeded
+        //가로 * 3  < 세로 * 4 이면 (4:3 비율보다 세로 이미지 비율이 더 크다면)
+        let width = self.size.width
+        let height = self.size.height
+        if width * 3 < height * 4 {
+            let x: CGFloat = 0
+            let y: CGFloat = (4 * height - 3 * width) / 8
+            let cropRect = CGRect(x: x, y: y, width: width, height: width * 3 / 4)
+            if let imageRef = self.cgImage?.cropping(to: cropRect) {
+                croppedImage = UIImage(cgImage: imageRef, scale: 0, orientation: self.imageOrientation)
+            }
+        }
+        
+        guard let resultImage = croppedImage else { return nil }
+        
+        //2. 크기 줄이기 ifNeeded
+        let ratio = UIScreen.main.bounds.width / resultImage.size.width
+        if ratio < 1 {
+            let size = resultImage.size.applying(CGAffineTransform(scaleX: ratio, y: ratio))
+            UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
+            resultImage.draw(in: CGRect(origin: CGPoint.zero, size: size))
+            let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            if let resultImage = scaledImage {
+                return resultImage
+            }
+        }
+        return resultImage
+    }
 }
 
 extension UITextView {

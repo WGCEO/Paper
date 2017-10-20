@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,14 +73,23 @@
                                         <constraint firstAttribute="height" constant="40" id="thY-Ql-d8n"/>
                                     </constraints>
                                     <state key="normal" image="h1"/>
+                                    <connections>
+                                        <action selector="tapHeaderPickerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="iQU-bg-wX5"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYR-UT-45d">
                                     <rect key="frame" x="60" y="0.0" width="40" height="40"/>
                                     <state key="normal" image="h2"/>
+                                    <connections>
+                                        <action selector="tapHeaderPickerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="5bl-CO-vPy"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLg-pH-nbz">
                                     <rect key="frame" x="120" y="0.0" width="40" height="40"/>
                                     <state key="normal" image="h3"/>
+                                    <connections>
+                                        <action selector="tapHeaderPickerButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="e04-aG-odS"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>
@@ -110,6 +120,9 @@
                 <outletCollection property="pickerButtons" destination="lJh-gj-lvX" collectionClass="NSMutableArray" id="EFw-5b-vIb"/>
                 <outletCollection property="pickerButtons" destination="BWX-Tx-hTU" collectionClass="NSMutableArray" id="NA3-J6-Hpe"/>
                 <outletCollection property="pickerButtons" destination="Vd0-nw-5KV" collectionClass="NSMutableArray" id="esy-Rv-4lb"/>
+                <outletCollection property="headerPickerButtons" destination="a5L-Aj-KdC" collectionClass="NSMutableArray" id="ypT-rp-N4X"/>
+                <outletCollection property="headerPickerButtons" destination="uYR-UT-45d" collectionClass="NSMutableArray" id="BsM-Kj-2Z4"/>
+                <outletCollection property="headerPickerButtons" destination="NLg-pH-nbz" collectionClass="NSMutableArray" id="GRs-dg-PeZ"/>
             </connections>
             <point key="canvasLocation" x="105" y="-201"/>
         </view>

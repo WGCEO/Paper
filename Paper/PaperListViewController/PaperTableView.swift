@@ -70,10 +70,6 @@ extension PaperTableView : UITableViewDataSource {
             let attrString = NSKeyedUnarchiver.unarchiveObject(with: fullData) as! NSAttributedString
             cell.label.attributedText = attrString
         }
-        
-        let margin = Global.textMargin(by: bounds.width)
-        cell.leftConstraint.constant = margin
-        cell.rightConstraint.constant = margin
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

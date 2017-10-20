@@ -15,6 +15,7 @@ class AddTagViewController: DefaultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        textField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +43,10 @@ class AddTagViewController: DefaultViewController {
             }
         textField.resignFirstResponder()
     }
+}
 
-
+extension AddTagViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return false
+    }
 }

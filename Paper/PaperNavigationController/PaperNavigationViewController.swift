@@ -15,10 +15,10 @@ class PaperNavigationViewController: UINavigationController {
         super.viewDidLoad()
 
         delegate = self
-        setupNavagationBar()
+        setupNavagationBarGray()
     }
     
-    private func setupNavagationBar(){
+    private func setupNavagationBarGray(){
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
         navigationBar.backgroundColor = UIColor.groupTableViewBackground.withAlphaComponent(0.95)

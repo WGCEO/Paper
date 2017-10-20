@@ -94,16 +94,14 @@ class PianoView: UIView {
             let mutableAttrText = NSMutableAttributedString(attributedString: attrText)
             mutableAttrText.addAttributes(attr, range: NSMakeRange(0, mutableAttrText.length))
             labelInfo.label.attributedText = mutableAttrText
+            labelInfo.label.bounds.size = mutableAttrText.size()
             
         } else if removeAttribute {
             
             let mutableAttrText = NSMutableAttributedString(attributedString: attrText)
             mutableAttrText.addAttributes(attributeStyle.removeAttr(), range: NSMakeRange(0, mutableAttrText.length))
             labelInfo.label.attributedText = mutableAttrText
-        }
-        
-        if let size = labelInfo.label.attributedText?.size() {
-            labelInfo.label.frame.size = size
+            labelInfo.label.bounds.size = mutableAttrText.size()
         }
     }
     

@@ -98,6 +98,7 @@ extension PianoTextView {
             
             layoutManager.textStorage?.addAttributes(result.applyAttribute, range: applyRange)
             userEdited = true
+            CoreData.sharedInstance.paper.modifiedDate = Date()
         }
         
         let removeRange = getRangeForRemove(final: final, farRight: farRight)
@@ -107,6 +108,7 @@ extension PianoTextView {
             attributedText = mutableAttrText
             layoutManager.textStorage?.addAttributes(result.removeAttribute, range: removeRange)
             userEdited = true
+            CoreData.sharedInstance.paper.modifiedDate = Date()
         }
     }
     

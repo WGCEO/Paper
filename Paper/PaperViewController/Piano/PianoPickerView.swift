@@ -18,16 +18,31 @@ class PianoPickerView: UIView {
     @IBOutlet weak var headerPickerView: UIView!
     @IBOutlet weak var headerButton: UIButton!
     @IBOutlet var pickerButtons: [UIButton]!
+    @IBOutlet var headerPickerButtons: [UIButton]!
     
     @IBAction func tapPickerButton(_ sender: UIButton) {
         if wasDoubleTappedHeader(button: sender) {
             headerPickerView.isHidden = false
+            
+            for headerPickerButton in headerPickerButtons {
+                headerPickerButton.alpha = sender.tag != headerPickerButton.tag ? 0.3 : 1
+            }
+            
             return
         }
         
         delegate?.pianoPickerView(self, didSelectPickerAt: sender.tag)
         changeAlpha(for: sender)
     }
+    
+    @IBAction func tapHeaderPickerButton(_ sender: UIButton) {
+        headerButton.tag = sender.tag
+        let image = sender.image(for: .normal)
+        headerButton.setImage(image, for: .normal)
+        headerPickerView.isHidden = true
+        delegate?.pianoPickerView(self, didSelectPickerAt: sender.tag)
+    }
+    
     
     private func wasDoubleTappedHeader(button: UIButton) -> Bool {
         return button.alpha == Global.opacity && button == headerButton

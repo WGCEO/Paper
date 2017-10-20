@@ -24,8 +24,7 @@ extension PaperViewController: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard let textView = textView as? PianoTextView else { return true}
-        
+        guard let textView = textView as? PianoTextView else { return true }
         let currentParagraphRange = textView.rangeForCurrentParagraph()
         
         if textView.attributedText.containsAttachments(in: currentParagraphRange)
@@ -45,7 +44,7 @@ extension PaperViewController: UITextViewDelegate {
         
         textView.userEdited = true
         CoreData.sharedInstance.paper.modifiedDate = Date()
-        textView.addAttrToFormIfNeeded(in: textView.rangeForCurrentParagraph())
+        textView.addAttrToFormIfNeeded(in: textView.rangeForCurrentParagraph(), mutableAttrString: textView.textStorage)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

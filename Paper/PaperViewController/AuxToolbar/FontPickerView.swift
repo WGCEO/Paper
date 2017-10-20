@@ -10,11 +10,10 @@ import UIKit
 
 class FontPickerView: UIView {
 
-    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var slider: FontSlider!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
     }
     
     @IBAction func fontChanged(_ sender: UISlider) {
@@ -71,7 +70,7 @@ class FontPickerView: UIView {
         var paraRange = textView.rangeForParagraph(with: NSMakeRange(0, 0))
         
         while !(paraRange.location + paraRange.length > textView.attributedText.length) {
-            textView.addAttrToFormIfNeeded(in: paraRange)
+            textView.addAttrToFormIfNeeded(in: paraRange, mutableAttrString: textView.textStorage)
             
             let index = paraRange.location + paraRange.length
             if index < textView.attributedText.length {

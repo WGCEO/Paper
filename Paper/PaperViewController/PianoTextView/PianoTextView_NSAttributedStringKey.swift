@@ -20,11 +20,11 @@ extension PianoTextView {
     
     //특정 서식이 4.의 width 보다 좁다면,
     //(4.의 width - 서식의 width)/2 를 커닝값으로 하고,
-    //indent는 30 - (띄어쓰기 + (4.의 width + 서식 width)/2) 로 해야한다.
+    //indent는 Global.headIndent - (띄어쓰기 + (4.의 width + 서식 width)/2) 로 해야한다.
     
-    //특정 서식이 4.의 width 보다 크다면(단, 30 - 띄어쓰기크기(최대 5.06)보다는 반드시 작아야 함)
+    //특정 서식이 4.의 width 보다 크다면(단, Global.headIndent - 띄어쓰기크기(최대 5.06)보다는 반드시 작아야 함)
     //커닝값은 0이며
-    //indent는 30 - (띄어쓰기 + 서식 width)로 해야한다.
+    //indent는 Global.headIndent - (띄어쓰기 + 서식 width)로 해야한다.
     
     internal func calculateDefaultAttributes() -> [NSAttributedStringKey : Any] {
         return [.paragraphStyle : Global.defaultParagraphStyle,
@@ -87,12 +87,12 @@ extension PianoTextView {
         let numberingFont = UIFont(name: "Avenir Next", size: font.pointSize)!
         let num = NSAttributedString(string: "4", attributes: [.font : numberingFont])
         let dotAndSpace = NSAttributedString(string: ". ", attributes: [.font : font])
-        let firstLineHeadIndent = 30 - (num.size().width + dotAndSpace.size().width)
-        let headIndent = 30 + attributedText.attributedSubstring(from: gapRange).size().width
+        let firstLineHeadIndent = Global.headIndent - (num.size().width + dotAndSpace.size().width)
+        let headIndent = Global.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
         paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
         paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = -20
-        paragraphStyle.lineSpacing = 8
+        paragraphStyle.tailIndent = Global.tailIndent
+        paragraphStyle.lineSpacing = Global.lineSpacing
         return paragraphStyle
     }
     
@@ -109,14 +109,14 @@ extension PianoTextView {
         let circle = NSAttributedString(string: "•", attributes: [
             .font : font]).size()
         let firstLineHeadIndent = circle.width > num.width + dot.width ?
-            30 - (space.width + circle.width) :
-            30 - (space.width + (num.width + dot.width + circle.width )/2)
-        let headIndent = 30 + attributedText.attributedSubstring(from: gapRange).size().width
+            Global.headIndent - (space.width + circle.width) :
+            Global.headIndent - (space.width + (num.width + dot.width + circle.width )/2)
+        let headIndent = Global.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
         
         paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
         paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = -20
-        paragraphStyle.lineSpacing = 8
+        paragraphStyle.tailIndent = Global.tailIndent
+        paragraphStyle.lineSpacing = Global.lineSpacing
         return paragraphStyle
     }
     
@@ -133,14 +133,14 @@ extension PianoTextView {
         let star = NSAttributedString(string: "★", attributes: [
             .font : font]).size()
         let firstLineHeadIndent = star.width > num.width + dot.width ?
-            30 - (space.width + star.width) :
-            30 - (space.width + (num.width + dot.width + star.width )/2)
-        let headIndent = 30 + attributedText.attributedSubstring(from: gapRange).size().width
+            Global.headIndent - (space.width + star.width) :
+            Global.headIndent - (space.width + (num.width + dot.width + star.width )/2)
+        let headIndent = Global.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
         
         paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
         paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = -20
-        paragraphStyle.lineSpacing = 8
+        paragraphStyle.tailIndent = Global.tailIndent
+        paragraphStyle.lineSpacing = Global.lineSpacing
         return paragraphStyle
     }
     
@@ -157,14 +157,14 @@ extension PianoTextView {
         let ref = NSAttributedString(string: "※", attributes: [
             .font : font]).size()
         let firstLineHeadIndent = ref.width > num.width + dot.width ?
-            30 - (space.width + ref.width) :
-            30 - (space.width + (num.width + dot.width + ref.width )/2)
-        let headIndent = 30 + attributedText.attributedSubstring(from: gapRange).size().width
+            Global.headIndent - (space.width + ref.width) :
+            Global.headIndent - (space.width + (num.width + dot.width + ref.width )/2)
+        let headIndent = Global.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
         
         paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
         paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = -20
-        paragraphStyle.lineSpacing = 8
+        paragraphStyle.tailIndent = Global.tailIndent
+        paragraphStyle.lineSpacing = Global.lineSpacing
         return paragraphStyle
     }
 }
