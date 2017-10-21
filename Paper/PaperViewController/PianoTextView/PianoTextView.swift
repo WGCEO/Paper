@@ -23,6 +23,7 @@ class PianoTextView: UITextView {
             }
             return attributes
         } set {
+            typingAttributes = newValue
         }
     }
     
@@ -90,18 +91,11 @@ extension PianoTextView {
 
 
 extension PianoTextView: NSTextStorageDelegate {
-//        func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
-//            if editedMask.rawValue == 3 && editedRange.length == 1 && self.isEditable  {
-//                textStorage.addAttributes(defaultAttributesWithoutParaStyle, range: editedRange)
-//            }
-//            print("\(editedMask) \(editedRange), \(delta)")
-//        }
     
     func textStorage(_ textStorage: NSTextStorage, willProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
         if editedMask.rawValue == 3 &&
             self.isEditable &&
-            (editedRange.length == 1 || !detectCompletedForm(in: editedRange))  {
-            
+            (editedRange.length == 1 || convertedPaperForm(text: textStorage.string, range: editedRange) == nil)  {
             textStorage.addAttributes(defaultAttributesWithoutParaStyle, range: editedRange)
         }
     }

@@ -22,11 +22,19 @@ struct Global {
     static let tailIndent: CGFloat = iphone ? -20 : -30
     static let lineSpacing: CGFloat = 10
     
-    
+    //TODO: 폰트를 제작 후에 regex를 변환전과 변환 후로 나눠서
     static let numRegex = "^\\s*(\\d+)(?=\\. )"
-    static let listRegex = "^\\s*([-•])(?= )"
-    static let asteriskRegex = "^\\s*([\\*\\★])(?= )"
-    static let atRegex = "^\\s*([@※])(?= )"
+//    static let listRegex = "^\\s*([-•])(?= )"
+//    static let asteriskRegex = "^\\s*([\\*\\★])(?= )"
+//    static let atRegex = "^\\s*([@※])(?= )"
+    static let oneRegex = "^\\s*([1•])(?= )"
+    static let twoRegex = "^\\s*([2★])(?= )"
+    static let threeRegex = "^\\s*([3※])(?= )"
+    
+    static let convertedOneRegex = "^\\s*(•)(?= )"
+    static let convertedTwoRegex = "^\\s*(★)(?= )"
+    static let convertedThreeRegex = "^\\s*(※)(?= )"
+    
     
     static let colors: [UIColor] = [
         UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1),

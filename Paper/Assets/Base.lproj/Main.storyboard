@@ -99,21 +99,13 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                                         <constraint firstAttribute="height" constant="16" id="bZK-TL-Nhg"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="더 보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcN-8V-pZR">
-                                                    <rect key="frame" x="167" y="113" width="40.5" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="xo6-rb-bIV" secondAttribute="bottom" id="6B8-dC-tVZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="rcN-8V-pZR" secondAttribute="bottom" constant="6" id="AMj-la-tHf"/>
                                                 <constraint firstItem="xo6-rb-bIV" firstAttribute="leading" secondItem="SGh-HX-QcW" secondAttribute="leading" id="BbO-0d-g2d"/>
                                                 <constraint firstItem="1dk-IL-FCX" firstAttribute="leading" secondItem="SGh-HX-QcW" secondAttribute="leading" id="EgA-kU-gYI"/>
                                                 <constraint firstItem="xo6-rb-bIV" firstAttribute="top" secondItem="1dk-IL-FCX" secondAttribute="bottom" id="GCU-nJ-pbI"/>
-                                                <constraint firstItem="rcN-8V-pZR" firstAttribute="centerX" secondItem="SGh-HX-QcW" secondAttribute="centerX" id="Qj9-9g-PCI"/>
                                                 <constraint firstItem="vtr-AW-tnH" firstAttribute="top" secondItem="5YJ-98-XaH" secondAttribute="bottom" id="Zlc-Hz-TUV"/>
                                                 <constraint firstItem="5YJ-98-XaH" firstAttribute="top" secondItem="SGh-HX-QcW" secondAttribute="top" id="cyv-87-WmJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="vtr-AW-tnH" secondAttribute="trailing" id="f9Z-2z-4iT"/>
@@ -190,7 +182,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="0xo-t2-BpI">
-                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wEI-sK-ohZ">
+                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wEI-sK-ohZ">
                                 <rect key="frame" x="335" y="10" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="deleteNormal"/>
@@ -321,9 +313,9 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkm-cM-Ayy" customClass="MirroringButton" customModule="Paper" customModuleProvider="target">
-                                <rect key="frame" x="295" y="664" width="40" height="40"/>
-                                <state key="normal" image="mirroringOn"/>
-                                <state key="selected" image="mirroringOff"/>
+                                <rect key="frame" x="305" y="671" width="26" height="26"/>
+                                <state key="normal" image="mirroringOff"/>
+                                <state key="selected" image="mirroringOn"/>
                                 <connections>
                                     <action selector="tapMirroringButton:" destination="emW-bc-vcM" eventType="touchUpInside" id="zYn-ga-RmD"/>
                                 </connections>
@@ -421,7 +413,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                             <constraint firstItem="ftK-cx-0Fx" firstAttribute="leading" secondItem="7BV-77-IOd" secondAttribute="leading" id="kgP-tR-MVt"/>
                             <constraint firstItem="ntm-AW-Gwr" firstAttribute="centerY" secondItem="x2n-g8-djy" secondAttribute="centerY" id="mAL-zi-ddS"/>
                             <constraint firstItem="7BV-77-IOd" firstAttribute="trailing" secondItem="ftK-cx-0Fx" secondAttribute="trailing" id="oy0-oL-VLm"/>
-                            <constraint firstItem="x2n-g8-djy" firstAttribute="leading" secondItem="kkm-cM-Ayy" secondAttribute="trailing" id="yoT-MM-KOC"/>
+                            <constraint firstItem="x2n-g8-djy" firstAttribute="leading" secondItem="kkm-cM-Ayy" secondAttribute="trailing" constant="4" id="yoT-MM-KOC"/>
                             <constraint firstItem="jGx-Qb-3Z5" firstAttribute="leading" secondItem="7BV-77-IOd" secondAttribute="leading" id="zdH-jj-LoF"/>
                             <constraint firstItem="ntm-AW-Gwr" firstAttribute="centerY" secondItem="sxd-nM-oJg" secondAttribute="centerY" id="zlf-5S-fcg"/>
                         </constraints>
@@ -625,8 +617,8 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
         <image name="highlight" width="24" height="24"/>
         <image name="image" width="40" height="40"/>
         <image name="keyboardDown" width="40" height="40"/>
-        <image name="mirroringOff" width="40" height="40"/>
-        <image name="mirroringOn" width="40" height="40"/>
+        <image name="mirroringOff" width="26" height="26"/>
+        <image name="mirroringOn" width="26" height="26"/>
         <image name="pallette" width="24" height="24"/>
         <image name="tagDelete" width="16" height="16"/>
         <image name="triangle" width="24" height="12"/>

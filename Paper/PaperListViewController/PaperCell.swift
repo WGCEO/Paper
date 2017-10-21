@@ -22,4 +22,5 @@ class PaperCell: UITableViewCell, Reusable {
 
         // Configure the view for the selected state
     }
+    
 }

@@ -32,7 +32,8 @@ extension PianoTextView {
                 .foregroundColor: Global.textColor,
                 .backgroundColor: UIColor.clear,
                 .underlineStyle: 0,
-                .strikethroughStyle: 0
+                .strikethroughStyle: 0,
+                .kern: 0
         ]
     }
     
@@ -41,7 +42,8 @@ extension PianoTextView {
                 .foregroundColor: Global.textColor,
                 .backgroundColor: UIColor.clear,
                 .underlineStyle: 0,
-                .strikethroughStyle: 0
+                .strikethroughStyle: 0,
+                .kern: 0
         ]
     }
     
@@ -89,6 +91,31 @@ extension PianoTextView {
         let dotAndSpace = NSAttributedString(string: ". ", attributes: [.font : font])
         let firstLineHeadIndent = Global.headIndent - (num.size().width + dotAndSpace.size().width)
         let headIndent = Global.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
+        paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
+        paragraphStyle.headIndent = headIndent
+        paragraphStyle.tailIndent = Global.tailIndent
+        paragraphStyle.lineSpacing = Global.lineSpacing
+        return paragraphStyle
+    }
+    
+    internal func formParagraphStyle(form: ReserveForm, gapRange: NSRange) -> NSMutableParagraphStyle {
+        let paragraphStyle = NSMutableParagraphStyle()
+        let font = CoreData.sharedInstance.paperFont
+        
+        let numberingFont = UIFont(name: "Avenir Next", size: font.pointSize)!
+        let num = NSAttributedString(string: "4", attributes: [
+            .font : numberingFont]).size()
+        let dot = NSAttributedString(string: ".", attributes: [
+            .font : font]).size()
+        let space = NSAttributedString(string: " ", attributes: [
+            .font : font]).size()
+        let form = NSAttributedString(string: form.type.converted, attributes: [
+            .font : font]).size()
+        let firstLineHeadIndent = form.width > num.width + dot.width ?
+            Global.headIndent - (space.width + form.width) :
+            Global.headIndent - (space.width + (num.width + dot.width + form.width )/2)
+        let headIndent = Global.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
+        
         paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
         paragraphStyle.headIndent = headIndent
         paragraphStyle.tailIndent = Global.tailIndent

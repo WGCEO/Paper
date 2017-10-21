@@ -215,7 +215,7 @@ class PaperViewController: DefaultViewController {
             mirroringHelperView.isHidden = false
             mirroringHelperView.alpha = 1
             
-            UIView.animate(withDuration: 0.5, delay: 2.5, options: [], animations: { [weak self] in
+            UIView.animate(withDuration: 0.5, delay: 1.5, options: [], animations: { [weak self] in
                 self?.mirroringHelperView.alpha = 0.0
                 }, completion: { (_) in
                     self.mirroringHelperView.isHidden = true

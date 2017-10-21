@@ -10,103 +10,62 @@ import UIKit
 
 //MARK: completed formatter
 extension PianoTextView {
-    internal func removeAttrOrInsertFormAtNextLineifNeeded(in range: NSRange, replacementText text: String) -> Bool {
-        if let bool = detectCompletedNumbering(in: range, replacementText: text) {
-            return bool
-        } else if let bool = detectCompletedListing(in: range, replacementText: text) {
-            return bool
-        } else if let bool = detectCompletedAsterisk(in: range, replacementText: text) {
-            return bool
-        } else if let bool = detectCompletedAt(in: range, replacementText: text) {
-            return bool
-        } else { return true }
-    }
-    
-    private func detectCompletedNumbering(in range: NSRange, replacementText: String) -> Bool? {
-        guard let numRange = formRange(paraRange: range, regexString: Global.numRegex)
-            else { return nil }
-        //여기서 2는 점과 띄어쓰기 length
-        let formatRange = NSMakeRange(range.location, numRange.location + numRange.length + 2 - range.location)
-        
-        //커서가 영역 내에 존재하거나 영역 내에 존재하지 않지만 백스페이스 동작이고 커서 로케이션이 영역바로 다음에 위치해 있는 경우
-        if  cursorIn(formatRange: formatRange) ||
-            cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
-            resetNumStyle(currentParaRange: range, numRange: numRange)
-            
-        } else if inputNewLine(replacementText: replacementText) {
-            if existTextAfterForm(paraRange: range, formRange: formatRange) {
-                addNumToNextParagraph(formRange: formatRange, numRange: numRange)
-                return false
-            } else {
-                //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
-                deleteNum(to: range, numRange: numRange)
-                return false
+    internal func convertedPaperForm(text: String, range: NSRange) -> ConvertedForm? {
+        for type in ConvertedFormType.allValues {
+            if let range = formRange(text: text, range: range, regex: type.regexString) {
+                return ConvertedForm(type: type, range: range)
             }
         }
-        return true
+        return nil
     }
     
-    private func detectCompletedListing(in range: NSRange, replacementText: String) -> Bool? {
-        guard let listRange = formRange(paraRange: range, regexString: Global.listRegex)
-            else { return nil }
-        let formatRange = NSMakeRange(range.location, listRange.location + listRange.length  + 1 - range.location)
+    internal func removeAttrOrInsertFormAtNextLineifNeeded(in paraRange: NSRange, mutableAttrString: NSMutableAttributedString, replacementText: String) -> Bool {
         
-        if cursorIn(formatRange: formatRange) ||
-            cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
-            resetListStyle(currentParaRange: range, listRange: listRange)
-            
-        } else if inputNewLine(replacementText: replacementText) {
-            if existTextAfterForm(paraRange: range, formRange: formatRange) {
-                addListToNextParagraph(formRange: formatRange)
-                return false
-            } else {
-                deleteList(to: range, listRange: listRange)
-                return false
+        if let convertedForm = convertedPaperForm(text: mutableAttrString.string, range: paraRange) {
+            let range = convertedForm.range
+            let formatRange = convertedForm.type != .number ?
+                NSMakeRange(paraRange.location, range.location + range.length  + 1 - paraRange.location) :
+                NSMakeRange(paraRange.location, range.location + range.length + 2 - paraRange.location)
+            switch convertedForm.type {
+            case .number:
+                //커서가 영역 내에 존재하거나 영역 내에 존재하지 않지만 백스페이스 동작이고 커서 로케이션이 영역바로 다음에 위치해 있는 경우
+                if  cursorIn(formatRange: formatRange) ||
+                    cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
+                    resetNumStyle(currentParaRange: paraRange, numRange: range)
+                    
+                } else if inputNewLine(replacementText: replacementText) {
+                    if existTextAfterForm(paraRange: paraRange, formRange: formatRange) {
+                        addNumToNextParagraph(formRange: formatRange, numRange: range)
+                        return false
+                    } else {
+                        //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
+                        deleteNum(to: paraRange, numRange: range)
+                        return false
+                    }
+                }
+                return true
+                
+            case .one, .two, .three:
+                
+                if cursorIn(formatRange: formatRange) ||
+                    cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
+                    resetFormStyle(form: convertedForm, paraRange: paraRange)
+                    
+                } else if inputNewLine(replacementText: replacementText) {
+                    if existTextAfterForm(paraRange: paraRange, formRange: formatRange) {
+                        addFormToNextParagraph(formRange: formatRange)
+                        return false
+                    } else {
+                        deleteForm(formRange: range, paraRange: paraRange)
+                        return false
+                    }
+                }
+                return true
             }
-        }
-        return true
-    }
-    
-    private func detectCompletedAsterisk(in range: NSRange, replacementText: String) -> Bool? {
-        guard let asteriskRange = formRange(paraRange: range, regexString: Global.asteriskRegex)
-            else { return nil }
-        let formatRange = NSMakeRange(range.location, asteriskRange.location + asteriskRange.length  + 1 - range.location)
-        
-        if cursorIn(formatRange: formatRange) ||
-            cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
-            resetAsteriskStyle(currentParaRange: range, asteriskRange: asteriskRange)
             
-        } else if inputNewLine(replacementText: replacementText) {
-            if existTextAfterForm(paraRange: range, formRange: formatRange) {
-                addAsteriskToNextParagraph(formRange: formatRange)
-                return false
-            } else {
-                deleteAsterisk(to: range, asteriskRange: asteriskRange)
-                return false
-            }
+        } else {
+            return true
         }
-        return true
-    }
-    
-    private func detectCompletedAt(in range: NSRange, replacementText: String) -> Bool? {
-        guard let atRange = formRange(paraRange: range, regexString: Global.atRegex)
-            else { return nil }
-        let formatRange = NSMakeRange(range.location, atRange.location + atRange.length  + 1 - range.location)
-        
-        if cursorIn(formatRange: formatRange) ||
-            cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
-            resetAtStyle(currentParaRange: range, atRange: atRange)
-            
-        } else if inputNewLine(replacementText: replacementText) {
-            if existTextAfterForm(paraRange: range, formRange: formatRange) {
-                addAtToNextParagraph(formRange: formatRange)
-                return false
-            } else {
-                deleteAt(to: range, atRange: atRange)
-                return false
-            }
-        }
-        return true
     }
     
     private func deleteNum(to range: NSRange, numRange: NSRange){
@@ -123,51 +82,19 @@ extension PianoTextView {
         }
     }
     
-    private func deleteList(to range: NSRange, listRange: NSRange) {
+    private func deleteForm(formRange: NSRange, paraRange: NSRange) {
         //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
         textStorage.addAttributes([
             .font : CoreData.sharedInstance.paperFont,
             .foregroundColor : Global.textColor,
             .paragraphStyle : Global.defaultParagraphStyle],
-                                  range: range)
+                                  range: paraRange)
         //다음 행이 있다면 지워졌던 개행도 삽입해줘야함
-        let existNextParagraph = attributedText.length > range.location + range.length
-        textStorage.replaceCharacters(in: range, with: existNextParagraph ? "\n" : "")
+        let existNextParagraph = attributedText.length > paraRange.location + paraRange.length
+        textStorage.replaceCharacters(in: paraRange, with: existNextParagraph ? "\n" : "")
         if existNextParagraph {
             //리스트 + 띄어쓰기 를 지웠으므로 커서를 다시 왼쪽으로 돌려놓아야함
-            selectedRange.location -= (listRange.length + 1 + listRange.location - range.location)
-        }
-    }
-    
-    private func deleteAsterisk(to range: NSRange, asteriskRange: NSRange) {
-        //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
-        textStorage.addAttributes([
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : Global.textColor,
-            .paragraphStyle : Global.defaultParagraphStyle],
-                                  range: range)
-        //다음 행이 있다면 지워졌던 개행도 삽입해줘야함
-        let existNextParagraph = attributedText.length > range.location + range.length
-        textStorage.replaceCharacters(in: range, with: existNextParagraph ? "\n" : "")
-        if existNextParagraph {
-            //리스트 + 띄어쓰기 를 지웠으므로 커서를 다시 왼쪽으로 돌려놓아야함
-            selectedRange.location -= (asteriskRange.length + 1 + asteriskRange.location - range.location)
-        }
-    }
-    
-    private func deleteAt(to range: NSRange, atRange: NSRange) {
-        //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
-        textStorage.addAttributes([
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : Global.textColor,
-            .paragraphStyle : Global.defaultParagraphStyle],
-                                  range: range)
-        //다음 행이 있다면 지워졌던 개행도 삽입해줘야함
-        let existNextParagraph = attributedText.length > range.location + range.length
-        textStorage.replaceCharacters(in: range, with: existNextParagraph ? "\n" : "")
-        if existNextParagraph {
-            //리스트 + 띄어쓰기 를 지웠으므로 커서를 다시 왼쪽으로 돌려놓아야함
-            selectedRange.location -= (atRange.length + 1 + atRange.location - range.location)
+            selectedRange.location -= (formRange.length + 1 + formRange.location - paraRange.location)
         }
     }
     
@@ -180,28 +107,14 @@ extension PianoTextView {
                                   range: currentParaRange)
     }
     
-    private func resetListStyle(currentParaRange: NSRange, listRange: NSRange) {
-        let mutableAttrText = NSMutableAttributedString(string: "-", attributes: [
+    private func resetFormStyle(form: ConvertedForm, paraRange: NSRange) {
+        let resetStr = form.type.reserved
+        let resetRange = form.range
+        let mutableAttrText = NSMutableAttributedString(string: resetStr, attributes: [
             .font : CoreData.sharedInstance.paperFont,
             .foregroundColor : Global.textColor])
-        textStorage.replaceCharacters(in: listRange, with: mutableAttrText)
-        textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: currentParaRange)
-    }
-    
-    private func resetAsteriskStyle(currentParaRange: NSRange, asteriskRange: NSRange) {
-        let mutableAttrText = NSMutableAttributedString(string: "*", attributes: [
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : Global.textColor])
-        textStorage.replaceCharacters(in: asteriskRange, with: mutableAttrText)
-        textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: currentParaRange)
-    }
-    
-    private func resetAtStyle(currentParaRange: NSRange, atRange: NSRange) {
-        let mutableAttrText = NSMutableAttributedString(string: "@", attributes: [
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : Global.textColor])
-        textStorage.replaceCharacters(in: atRange, with: mutableAttrText)
-        textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: currentParaRange)
+        textStorage.replaceCharacters(in: resetRange, with: mutableAttrText)
+        textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: paraRange)
     }
     
     private func existTextAfterForm(paraRange: NSRange, formRange: NSRange) -> Bool {
@@ -221,21 +134,7 @@ extension PianoTextView {
         selectedRange.location += formString.length
     }
     
-    private func addListToNextParagraph(formRange: NSRange) {
-        let formString = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: formRange))
-        insertText("\n")
-        textStorage.replaceCharacters(in: selectedRange, with: formString)
-        selectedRange.location += formString.length
-    }
-    
-    private func addAsteriskToNextParagraph(formRange: NSRange) {
-        let formString = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: formRange))
-        insertText("\n")
-        textStorage.replaceCharacters(in: selectedRange, with: formString)
-        selectedRange.location += formString.length
-    }
-    
-    private func addAtToNextParagraph(formRange: NSRange) {
+    private func addFormToNextParagraph(formRange: NSRange) {
         let formString = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: formRange))
         insertText("\n")
         textStorage.replaceCharacters(in: selectedRange, with: formString)
@@ -259,113 +158,64 @@ extension PianoTextView {
 //MARK: formatter
 extension PianoTextView {
     
-    internal func addAttrToFormIfNeeded(in currentParaRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        if var numRange = detectNumbering(in: currentParaRange) {
-            if numRange.length > 20 {
-                //예외처리(UInt가 감당할 수 있는 숫자 제한, true를 리턴하면, 숫자는 감지했지만 아무것도 할 수 없음을 의미함)
-                return
+    private func replaceForm(from: ReserveForm, mutableAttrString: NSMutableAttributedString) {
+        mutableAttrString.replaceCharacters(in: from.range, with: from.type.converted)
+    }
+    
+    private func replaceForm(from: ConvertedForm, mutableAttrString: NSMutableAttributedString) {
+        mutableAttrString.replaceCharacters(in: from.range, with: from.type.reserved)
+    }
+    
+    internal func addAttrToFormIfNeeded(in paraRange: NSRange, mutableAttrString: NSMutableAttributedString) {
+        if let reserveForm = reservePaperForm(text: mutableAttrString.string, range: paraRange) {
+            var range = reserveForm.range
+            switch reserveForm.type {
+            case .number:
+                if range.length > 20 {
+                    //예외처리(UInt가 감당할 수 있는 숫자 제한, true를 리턴하면, 숫자는 감지했지만 아무것도 할 수 없음을 의미함)
+                    return
+                }
+                replaceNumIfNeeded(currentParaRange: paraRange, numRange: &range)
+                let newParaRange = rangeForParagraph(with: range)
+                addAttributeForNumbering(paraRange: newParaRange ,numRange: range, mutableAttrString: mutableAttrString)
+                replaceNextNumsIfNeeded(numRange: &range)
+                
+            case .one, .two, .three:
+                replaceForm(from: reserveForm, mutableAttrString: mutableAttrString)
+                addAttributeFor(form: reserveForm, paraRange: paraRange, mutableAttrString: mutableAttrString)
             }
-            
-            replaceNumIfNeeded(currentParaRange: currentParaRange, numRange: &numRange)
-            let newParaRange = rangeForParagraph(with: numRange)
-            addAttributeForNumbering(paraRange: newParaRange ,numRange: numRange, mutableAttrString: mutableAttrString)
-            replaceNextNumsIfNeeded(numRange: &numRange)
-            
-            
-            return
-        } else if let listRange = detectListing(in: currentParaRange) {
-            replaceListIfNeeded(listRange: listRange)
-            addAttributeForListing(paraRange: currentParaRange, listRange: listRange, mutableAttrString: mutableAttrString)
-            
-            return
-        } else if let asteriskRange = detectAsterisk(in: currentParaRange) {
-            replaceAsteriskIfNeeded(asteriskRange: asteriskRange)
-            addAttributeForAsterisk(paraRange: currentParaRange, asteriskRange: asteriskRange, mutableAttrString: mutableAttrString)
-            return
-        } else if let atRange = detectAt(in: currentParaRange) {
-            replaceAtIfNeeded(atRange: atRange)
-            addAttributeForAt(paraRange: currentParaRange, atRange: atRange, mutableAttrString: textStorage)
-            return
-        } else if let circleRange = detectCircle(in: currentParaRange) {
-            addAttributeForCircle(paraRange: currentParaRange, circleRange: circleRange, mutableAttrString: mutableAttrString)
-            return
-        } else if let _ = detectRef(in: currentParaRange){
-            return
-        } else if let _ = detectStar(in: currentParaRange){
-            return
         } else {
-            //서식 없는 경우
-            mutableAttrString.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: currentParaRange)
-            return
+            mutableAttrString.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: paraRange)
         }
     }
     
-    internal func detectCompletedForm(in range: NSRange) -> Bool {
-        return detectNumbering(in: range) != nil || detectRef(in: range) != nil || detectCircle(in: range) != nil || detectStar(in:range) != nil
-    }
-    
-    private func detectNumbering(in range: NSRange) -> NSRange? {
-        guard let numRange = formRange(paraRange: range, regexString: Global.numRegex)
-            else { return nil }
-        return numRange
-    }
-    
-    
-    
-    private func detectListing(in range: NSRange) -> NSRange? {
-        guard let listRange = formRange(paraRange: range, regexString: Global.listRegex)
-            else { return nil }
-        return listRange
-    }
-    
-    private func detectAsterisk(in range: NSRange) -> NSRange? {
-        guard let asteriskRange = formRange(paraRange: range, regexString: Global.asteriskRegex)
-            else { return nil }
-        return asteriskRange
-    }
-    
-    private func detectAt(in range: NSRange) -> NSRange? {
-        guard let atRange = formRange(paraRange: range, regexString: Global.atRegex)
-            else { return nil }
-        return atRange
-    }
-    
-    private func detectCircle(in range: NSRange) -> NSRange? {
-        guard let circleRange = formRange(paraRange: range, regexString: Global.listRegex)
-            else { return nil }
-        return circleRange
-    }
-    
-    private func detectStar(in range: NSRange) -> NSRange? {
-        guard let starRange = formRange(paraRange: range, regexString: Global.asteriskRegex)
-            else { return nil }
-        return starRange
-    }
-    
-    private func detectRef(in range: NSRange) -> NSRange? {
-        guard let refRange = formRange(paraRange: range, regexString: Global.atRegex)
-            else { return nil }
-        return refRange
-    }
-    
-    private func formRange(paraRange: NSRange, regexString: String) -> NSRange? {
-        do {
-            let regularExpression = try NSRegularExpression(pattern: regexString, options: .anchorsMatchLines)
-            guard let result = regularExpression.matches(in: text, options: .withTransparentBounds, range: paraRange).first else { return nil }
-            
-            return result.range(at: 1)
-        } catch {
-            print(error.localizedDescription)
+    private func reservePaperForm(text: String, range: NSRange) -> ReserveForm? {
+        for type in ReserveFormType.allValues {
+            if let range = formRange(text: text, range: range, regex: type.regexString) {
+                return ReserveForm(type: type, range: range)
+            }
         }
         return nil
     }
+    
+    private func formRange(text: String, range: NSRange, regex: String) -> NSRange? {
+        do {
+            let regularExpression = try NSRegularExpression(pattern: regex, options: .anchorsMatchLines)
+            guard let result = regularExpression.matches(in: text, options: .withTransparentBounds, range: range).first else { return nil }
+            return result.range(at: 1)
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+    
     
     private func replaceNumIfNeeded(currentParaRange: NSRange, numRange: inout NSRange){
         //이전 패러그랲이 없으면 리턴
         guard currentParaRange.location != 0
             else { return }
         let prevParaRange = rangeForParagraph(with: NSMakeRange(currentParaRange.location - 1, 0))
-        guard let prevNumRange = formRange(paraRange: prevParaRange, regexString: Global.numRegex)
+        guard let prevNumRange = formRange(text: text, range: prevParaRange, regex: Global.numRegex)
             else { return }
         let prevGapRange = NSMakeRange(prevParaRange.location,
                                        prevNumRange.location - prevParaRange.location)
@@ -395,7 +245,8 @@ extension PianoTextView {
         var currentParaRange = rangeForParagraph(with: numRange)
         while currentParaRange.location + currentParaRange.length < attributedText.length {
             let nextParaRange = rangeForParagraph(with: NSMakeRange(currentParaRange.location + currentParaRange.length + 1, 0))
-            guard let nextNumRange = formRange(paraRange: nextParaRange, regexString: Global.numRegex)
+            guard let nextNumRange = formRange(text: text, range: nextParaRange, regex: Global.numRegex)
+                
                 else { return }
             let nextGapRange = NSMakeRange(nextParaRange.location,
                                            nextNumRange.location - nextParaRange.location)
@@ -416,18 +267,6 @@ extension PianoTextView {
         }
     }
     
-    private func replaceListIfNeeded(listRange: NSRange) {
-        textStorage.replaceCharacters(in: listRange, with: "•")
-    }
-    
-    private func replaceAsteriskIfNeeded(asteriskRange: NSRange) {
-        textStorage.replaceCharacters(in: asteriskRange, with: "★")
-    }
-    
-    private func replaceAtIfNeeded(atRange: NSRange) {
-        textStorage.replaceCharacters(in: atRange, with: "※")
-    }
-    
     private func addAttributeForNumbering(paraRange: NSRange, numRange: NSRange, mutableAttrString: NSMutableAttributedString) {
         let numberingFont = UIFont(name: "Avenir Next",
                                    size: CoreData.sharedInstance.paperFont.pointSize)!
@@ -444,45 +283,19 @@ extension PianoTextView {
                                   range: paraRange)
     }
     
-    private func addAttributeForListing(paraRange: NSRange, listRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        let gapRange = NSMakeRange(paraRange.location, listRange.location - paraRange.location)
+    private func addAttributeFor(form: ReserveForm, paraRange: NSRange, mutableAttrString: NSMutableAttributedString) {
+        let range = form.range
+        let gapRange = NSMakeRange(paraRange.location, range.location - paraRange.location)
+        let kern = form.type.kern
         
         mutableAttrString.addAttributes([
             .font : CoreData.sharedInstance.paperFont,
             .foregroundColor : CoreData.sharedInstance.paperColor,
-            .kern : circleKern], range: listRange)
-        mutableAttrString.addAttributes([.paragraphStyle : circleParagraphStyle(gapRange: gapRange)], range: paraRange)
+            .kern : kern], range: range)
+        mutableAttrString.addAttributes([.paragraphStyle : formParagraphStyle(form: form, gapRange: gapRange)], range: paraRange)
     }
     
-    private func addAttributeForAsterisk(paraRange: NSRange, asteriskRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        let gapRange = NSMakeRange(paraRange.location, asteriskRange.location - paraRange.location)
-        mutableAttrString.addAttributes([
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : CoreData.sharedInstance.paperColor,
-            .kern : starKern], range: asteriskRange)
-        
-        mutableAttrString.addAttributes([.paragraphStyle : starParagraphStyle(gapRange: gapRange)], range: paraRange)
-    }
-    
-    private func addAttributeForAt(paraRange: NSRange, atRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        let gapRange = NSMakeRange(paraRange.location, atRange.location - paraRange.location)
-        mutableAttrString.addAttributes([
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : CoreData.sharedInstance.paperColor,
-            .kern : refKern], range: atRange)
-        
-        mutableAttrString.addAttributes([.paragraphStyle : refParagraphStyle(gapRange: gapRange)], range: paraRange)
-    }
-    
-    private func addAttributeForCircle(paraRange: NSRange, circleRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        let gapRange = NSMakeRange(paraRange.location, circleRange.location - paraRange.location)
-        mutableAttrString.addAttributes([
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : CoreData.sharedInstance.paperColor,
-            .kern : circleKern], range: circleRange)
-        
-        mutableAttrString.addAttributes([.paragraphStyle : circleParagraphStyle(gapRange: gapRange)], range: paraRange)
-    }
+
 }
 
 //MARK: Paste
@@ -496,6 +309,8 @@ extension PianoTextView {
     
     private func transformAttrStringFromPasteboard() -> NSAttributedString? {
         var attrString: NSAttributedString? = nil
+
+        //하나를 복사해도 여러가지의 타입이 생성되는데 그중에 우선순위 pasteboard가 있어서 그에 맞춰 코딩함
         if let data = UIPasteboard.general.data(forPasteboardType: "com.apple.flat-rtfd") {
             do {
                 attrString = try NSAttributedString(data: data, options: [:], documentAttributes: nil)
@@ -505,6 +320,18 @@ extension PianoTextView {
         } else if let data = UIPasteboard.general.data(forPasteboardType: "com.apple/webarchive") {
             do {
                 attrString = try NSAttributedString(data: data, options: [:], documentAttributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else if let data = UIPasteboard.general.data(forPasteboardType: "com.evernote.app.htmlData") {
+            do {
+                attrString = try NSAttributedString(data: data, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else if let data = UIPasteboard.general.data(forPasteboardType: "Apple Web Archive pasteboard type") {
+            do {
+                attrString = try NSAttributedString(data: data, options: [.documentType : NSAttributedString.DocumentType.html], documentAttributes: nil)
             } catch {
                 print(error.localizedDescription)
             }
