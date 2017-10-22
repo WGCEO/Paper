@@ -10,10 +10,10 @@ import UIKit
 
 //MARK: completed formatter
 extension PianoTextView {
-    internal func convertedPaperForm(text: String, range: NSRange) -> ConvertedForm? {
-        for type in ConvertedFormType.allValues {
+    internal func paperForm(text: String, range: NSRange) -> PaperForm? {
+        for type in PaperFormType.allValues {
             if let range = formRange(text: text, range: range, regex: type.regexString) {
-                return ConvertedForm(type: type, range: range)
+                return PaperForm(type: type, range: range)
             }
         }
         return nil
@@ -21,68 +21,36 @@ extension PianoTextView {
     
     internal func removeAttrOrInsertFormAtNextLineifNeeded(in paraRange: NSRange, mutableAttrString: NSMutableAttributedString, replacementText: String) -> Bool {
         
-        if let convertedForm = convertedPaperForm(text: mutableAttrString.string, range: paraRange) {
-            let range = convertedForm.range
-            let formatRange = convertedForm.type != .number ?
-                NSMakeRange(paraRange.location, range.location + range.length  + 1 - paraRange.location) :
-                NSMakeRange(paraRange.location, range.location + range.length + 2 - paraRange.location)
-            switch convertedForm.type {
-            case .number:
-                //커서가 영역 내에 존재하거나 영역 내에 존재하지 않지만 백스페이스 동작이고 커서 로케이션이 영역바로 다음에 위치해 있는 경우
-                if  cursorIn(formatRange: formatRange) ||
-                    cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
-                    resetNumStyle(currentParaRange: paraRange, numRange: range)
-                    
-                } else if inputNewLine(replacementText: replacementText) {
-                    if existTextAfterForm(paraRange: paraRange, formRange: formatRange) {
-                        addNumToNextParagraph(formRange: formatRange, numRange: range)
-                        return false
-                    } else {
-                        //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
-                        deleteNum(to: paraRange, numRange: range)
-                        return false
-                    }
-                }
-                return true
-                
-            case .one, .two, .three:
-                
-                if cursorIn(formatRange: formatRange) ||
-                    cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
-                    resetFormStyle(form: convertedForm, paraRange: paraRange)
-                    
-                } else if inputNewLine(replacementText: replacementText) {
-                    if existTextAfterForm(paraRange: paraRange, formRange: formatRange) {
-                        addFormToNextParagraph(formRange: formatRange)
-                        return false
-                    } else {
-                        deleteForm(formRange: range, paraRange: paraRange)
-                        return false
-                    }
-                }
-                return true
-            }
+        if let form = paperForm(text: mutableAttrString.string, range: paraRange) {
+            let range = form.range
+            let extraLength = form.type != .number ? 1 : 2
+            let formatRange = NSMakeRange(paraRange.location,
+                                          range.location + range.length  + extraLength - paraRange.location)
             
+            if  cursorIn(formatRange: formatRange) ||
+                cursorWillBeIn(formRange: formatRange, replacementText: replacementText) {
+                resetFormStyle(form: form, paraRange: paraRange)
+                
+            } else if inputNewLine(replacementText: replacementText) {
+                if existTextAfterForm(paraRange: paraRange, formRange: formatRange) {
+                    addFormToNextParagraph(form: form, formatRange: formatRange)
+                    
+                    return false
+                } else {
+                    //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
+                    delete(form: form, paraRange: paraRange)
+                    return false
+                }
+            }
+            return true
         } else {
             return true
         }
     }
     
-    private func deleteNum(to range: NSRange, numRange: NSRange){
-        textStorage.addAttributes([
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : Global.textColor,
-            .paragraphStyle : Global.defaultParagraphStyle], range: range)
-        //다음 행이 있다면 지워졌던 개행도 삽입해줘야함
-        let existNextParagraph = attributedText.length > range.location + range.length
-        textStorage.replaceCharacters(in: range, with: existNextParagraph ? "\n" : "")
-        if existNextParagraph {
-            //숫자 + 점 + 띄어쓰기 + 를 지웠으므로 커서를 다시 왼쪽으로 돌려놓아야함
-            selectedRange.location -= (numRange.length + 2 + numRange.location - range.location)
-        }
-    }
-    
-    private func deleteForm(formRange: NSRange, paraRange: NSRange) {
+    private func delete(form: PaperForm, paraRange: NSRange) {
+        let move = form.type != .number ? 1 : 2
+        
         //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
         textStorage.addAttributes([
             .font : CoreData.sharedInstance.paperFont,
@@ -94,27 +62,27 @@ extension PianoTextView {
         textStorage.replaceCharacters(in: paraRange, with: existNextParagraph ? "\n" : "")
         if existNextParagraph {
             //리스트 + 띄어쓰기 를 지웠으므로 커서를 다시 왼쪽으로 돌려놓아야함
-            selectedRange.location -= (formRange.length + 1 + formRange.location - paraRange.location)
+            selectedRange.location -= (form.range.length + move + form.range.location - paraRange.location)
         }
     }
     
-    private func resetNumStyle(currentParaRange: NSRange, numRange: NSRange) {
-        let numAndDotRange = NSMakeRange(numRange.location, numRange.length + 1)
-        textStorage.addAttributes([.foregroundColor : Global.textColor,
-                                   .font : CoreData.sharedInstance.paperFont],
-                                  range: numAndDotRange)
-        textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle],
-                                  range: currentParaRange)
-    }
-    
-    private func resetFormStyle(form: ConvertedForm, paraRange: NSRange) {
-        let resetStr = form.type.reserved
-        let resetRange = form.range
-        let mutableAttrText = NSMutableAttributedString(string: resetStr, attributes: [
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : Global.textColor])
-        textStorage.replaceCharacters(in: resetRange, with: mutableAttrText)
-        textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: paraRange)
+    private func resetFormStyle(form: PaperForm, paraRange: NSRange) {
+        if form.type != .number {
+            let resetStr = form.type.reserved
+            let resetRange = form.range
+            let mutableAttrText = NSMutableAttributedString(string: resetStr, attributes: [
+                .font : CoreData.sharedInstance.paperFont,
+                .foregroundColor : Global.textColor])
+            textStorage.replaceCharacters(in: resetRange, with: mutableAttrText)
+            textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: paraRange)
+        } else {
+            let resetRange = NSMakeRange(form.range.location, form.range.length + 1)
+            textStorage.addAttributes([.foregroundColor : Global.textColor,
+                                       .font : CoreData.sharedInstance.paperFont],
+                                      range: resetRange)
+            textStorage.addAttributes([.paragraphStyle : Global.defaultParagraphStyle],
+                                      range: paraRange)
+        }
     }
     
     private func existTextAfterForm(paraRange: NSRange, formRange: NSRange) -> Bool {
@@ -123,22 +91,22 @@ extension PianoTextView {
         return str.count != 0 ? true : false
     }
     
-    private func addNumToNextParagraph(formRange: NSRange, numRange: NSRange){
-        let formString = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: formRange))
-        let numRangeInForm = NSMakeRange(numRange.location - formRange.location, numRange.length)
-        let nextNumber = UInt64(formString.attributedSubstring(from: numRangeInForm).string)! + 1
-        
-        formString.replaceCharacters(in: numRangeInForm, with: String(nextNumber))
-        insertText("\n")
-        textStorage.replaceCharacters(in: selectedRange, with: formString)
-        selectedRange.location += formString.length
-    }
-    
-    private func addFormToNextParagraph(formRange: NSRange) {
-        let formString = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: formRange))
-        insertText("\n")
-        textStorage.replaceCharacters(in: selectedRange, with: formString)
-        selectedRange.location += formString.length
+    private func addFormToNextParagraph(form: PaperForm,formatRange: NSRange) {
+        if form.type != .number {
+            let formatString = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: formatRange))
+            insertText("\n")
+            textStorage.replaceCharacters(in: selectedRange, with: formatString)
+            selectedRange.location += formatString.length
+        } else {
+            let formatString = NSMutableAttributedString(attributedString: attributedText.attributedSubstring(from: formatRange))
+            let rangeInFormat = NSMakeRange(form.range.location - formatRange.location, form.range.length)
+            let nextNumber = UInt64(formatString.attributedSubstring(from: rangeInFormat).string)! + 1
+            
+            formatString.replaceCharacters(in: rangeInFormat, with: String(nextNumber))
+            insertText("\n")
+            textStorage.replaceCharacters(in: selectedRange, with: formatString)
+            selectedRange.location += formatString.length
+        }
     }
     
     private func cursorIn(formatRange: NSRange) -> Bool {
@@ -158,18 +126,10 @@ extension PianoTextView {
 //MARK: formatter
 extension PianoTextView {
     
-    private func replaceForm(from: ReserveForm, mutableAttrString: NSMutableAttributedString) {
-        mutableAttrString.replaceCharacters(in: from.range, with: from.type.converted)
-    }
-    
-    private func replaceForm(from: ConvertedForm, mutableAttrString: NSMutableAttributedString) {
-        mutableAttrString.replaceCharacters(in: from.range, with: from.type.reserved)
-    }
-    
     internal func addAttrToFormIfNeeded(in paraRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        if let reserveForm = reservePaperForm(text: mutableAttrString.string, range: paraRange) {
-            var range = reserveForm.range
-            switch reserveForm.type {
+        if let paperForm = paperForm(text: mutableAttrString.string, range: paraRange) {
+            var range = paperForm.range
+            switch paperForm.type {
             case .number:
                 if range.length > 20 {
                     //예외처리(UInt가 감당할 수 있는 숫자 제한, true를 리턴하면, 숫자는 감지했지만 아무것도 할 수 없음을 의미함)
@@ -177,25 +137,16 @@ extension PianoTextView {
                 }
                 replaceNumIfNeeded(currentParaRange: paraRange, numRange: &range)
                 let newParaRange = rangeForParagraph(with: range)
-                addAttributeForNumbering(paraRange: newParaRange ,numRange: range, mutableAttrString: mutableAttrString)
-                replaceNextNumsIfNeeded(numRange: &range)
+                addAttributeFor(form: paperForm, paraRange: newParaRange, mutableAttrString: mutableAttrString)
+                replaceNextNumsIfNeeded(form: paperForm, mutableAttrString: mutableAttrString)
                 
             case .one, .two, .three:
-                replaceForm(from: reserveForm, mutableAttrString: mutableAttrString)
-                addAttributeFor(form: reserveForm, paraRange: paraRange, mutableAttrString: mutableAttrString)
+                replaceForm(form: paperForm, toConvert: true, mutableAttrString: mutableAttrString)
+                addAttributeFor(form: paperForm, paraRange: paraRange, mutableAttrString: mutableAttrString)
             }
         } else {
             mutableAttrString.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: paraRange)
         }
-    }
-    
-    private func reservePaperForm(text: String, range: NSRange) -> ReserveForm? {
-        for type in ReserveFormType.allValues {
-            if let range = formRange(text: text, range: range, regex: type.regexString) {
-                return ReserveForm(type: type, range: range)
-            }
-        }
-        return nil
     }
     
     private func formRange(text: String, range: NSRange, regex: String) -> NSRange? {
@@ -207,6 +158,10 @@ extension PianoTextView {
             print(error.localizedDescription)
             return nil
         }
+    }
+    
+    private func replaceForm(form: PaperForm, toConvert: Bool, mutableAttrString: NSMutableAttributedString) {
+        mutableAttrString.replaceCharacters(in: form.range, with: toConvert ? form.type.converted : form.type.reserved)
     }
     
     
@@ -241,8 +196,9 @@ extension PianoTextView {
         }
     }
     
-    private func replaceNextNumsIfNeeded(numRange: inout NSRange){
-        var currentParaRange = rangeForParagraph(with: numRange)
+    private func replaceNextNumsIfNeeded(form: PaperForm, mutableAttrString: NSMutableAttributedString){
+        var form = form
+        var currentParaRange = rangeForParagraph(with: form.range)
         while currentParaRange.location + currentParaRange.length < attributedText.length {
             let nextParaRange = rangeForParagraph(with: NSMakeRange(currentParaRange.location + currentParaRange.length + 1, 0))
             guard let nextNumRange = formRange(text: text, range: nextParaRange, regex: Global.numRegex)
@@ -251,48 +207,50 @@ extension PianoTextView {
             let nextGapRange = NSMakeRange(nextParaRange.location,
                                            nextNumRange.location - nextParaRange.location)
             let currGapRange = NSMakeRange(currentParaRange.location,
-                                           numRange.location - currentParaRange.location)
+                                           form.range.location - currentParaRange.location)
             guard attributedText.attributedSubstring(from: currGapRange).string ==
                 attributedText.attributedSubstring(from: nextGapRange).string,
                 UInt(attributedText.attributedSubstring(from: nextNumRange).string)! - 1 !=
-                    UInt(attributedText.attributedSubstring(from: numRange).string)!
+                    UInt(attributedText.attributedSubstring(from: form.range).string)!
                 else { return }
             
-            let correctNextNum = "\(Int(attributedText.attributedSubstring(from: numRange).string)! + 1)"
+            let correctNextNum = "\(Int(attributedText.attributedSubstring(from: form.range).string)! + 1)"
             textStorage.replaceCharacters(in: nextNumRange, with: correctNextNum)
-            numRange = NSMakeRange(nextNumRange.location, correctNextNum.count)
-            let newParaRange = rangeForParagraph(with: numRange)
-            addAttributeForNumbering(paraRange: newParaRange,numRange: numRange, mutableAttrString: textStorage)
-            currentParaRange = rangeForParagraph(with: numRange)
+            form.range = NSMakeRange(nextNumRange.location, correctNextNum.count)
+            let newParaRange = rangeForParagraph(with: form.range)
+            addAttributeFor(form: form, paraRange: newParaRange, mutableAttrString: mutableAttrString)
+            
+            currentParaRange = rangeForParagraph(with: form.range)
         }
     }
     
-    private func addAttributeForNumbering(paraRange: NSRange, numRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        let numberingFont = UIFont(name: "Avenir Next",
-                                   size: CoreData.sharedInstance.paperFont.pointSize)!
+    private func addAttributeFor(form: PaperForm, paraRange: NSRange, mutableAttrString: NSMutableAttributedString) {
+        if form.type != .number {
+            let range = form.range
+            let gapRange = NSMakeRange(paraRange.location, range.location - paraRange.location)
+            let kern = form.type.kern
+            
+            mutableAttrString.addAttributes([
+                .font : CoreData.sharedInstance.paperFont,
+                .foregroundColor : CoreData.sharedInstance.paperColor,
+                .kern : kern], range: range)
+            mutableAttrString.addAttributes([.paragraphStyle : formParagraphStyle(form: form, gapRange: gapRange)], range: paraRange)
+        } else {
+            let numberingFont = UIFont(name: "Avenir Next",
+                                       size: CoreData.sharedInstance.paperFont.pointSize)!
+            
+            let dotRange = NSMakeRange(form.range.location + form.range.length, 1)
+            let gapRange = NSMakeRange(paraRange.location, form.range.location - paraRange.location)
+            mutableAttrString.addAttributes([.font : numberingFont,
+                                             .foregroundColor : CoreData.sharedInstance.paperColor],
+                                            range: form.range)
+            mutableAttrString.addAttributes([.foregroundColor : UIColor.lightGray,
+                                             .font : CoreData.sharedInstance.paperFont],
+                                            range: dotRange)
+            mutableAttrString.addAttributes([.paragraphStyle : numParagraphStyle(gapRange: gapRange)],
+                                            range: paraRange)
+        }
         
-        let dotRange = NSMakeRange(numRange.location + numRange.length, 1)
-        let gapRange = NSMakeRange(paraRange.location, numRange.location - paraRange.location)
-        mutableAttrString.addAttributes([.font : numberingFont,
-                                   .foregroundColor : CoreData.sharedInstance.paperColor],
-                                  range: numRange)
-        mutableAttrString.addAttributes([.foregroundColor : UIColor.lightGray,
-                                   .font : CoreData.sharedInstance.paperFont],
-                                  range: dotRange)
-        mutableAttrString.addAttributes([.paragraphStyle : numParagraphStyle(gapRange: gapRange)],
-                                  range: paraRange)
-    }
-    
-    private func addAttributeFor(form: ReserveForm, paraRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        let range = form.range
-        let gapRange = NSMakeRange(paraRange.location, range.location - paraRange.location)
-        let kern = form.type.kern
-        
-        mutableAttrString.addAttributes([
-            .font : CoreData.sharedInstance.paperFont,
-            .foregroundColor : CoreData.sharedInstance.paperColor,
-            .kern : kern], range: range)
-        mutableAttrString.addAttributes([.paragraphStyle : formParagraphStyle(form: form, gapRange: gapRange)], range: paraRange)
     }
     
 

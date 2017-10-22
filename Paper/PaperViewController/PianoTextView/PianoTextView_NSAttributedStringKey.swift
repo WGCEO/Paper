@@ -13,9 +13,6 @@ extension PianoTextView {
     internal func updateAllCalculateAttr(){
         defaultAttributes = calculateDefaultAttributes()
         defaultAttributesWithoutParaStyle = calculateDefaultAttributesWithoutParagraph()
-        circleKern = calculateCircleKern()
-        starKern = calculateStarKern()
-        refKern = calculateRefKern()
     }
     
     //특정 서식이 4.의 width 보다 좁다면,
@@ -98,7 +95,7 @@ extension PianoTextView {
         return paragraphStyle
     }
     
-    internal func formParagraphStyle(form: ReserveForm, gapRange: NSRange) -> NSMutableParagraphStyle {
+    internal func formParagraphStyle(form: PaperForm, gapRange: NSRange) -> NSMutableParagraphStyle {
         let paragraphStyle = NSMutableParagraphStyle()
         let font = CoreData.sharedInstance.paperFont
         

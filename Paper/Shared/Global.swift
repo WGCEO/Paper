@@ -30,11 +30,7 @@ struct Global {
     static let oneRegex = "^\\s*([1•])(?= )"
     static let twoRegex = "^\\s*([2★])(?= )"
     static let threeRegex = "^\\s*([3※])(?= )"
-    
-    static let convertedOneRegex = "^\\s*(•)(?= )"
-    static let convertedTwoRegex = "^\\s*(★)(?= )"
-    static let convertedThreeRegex = "^\\s*(※)(?= )"
-    
+        
     
     static let colors: [UIColor] = [
         UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1),

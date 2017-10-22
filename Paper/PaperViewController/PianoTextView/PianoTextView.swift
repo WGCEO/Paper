@@ -23,7 +23,6 @@ class PianoTextView: UITextView {
             }
             return attributes
         } set {
-            typingAttributes = newValue
         }
     }
     
@@ -49,11 +48,6 @@ class PianoTextView: UITextView {
     lazy var defaultAttributesWithoutParaStyle : [NSAttributedStringKey : Any] = {
         return calculateDefaultAttributesWithoutParagraph()
     }()
-    
-    //calculate의 파라미터로 실제 구입한 패키지 정보 담기
-    lazy var circleKern: CGFloat = { calculateCircleKern() }()
-    lazy var starKern: CGFloat = { calculateStarKern() }()
-    lazy var refKern: CGFloat = { calculateRefKern() }()
     
 }
 
@@ -95,7 +89,7 @@ extension PianoTextView: NSTextStorageDelegate {
     func textStorage(_ textStorage: NSTextStorage, willProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
         if editedMask.rawValue == 3 &&
             self.isEditable &&
-            (editedRange.length == 1 || convertedPaperForm(text: textStorage.string, range: editedRange) == nil)  {
+            (editedRange.length == 1 || paperForm(text: textStorage.string, range: editedRange) == nil)  {
             textStorage.addAttributes(defaultAttributesWithoutParaStyle, range: editedRange)
         }
     }

@@ -13,7 +13,7 @@ public protocol EnumCollection: Hashable {
     static var allValues: [Self] { get }
 }
 
-enum ReserveFormType: EnumCollection {
+enum PaperFormType: EnumCollection {
 
     case number
     case one
@@ -32,6 +32,21 @@ enum ReserveFormType: EnumCollection {
                 return Global.twoRegex
             case .three:
                 return Global.threeRegex
+            }
+        }
+    }
+    
+    var reserved: String {
+        get {
+            switch self {
+            case .number:
+                return "TODO: 어케 처리할 것인가"
+            case .one:
+                return "1"
+            case .two:
+                return "2"
+            case .three:
+                return "3"
             }
         }
     }
@@ -65,11 +80,11 @@ enum ReserveFormType: EnumCollection {
         }
     }
     
-    static func cases() -> AnySequence<ReserveFormType> {
-        return AnySequence { () -> AnyIterator<ReserveFormType> in
+    static func cases() -> AnySequence<PaperFormType> {
+        return AnySequence { () -> AnyIterator<PaperFormType> in
             var raw = 0
             return AnyIterator {
-                let current: ReserveFormType = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: self, capacity: 1) { $0.pointee } }
+                let current: PaperFormType = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: self, capacity: 1) { $0.pointee } }
                 guard current.hashValue == raw else {
                     return nil
                 }
@@ -79,74 +94,13 @@ enum ReserveFormType: EnumCollection {
         }
     }
 
-    public static var allValues: [ReserveFormType] {
+    public static var allValues: [PaperFormType] {
         return Array(self.cases())
     }
 }
 
-enum ConvertedFormType: EnumCollection {
-    
-    case number
-    case one
-    case two
-    case three
-    
-    //    TODO: 나중에 서식 아이디어 반영할 때 Global에 있는거 이쪽으로 다 옮기기
-    var regexString: String {
-        get {
-            switch self {
-            case .number:
-                return Global.numRegex
-            case .one:
-                return Global.convertedOneRegex
-            case .two:
-                return Global.convertedTwoRegex
-            case .three:
-                return Global.convertedThreeRegex
-            }
-        }
-    }
-    
-    var reserved: String {
-        get {
-            switch self {
-            case .number:
-                return "TODO: 어케 처리할 것인가"
-            case .one:
-                return "1"
-            case .two:
-                return "2"
-            case .three:
-                return "3"
-            }
-        }
-    }
-    
-    static func cases() -> AnySequence<ConvertedFormType> {
-        return AnySequence { () -> AnyIterator<ConvertedFormType> in
-            var raw = 0
-            return AnyIterator {
-                let current: ConvertedFormType = withUnsafePointer(to: &raw) { $0.withMemoryRebound(to: self, capacity: 1) { $0.pointee } }
-                guard current.hashValue == raw else {
-                    return nil
-                }
-                raw += 1
-                return current
-            }
-        }
-    }
-    
-    public static var allValues: [ConvertedFormType] {
-        return Array(self.cases())
-    }
+struct PaperForm {
+    let type: PaperFormType
+    var range: NSRange
 }
 
-struct ReserveForm {
-    let type: ReserveFormType
-    let range: NSRange
-}
-
-struct ConvertedForm {
-    let type: ConvertedFormType
-    let range: NSRange
-}
