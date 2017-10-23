@@ -121,9 +121,6 @@ class PianoView: UIView {
                 //폰트 중앙 고정
                 labelInfo.label.center.x = labelInfo.center.x
                 
-                if let size = labelInfo.label.attributedText?.size() {
-                    labelInfo.label.frame.size = size
-                }
             }
             
             if !(touchX > labelInfo.frame.origin.x && touchX < labelInfo.frame.origin.x + labelInfo.frame.size.width){
@@ -139,11 +136,17 @@ class PianoView: UIView {
             }
             
             //프레임 원복
-            labelInfo.label.center = labelInfo.center
-            labelInfo.label.frame = labelInfo.frame
+//            labelInfo.label.center = labelInfo.center
+//            labelInfo.label.frame = labelInfo.frame
+            //프레임 원위치로
+            labelInfo.label.frame.origin = labelInfo.frame.origin
             
             //알파값 세팅
             labelInfo.label.alpha = Global.opacity
+        }
+        
+        if let size = labelInfo.label.attributedText?.size() {
+            labelInfo.label.frame.size = size
         }
     }
     
