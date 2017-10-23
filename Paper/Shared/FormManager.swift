@@ -29,7 +29,8 @@ class FormManager {
     let formOne = "•"
     let formTwo = "★"
     let formThree = "※"
-
+    
+    let defaultFontSize: CGFloat = Global.iphone ? 17 : 23
     let headIndent: CGFloat = Global.iphone ? 30 : 40
     let tailIndent: CGFloat = Global.iphone ? -20 : -30
     let lineSpacing: CGFloat = 10
@@ -83,20 +84,19 @@ class FormManager {
     
     
     internal func transformToFont(name: String) -> UIFont {
-        let defaultSize: CGFloat = Global.iphone ? 17 : 23
         switch name {
         case "xSmall":
-            return UIFont.systemFont(ofSize: defaultSize - 1)
+            return UIFont.systemFont(ofSize: defaultFontSize - 2)
         case "small":
-            return UIFont.systemFont(ofSize: defaultSize)
+            return UIFont.systemFont(ofSize: defaultFontSize)
         case "medium":
-            return UIFont.systemFont(ofSize: defaultSize + 2)
+            return UIFont.systemFont(ofSize: defaultFontSize + 2)
         case "large":
-            return UIFont.systemFont(ofSize: defaultSize + 4)
+            return UIFont.systemFont(ofSize: defaultFontSize + 4)
         case "xLarge":
-            return UIFont.systemFont(ofSize: defaultSize + 6)
+            return UIFont.systemFont(ofSize: defaultFontSize + 6)
         default:
-            return UIFont.systemFont(ofSize: 17)
+            return UIFont.systemFont(ofSize: defaultFontSize)
         }
     }
     

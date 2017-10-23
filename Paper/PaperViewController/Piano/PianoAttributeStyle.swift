@@ -41,7 +41,7 @@ enum PianoAttributeStyle {
     func removeAttr() -> [NSAttributedStringKey : Any] {
         switch self {
         case .color:
-            return [.foregroundColor : UIColor(red: 85/255, green: 85/255, blue: 85/255, alpha: 1)]
+            return [.foregroundColor : FormManager.sharedInstance.textColor]
         case .bold(let x):
             return [.font : UIFont.systemFont(ofSize: x)]
         case .header1(let x):

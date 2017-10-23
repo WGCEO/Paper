@@ -4,7 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,6 +26,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHT-df-Pbm">
                             <rect key="frame" x="187" y="0.0" width="187" height="64"/>
                             <state key="normal" title="PDF로 변환"/>
+                            <connections>
+                                <action selector="tapConvertPDFButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="afo-Wc-r7u"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

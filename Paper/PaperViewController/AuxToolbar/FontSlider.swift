@@ -12,7 +12,8 @@ class FontSlider: UISlider {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+        let formManager = FormManager.sharedInstance
+        value = Float(formManager.paperFont.pointSize - formManager.defaultFontSize)/2 + 1
     }
 
 }

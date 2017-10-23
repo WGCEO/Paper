@@ -17,5 +17,19 @@ class ConvertPickerView: UIView {
         // Drawing code
     }
     */
-
+    @IBAction func tapConvertPDFButton(_ sender: Any) {
+        guard let textView = CoreData.sharedInstance.textView else { return }
+        
+        ActivityIndicator.startAnimating()
+        
+        DocumentRenderer.render(type: .pdf, with: textView) { (pdfURL: URL?) in
+            ActivityIndicator.stopAnimating()
+            
+            guard let url = pdfURL else { return }
+            
+            let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            AppNavigator.present(activityViewController)
+        }
+    }
+    
 }

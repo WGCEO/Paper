@@ -24,6 +24,8 @@
 		DA9F066C1F8F4B1300EA5F18 /* PhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066B1F8F4B1300EA5F18 /* PhotoCollectionView.swift */; };
 		DA9F066E1F8F50BC00EA5F18 /* MirroringButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066D1F8F50BC00EA5F18 /* MirroringButton.swift */; };
 		DA9F06701F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066F1F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift */; };
+		DAAA7F5C1F9E19A600C27549 /* DocumentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA7F5B1F9E19A600C27549 /* DocumentRenderer.swift */; };
+		DAAA7F5E1F9E19EC00C27549 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA7F5D1F9E19EC00C27549 /* ActivityIndicator.swift */; };
 		DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */; };
 		DABEC0161F9AF1AD005D75AC /* PaperForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABEC0151F9AF1AD005D75AC /* PaperForm.swift */; };
 		DAC6971F1F8B57A7008071E4 /* PianoTextView_Paste.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6971E1F8B57A7008071E4 /* PianoTextView_Paste.swift */; };
@@ -95,6 +97,8 @@
 		DA9F066B1F8F4B1300EA5F18 /* PhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionView.swift; sourceTree = "<group>"; };
 		DA9F066D1F8F50BC00EA5F18 /* MirroringButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroringButton.swift; sourceTree = "<group>"; };
 		DA9F066F1F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViewController_UITextViewDelegate.swift; sourceTree = "<group>"; };
+		DAAA7F5B1F9E19A600C27549 /* DocumentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentRenderer.swift; sourceTree = "<group>"; };
+		DAAA7F5D1F9E19EC00C27549 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperNavigationViewController.swift; sourceTree = "<group>"; };
 		DABEC0151F9AF1AD005D75AC /* PaperForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperForm.swift; sourceTree = "<group>"; };
 		DAC6971E1F8B57A7008071E4 /* PianoTextView_Paste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Paste.swift; sourceTree = "<group>"; };
@@ -179,8 +183,10 @@
 		DA6E023E1F885AB10082576A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				DAAA7F5D1F9E19EC00C27549 /* ActivityIndicator.swift */,
 				DABEC0151F9AF1AD005D75AC /* PaperForm.swift */,
 				DA50B2101F9DF29F00EC5A0E /* FormManager.swift */,
+				DAAA7F5B1F9E19A600C27549 /* DocumentRenderer.swift */,
 				DAD3D63E1F7A36CF00FC029D /* CoreData.swift */,
 				DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */,
 				DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */,
@@ -464,6 +470,7 @@
 				DAE92F3D1F8C31FB0004A824 /* TagPickerCollectionView.swift in Sources */,
 				DA50B2111F9DF29F00EC5A0E /* FormManager.swift in Sources */,
 				DADD555D1F8297E500822753 /* PaperListHeaderView.swift in Sources */,
+				DAAA7F5E1F9E19EC00C27549 /* ActivityIndicator.swift in Sources */,
 				DACBCAE01F8B4FA0003DEC7F /* PhotoView.swift in Sources */,
 				DA3F2BAC1F836B4500A556F5 /* Global.swift in Sources */,
 				DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */,
@@ -483,6 +490,7 @@
 				DAD3D62A1F7A29DA00FC029D /* PaperViewController.swift in Sources */,
 				DA9133191F95B2FE002C4DBE /* AddTagCell.swift in Sources */,
 				DAD3D6451F7A60A200FC029D /* ImageAttachment.swift in Sources */,
+				DAAA7F5C1F9E19A600C27549 /* DocumentRenderer.swift in Sources */,
 				DAE92F2F1F8B9E810004A824 /* PaperViewController_KeyboardNotification.swift in Sources */,
 				DAE92F3B1F8C31DB0004A824 /* TagPickerCell.swift in Sources */,
 				DAD3D63B1F7A30CE00FC029D /* PaperModel.xcdatamodeld in Sources */,
