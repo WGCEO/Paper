@@ -135,7 +135,7 @@ extension PianoTextView {
                     //예외처리(UInt가 감당할 수 있는 숫자 제한, true를 리턴하면, 숫자는 감지했지만 아무것도 할 수 없음을 의미함)
                     return
                 }
-                replaceNumIfNeeded(currentParaRange: paraRange, numRange: &range)
+                replaceNumIfNeeded(mutableAttrString: mutableAttrString,currentParaRange: paraRange, numRange: &range)
                 let newParaRange = rangeForParagraph(with: range)
                 addAttributeFor(form: paperForm, paraRange: newParaRange, mutableAttrString: mutableAttrString)
                 replaceNextNumsIfNeeded(form: paperForm, mutableAttrString: mutableAttrString)
@@ -165,7 +165,7 @@ extension PianoTextView {
     }
     
     
-    private func replaceNumIfNeeded(currentParaRange: NSRange, numRange: inout NSRange){
+    private func replaceNumIfNeeded(mutableAttrString: NSMutableAttributedString, currentParaRange: NSRange, numRange: inout NSRange){
         //이전 패러그랲이 없으면 리턴
         guard currentParaRange.location != 0
             else { return }
@@ -176,16 +176,16 @@ extension PianoTextView {
                                        prevNumRange.location - prevParaRange.location)
         let currGapRange = NSMakeRange(currentParaRange.location,
                                        numRange.location - currentParaRange.location)
-        guard attributedText.attributedSubstring(from: prevGapRange).string ==
-            attributedText.attributedSubstring(from: currGapRange).string,
-            UInt(attributedText.attributedSubstring(from: prevNumRange).string)! + 1 !=
-                UInt(attributedText.attributedSubstring(from: numRange).string)!
+        guard mutableAttrString.attributedSubstring(from: prevGapRange).string ==
+            mutableAttrString.attributedSubstring(from: currGapRange).string,
+            UInt(mutableAttrString.attributedSubstring(from: prevNumRange).string)! + 1 !=
+                UInt(mutableAttrString.attributedSubstring(from: numRange).string)!
             else { return }
         
-        let uncorrectCurrentNum = "\(UInt(attributedText.attributedSubstring(from: numRange).string)!)"
-        let correctCurrentNum = "\(UInt(attributedText.attributedSubstring(from: prevNumRange).string)! + 1)"
+        let uncorrectCurrentNum = "\(UInt(mutableAttrString.attributedSubstring(from: numRange).string)!)"
+        let correctCurrentNum = "\(UInt(mutableAttrString.attributedSubstring(from: prevNumRange).string)! + 1)"
         
-        textStorage.replaceCharacters(in: numRange, with: correctCurrentNum)
+        mutableAttrString.replaceCharacters(in: numRange, with: correctCurrentNum)
         //resultRange 값 수정
         numRange.length = correctCurrentNum.count
         

@@ -225,11 +225,6 @@ class PaperViewController: DefaultViewController {
         }
     }
     
-    @IBAction func tapHideKeyboardButton(_ sender: UIButton) {
-        Global.userFeedback()
-        textView.resignFirstResponder()
-    }
-    
     private func removePickerViews(){
         for subView in auxToolbarView.subviews {
             subView.removeFromSuperview()
