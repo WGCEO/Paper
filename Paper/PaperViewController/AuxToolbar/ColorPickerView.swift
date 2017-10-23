@@ -16,9 +16,9 @@ class ColorPickerView: UIView {
             button.isSelected = button != sender ? false : true
         }
         
-        let newColorStr = Global.colorStrs[sender.tag]
-        let newColor = Global.transFormToColor(name: newColorStr)
-        
+        let newColorStr = FormManager.sharedInstance.colorStrs[sender.tag]
+        let defaultColor = FormManager.sharedInstance.textColor
+        let newColor = FormManager.sharedInstance.transFormToColor(name: newColorStr)
         guard let textView = CoreData.sharedInstance.textView,
             let attrText = textView.attributedText, let paper = CoreData.sharedInstance.paper else { return }
         
@@ -26,21 +26,21 @@ class ColorPickerView: UIView {
         //1 노트의 attributedText의 attribute를 루프로 돌면서 기존 note.color와 동일 했던 텍스트 색상을 newcolor로 바꿔주기
         attrText.enumerateAttribute(.foregroundColor, in: NSMakeRange(0, attrText.length), options: []) { (value, range, stop) in
             guard let textColor = value as? UIColor,
-                !textColor.equal(Global.textColor) else { return }
+                !textColor.equal(defaultColor) else { return }
             textView.textStorage.addAttributes([.foregroundColor : newColor], range: range)
             textView.userEdited = true
         }
         
         attrText.enumerateAttribute(.underlineColor, in: NSMakeRange(0, attrText.length), options: []) { (value, range, stop) in
             guard let textColor = value as? UIColor,
-            !textColor.equal(Global.textColor) else { return }
+            !textColor.equal(defaultColor) else { return }
             textView.textStorage.addAttributes([.underlineColor : newColor], range: range)
             textView.userEdited = true
         }
         
         attrText.enumerateAttribute(.strikethroughColor, in: NSMakeRange(0, attrText.length), options: []) { (value, range, stop) in
             guard let textColor = value as? UIColor,
-                !textColor.equal(Global.textColor) else { return }
+                !textColor.equal(defaultColor) else { return }
             textView.textStorage.addAttributes([.strikethroughColor : newColor], range: range)
             textView.userEdited = true
         }

@@ -33,7 +33,7 @@ extension PianoTextView: PhotoViewDelegate {
         let attachment = ImageAttachment()
         attachment.image = image
         let attrString = NSMutableAttributedString(attributedString: NSAttributedString(attachment: attachment))
-        attrString.addAttributes(defaultAttributes, range: NSMakeRange(0, attrString.length))
+        attrString.addAttributes(FormManager.sharedInstance.defaultAttributes, range: NSMakeRange(0, attrString.length))
         textStorage.replaceCharacters(in: selectedRange, with: attrString)
         CoreData.sharedInstance.textView?.userEdited = true
         

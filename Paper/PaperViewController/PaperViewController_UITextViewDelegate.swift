@@ -34,7 +34,7 @@ extension PaperViewController: UITextViewDelegate {
             textView.jumpCursorToRightSide(paragraphRange: currentParagraphRange)
         }
         
-        return textView.removeAttrOrInsertFormAtNextLineifNeeded(in: currentParagraphRange, mutableAttrString: textView.textStorage, replacementText: text)
+        return FormManager.sharedInstance.removeAttrOrInsertFormAtNextLineifNeeded(in: currentParagraphRange, mutableAttrString: textView.textStorage, replacementText: text)
     }
     
     //현재 문단에 이미지가 있는데, 양 옆에 개행이 없는 곳이 있다면 넣어주기
@@ -44,7 +44,7 @@ extension PaperViewController: UITextViewDelegate {
         
         textView.userEdited = true
         CoreData.sharedInstance.paper.modifiedDate = Date()
-        textView.addAttrToFormIfNeeded(in: textView.rangeForCurrentParagraph(), mutableAttrString: textView.textStorage)
+        FormManager.sharedInstance.addAttrToFormIfNeeded(in: textView.rangeForCurrentParagraph(), mutableAttrString: textView.textStorage)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

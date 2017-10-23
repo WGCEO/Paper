@@ -17,10 +17,11 @@ class ImageAttachment: NSTextAttachment {
         
         if let image = self.image {
             let imageSize: CGSize = image.size
-            if lineFrag.width - (Global.headIndent * 2) < imageSize.width {
-                scalingFactor = (lineFrag.width - (Global.headIndent * 2)) / imageSize.width
+            let headIndent = FormManager.sharedInstance.headIndent
+            if lineFrag.width - (headIndent * 2) < imageSize.width {
+                scalingFactor = (lineFrag.width - (headIndent * 2)) / imageSize.width
             }
-            let rect = CGRect(x: Global.headIndent, y: 0, width: imageSize.width * scalingFactor, height: imageSize.height * scalingFactor)
+            let rect = CGRect(x: headIndent, y: 0, width: imageSize.width * scalingFactor, height: imageSize.height * scalingFactor)
             return rect
         } else {
             return CGRect.zero

@@ -245,11 +245,9 @@ extension PianoView: Pianoable {
 
 extension PianoView: PianoPickerViewDelegate {
     func pianoPickerView(_ pickerView: PianoPickerView, didSelectPickerAt index: Int) {
-        guard let paper = CoreData.sharedInstance.paper
-            else { return }
         
-        let color = Global.transFormToColor(name: paper.color!)
-        let font = Global.transformToFont(name: paper.font!)
+        let color = FormManager.sharedInstance.paperColor
+        let font = FormManager.sharedInstance.paperFont
         switch index {
         case 0:
             attributeStyle = PianoAttributeStyle.color(color)

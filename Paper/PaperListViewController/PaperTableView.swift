@@ -14,7 +14,6 @@ class PaperTableView: UITableView {
     private var paperResultsController: NSFetchedResultsController<Paper>!
     weak var paperListViewController: PaperListViewController?
     
-
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
@@ -25,7 +24,6 @@ class PaperTableView: UITableView {
         dataSource = self
         prefetchDataSource = self
         setupPaperResultsController(selectedTags: [])
-
     }
     
     private func setupPaperResultsController(selectedTags: [Tag]){

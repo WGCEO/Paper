@@ -310,7 +310,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                     <constraint firstAttribute="width" constant="40" id="6gS-7P-azW"/>
                                     <constraint firstAttribute="height" constant="40" id="Vdu-Lp-OQq"/>
                                 </constraints>
-                                <state key="normal" image="typoError"/>
+                                <state key="normal" image="mirroringOn"/>
                                 <state key="selected" image="typoErrorSelected"/>
                                 <connections>
                                     <action selector="tapMirroringButton:" destination="emW-bc-vcM" eventType="touchUpInside" id="zYn-ga-RmD"/>
@@ -610,10 +610,10 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
         <image name="hashtag" width="24" height="24"/>
         <image name="highlight" width="24" height="24"/>
         <image name="image" width="40" height="40"/>
+        <image name="mirroringOn" width="40" height="40"/>
         <image name="pallette" width="24" height="24"/>
         <image name="tagDelete" width="16" height="16"/>
         <image name="triangle" width="24" height="12"/>
-        <image name="typoError" width="26" height="26"/>
         <image name="typoErrorSelected" width="26" height="26"/>
         <image name="xClose" width="16" height="16"/>
         <image name="xGrey" width="40" height="40"/>

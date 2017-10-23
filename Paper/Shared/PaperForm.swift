@@ -25,13 +25,13 @@ enum PaperFormType: EnumCollection {
         get {
             switch self {
             case .number:
-                return Global.numRegex
+                return FormManager.sharedInstance.numRegex
             case .one:
-                return Global.oneRegex
+                return FormManager.sharedInstance.oneRegex
             case .two:
-                return Global.twoRegex
+                return FormManager.sharedInstance.twoRegex
             case .three:
-                return Global.threeRegex
+                return FormManager.sharedInstance.threeRegex
             }
         }
     }
@@ -63,20 +63,6 @@ enum PaperFormType: EnumCollection {
             case .three:
                 return "※"
             }
-        }
-    }
-    
-    var kern: CGFloat {
-        get {
-            let font = CoreData.sharedInstance.paperFont
-            let numberingFont = UIFont(name: "Avenir Next", size: font.pointSize)!
-            let num = NSAttributedString(string: "4", attributes: [
-                .font : numberingFont]).size()
-            let dot = NSAttributedString(string: ".", attributes: [
-                .font : font]).size()
-            let form = NSAttributedString(string: self.converted, attributes: [
-                .font : font]).size()
-            return form.width > num.width + dot.width ? 0 : (num.width + dot.width - form.width)/2
         }
     }
     

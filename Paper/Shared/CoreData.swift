@@ -32,15 +32,15 @@ class CoreData: NSPersistentContainer {
         return NSKeyedUnarchiver.unarchiveObject(with: paper.fullContent!) as! NSAttributedString
     }
     
-    internal var paperFont: UIFont {
-        get {
-            return Global.transformToFont(name: paper.font!)
-        }
-    }
-    
-    internal var paperColor: UIColor {
-        return Global.transFormToColor(name: paper.color!)
-    }
+//    internal var paperFont: UIFont {
+//        get {
+//            return Global.transformToFont(name: paper.font!)
+//        }
+//    }
+//    
+//    internal var paperColor: UIColor {
+//        return Global.transFormToColor(name: paper.color!)
+//    }
     
     lazy var preference: Preference = {
         do {

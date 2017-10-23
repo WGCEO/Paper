@@ -18,7 +18,7 @@ class PianoTextView: UITextView {
     override var typingAttributes: [String : Any] {
         get {
             var attributes: [String : Any] = [:]
-            for (key, value) in defaultAttributes {
+            for (key, value) in FormManager.sharedInstance.defaultAttributes {
                 attributes[key.rawValue] = value
             }
             return attributes
@@ -40,26 +40,22 @@ class PianoTextView: UITextView {
     public var control = PianoControl()
     internal var coverView: UIView?
  
-    //MARK: Attribute
-    lazy var defaultAttributes: [NSAttributedStringKey : Any] = {
-        return calculateDefaultAttributes()
-    }()
+
     
-    lazy var defaultAttributesWithoutParaStyle : [NSAttributedStringKey : Any] = {
-        return calculateDefaultAttributesWithoutParagraph()
-    }()
     
 }
 
 //MARK: setup
 extension PianoTextView {
     internal func setup(){
-        guard let paper = CoreData.sharedInstance.paper else { return }
-        textColor = Global.textColor
-        font = Global.transformToFont(name: paper.font!)
+        
+        let formManager = FormManager.sharedInstance
+        formManager.delegate = self
+        textColor = formManager.textColor
+        font = formManager.paperFont
         attributedText = CoreData.sharedInstance.paperFullContent()
-        tintColor = Global.transFormToColor(name: paper.color!)
-        updateAllCalculateAttr()
+        tintColor = formManager.paperColor
+        formManager.updateAllFormAttributes()
         
         control.effectable = self
         textContainer.lineFragmentPadding = 0
@@ -69,7 +65,7 @@ extension PianoTextView {
         CoreData.sharedInstance.textView = self
         
         //typingAttribute의 문단 세팅
-        for (key, value) in defaultAttributes {
+        for (key, value) in formManager.defaultAttributes {
             typingAttributes[key.rawValue] = value
         }
         
@@ -83,14 +79,29 @@ extension PianoTextView {
     }
 }
 
+extension PianoTextView: Cursorable {
+    var cursorRange: NSRange {
+        get {
+            return selectedRange
+        } set {
+            selectedRange = newValue
+        }
+    }
+    
+    func insertNewLine() {
+        insertText("\n")
+    }
+}
+
 
 extension PianoTextView: NSTextStorageDelegate {
     
     func textStorage(_ textStorage: NSTextStorage, willProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
+        let formManager = FormManager.sharedInstance
         if editedMask.rawValue == 3 &&
             self.isEditable &&
-            (editedRange.length == 1 || paperForm(text: textStorage.string, range: editedRange) == nil)  {
-            textStorage.addAttributes(defaultAttributesWithoutParaStyle, range: editedRange)
+            (editedRange.length == 1 || formManager.paperForm(text: textStorage.string, range: editedRange) == nil)  {
+            textStorage.addAttributes(formManager.defaultAttributesWithoutParaStyle, range: editedRange)
         }
     }
 }
