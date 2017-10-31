@@ -9,6 +9,7 @@
 import UIKit
 
 class ColorPickerView: UIView {
+    
     @IBOutlet var buttons: [UIButton]!
     
     @IBAction func tapColorButton(_ sender: UIButton) {
@@ -19,7 +20,7 @@ class ColorPickerView: UIView {
         let newColorStr = FormManager.sharedInstance.colorStrs[sender.tag]
         let defaultColor = FormManager.sharedInstance.textColor
         let newColor = FormManager.sharedInstance.transFormToColor(name: newColorStr)
-        guard let textView = CoreData.sharedInstance.textView,
+        guard let textView = Reference.sharedInstance.textView,
             let attrText = textView.attributedText, let paper = CoreData.sharedInstance.paper else { return }
         
         textView.tintColor = newColor

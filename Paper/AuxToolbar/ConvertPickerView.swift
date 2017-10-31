@@ -18,7 +18,7 @@ class ConvertPickerView: UIView {
     }
     */
     @IBAction func tapConvertPDFButton(_ sender: Any) {
-        guard let textView = CoreData.sharedInstance.textView else { return }
+        guard let textView = Reference.sharedInstance.textView else { return }
         
         ActivityIndicator.startAnimating()
         

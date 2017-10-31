@@ -6,7 +6,6 @@
 //  Copyright © 2017년 Piano. All rights reserved.
 //
 
-import UIKit
 import CoreData
 
 class CoreData: NSPersistentContainer {
@@ -15,7 +14,6 @@ class CoreData: NSPersistentContainer {
         return createContainer()
     }()
     
-    weak var textView: PianoTextView?
     internal var paper: Paper!
     internal lazy var privateMOC: NSManagedObjectContext = {
         let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
@@ -31,17 +29,7 @@ class CoreData: NSPersistentContainer {
         }
         return NSKeyedUnarchiver.unarchiveObject(with: paper.fullContent!) as! NSAttributedString
     }
-    
-//    internal var paperFont: UIFont {
-//        get {
-//            return Global.transformToFont(name: paper.font!)
-//        }
-//    }
-//    
-//    internal var paperColor: UIColor {
-//        return Global.transFormToColor(name: paper.color!)
-//    }
-    
+
     lazy var preference: Preference = {
         do {
             let request: NSFetchRequest<Preference> = Preference.fetchRequest()
@@ -96,6 +84,7 @@ extension CoreData {
                     //저장완료 레이블로 변경시키고,
                     self?.saveViewContext()
                     self?.cache[attrString] = nil
+                    
                     print("비동기 저장 완료")
                 }
             } catch {
@@ -106,7 +95,8 @@ extension CoreData {
     
     internal func syncSaveAllNote(){
         //TODO: 프라이빗 큐에서 정상 저장되는 지 체크해보기, unowned self가 되는지 체크
-        guard let attrText = textView?.attributedText.copy() as? NSAttributedString else { return }
+
+        guard let attrText = Reference.sharedInstance.attrText?.copy() as? NSAttributedString else { return }
         cache[attrText] = paper
         privateMOC.performAndWait { [unowned self] in
             for (attrString, paper) in self.cache {
@@ -203,15 +193,15 @@ extension CoreData {
                 
                 let tag2 = Tag(context: viewContext)
                 tag2.name = "공부"
-                tag2.date = Date()
+                tag2.date = Date(timeIntervalSinceNow: 0.1)
                 
                 let tag3 = Tag(context: viewContext)
                 tag3.name = "일상"
-                tag3.date = Date()
+                tag3.date = Date(timeIntervalSinceNow: 0.2)
                 
                 let tag4 = Tag(context: viewContext)
                 tag4.name = "아이디어"
-                tag4.date = Date()
+                tag4.date = Date(timeIntervalSinceNow: 0.3)
                 
                 saveViewContext()
             }
@@ -219,5 +209,12 @@ extension CoreData {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    internal func createTag(name: String) -> Tag {
+        let tag = Tag(context: viewContext)
+        tag.name = name
+        tag.date = Date()
+        return tag
     }
 }

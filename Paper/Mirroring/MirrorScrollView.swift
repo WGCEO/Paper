@@ -14,6 +14,7 @@ class MirrorScrollView: UIScrollView {
     @IBOutlet weak private var mrLabel: UILabel!
     @IBOutlet weak private var mrCursorView: UIView!
     private var isTapped: Bool = false
+    let mirrorFont: CGFloat = 31
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -54,7 +55,7 @@ class MirrorScrollView: UIScrollView {
         let mutableAttrText = NSMutableAttributedString(attributedString: attrText)
         let mutableAttrTextRange = NSMakeRange(0, mutableAttrText.length)
         if mutableAttrText.length != 0 {
-            let font = UIFont.systemFont(ofSize: Global.mirrorFont)
+            let font = UIFont.systemFont(ofSize: mirrorFont)
             mutableAttrText.addAttributes([NSAttributedStringKey.font : font,
                                            NSAttributedStringKey.paragraphStyle : NSParagraphStyle()],
                                           range: mutableAttrTextRange)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddTagViewController: DefaultViewController {
     @IBOutlet weak var collectionView: AddTagCollectionView!
@@ -47,6 +48,25 @@ class AddTagViewController: DefaultViewController {
 
 extension AddTagViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        //TODO: 태그들 중 현재 입력된 텍스트와 일치하는 태그이름이 있다면 해당 태그로 스크롤해주고, 추가하지 말기
+        
+        
+        //TODO 코어데이터에 저장하고, textfield는 초기화하기
+        if let name = textField.text {
+            let tag = CoreData.sharedInstance.createTag(name: name)
+            CoreData.sharedInstance.paper.tags = tag
+            textField.text = ""
+        }
+        
         return false
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return string != " " ? true : false
+    }
+    
+    
+
+    
 }

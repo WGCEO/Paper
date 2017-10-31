@@ -10,4 +10,16 @@ import UIKit
 
 class AddTagCell: UICollectionViewCell, Reusable {
     @IBOutlet weak var label: UILabel!
+    
+    var userSelected: Bool = false {
+        didSet {
+            updateView(userSelected: userSelected)
+        }
+    }
+    
+    private func updateView(userSelected: Bool) {
+        backgroundColor = userSelected ? .darkGray : .white
+        label.textColor = userSelected ? .white : .darkGray
+    }
+    
 }

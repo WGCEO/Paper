@@ -6,7 +6,7 @@
 //  Copyright © 2017년 Piano. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public protocol EnumCollection: Hashable {
     static func cases() -> AnySequence<Self>

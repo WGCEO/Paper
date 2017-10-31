@@ -30,6 +30,8 @@ class PaperListViewController: DefaultViewController {
             attrString.length == 0 {
             CoreData.sharedInstance.viewContext.delete(paper)
         }
+        
+        //TODO: 태그 카운트가 
     }
     
     @IBAction func tapTrash(_ sender: UIButton) {
@@ -59,8 +61,7 @@ class PaperListViewController: DefaultViewController {
         newPaper.creationDate = Date()
         newPaper.modifiedDate = Date()
         //2. 현재 선택되어 있는 카테고리 append
-        let selectedTags = NSSet(array: collectionView.selectedTags)
-        newPaper.addToTags(selectedTags)
+        newPaper.tags = collectionView.selectedTag
         newPaper.font = defaultFontStr
         
         if let navVC = navigationController as? PaperNavigationViewController {

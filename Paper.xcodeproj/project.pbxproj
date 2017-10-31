@@ -15,8 +15,29 @@
 		DA3F2BB21F85D19900A556F5 /* PaperTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */; };
 		DA50B2111F9DF29F00EC5A0E /* FormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA50B2101F9DF29F00EC5A0E /* FormManager.swift */; };
 		DA6EE2B91F96DEC000176169 /* FontSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE2B81F96DEC000176169 /* FontSlider.swift */; };
+		DA70A67F1FA0C13800349DDC /* PaperTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA70A67E1FA0C13800349DDC /* PaperTableView.swift */; };
+		DA7114351FA0D5000000911D /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7114341FA0D5000000911D /* TagCollectionView.swift */; };
+		DA7114391FA2B7E70000911D /* PaperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7114381FA2B7E70000911D /* PaperCell.swift */; };
+		DA71143B1FA2BCB80000911D /* PaperHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA71143A1FA2BCB80000911D /* PaperHeaderView.swift */; };
+		DA71143C1FA313080000911D /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D62D1F7A2C3C00FC029D /* Reusable.swift */; };
 		DA7D306A1F946B9B00A659E6 /* TagPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7D30691F946B9B00A659E6 /* TagPickerView.swift */; };
 		DA7D306C1F946BC300A659E6 /* TagPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7D306B1F946BC300A659E6 /* TagPickerView.xib */; };
+		DA8FC3CF1F9EA5FE00EADAF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC3CE1F9EA5FE00EADAF5 /* AppDelegate.swift */; };
+		DA8FC3D11F9EA5FE00EADAF5 /* PaperListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC3D01F9EA5FE00EADAF5 /* PaperListViewController.swift */; };
+		DA8FC3D31F9EA5FE00EADAF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8FC3D21F9EA5FE00EADAF5 /* Assets.xcassets */; };
+		DA8FC3D61F9EA5FE00EADAF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8FC3D41F9EA5FE00EADAF5 /* Main.storyboard */; };
+		DA8FC3F91F9EAFB800EADAF5 /* PaperModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D6391F7A30CE00FC029D /* PaperModel.xcdatamodeld */; };
+		DA8FC3FA1F9EAFC600EADAF5 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F2BAB1F836B4500A556F5 /* Global.swift */; };
+		DA8FC3FC1F9EB02A00EADAF5 /* Global_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC3FB1F9EB02A00EADAF5 /* Global_iOS.swift */; };
+		DA8FC3FD1F9EB06F00EADAF5 /* PaperForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABEC0151F9AF1AD005D75AC /* PaperForm.swift */; };
+		DA8FC4001F9EB5CC00EADAF5 /* FormManager_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC3FF1F9EB5CC00EADAF5 /* FormManager_iOS.swift */; };
+		DA8FC4021F9EC04E00EADAF5 /* FormManager_mac.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC4011F9EC04E00EADAF5 /* FormManager_mac.swift */; };
+		DA8FC4031F9EC2A500EADAF5 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D63E1F7A36CF00FC029D /* CoreData.swift */; };
+		DA8FC4091F9EC9D500EADAF5 /* Reference_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC4081F9EC9D500EADAF5 /* Reference_iOS.swift */; };
+		DA8FC40C1F9ECA1200EADAF5 /* Reference_mac.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC40A1F9ECA0F00EADAF5 /* Reference_mac.swift */; };
+		DA8FC40D1F9EF66A00EADAF5 /* FormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA50B2101F9DF29F00EC5A0E /* FormManager.swift */; };
+		DA8FC40F1F9EF8D400EADAF5 /* Share_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC40E1F9EF8D400EADAF5 /* Share_Extension.swift */; };
+		DA8FC4101F9EF8D400EADAF5 /* Share_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8FC40E1F9EF8D400EADAF5 /* Share_Extension.swift */; };
 		DA9133151F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9133141F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift */; };
 		DA9133171F956B3F002C4DBE /* AddTagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9133161F956B3F002C4DBE /* AddTagCollectionView.swift */; };
 		DA9133191F95B2FE002C4DBE /* AddTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9133181F95B2FE002C4DBE /* AddTagCell.swift */; };
@@ -29,7 +50,6 @@
 		DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */; };
 		DABEC0161F9AF1AD005D75AC /* PaperForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABEC0151F9AF1AD005D75AC /* PaperForm.swift */; };
 		DAC6971F1F8B57A7008071E4 /* PianoTextView_Paste.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6971E1F8B57A7008071E4 /* PianoTextView_Paste.swift */; };
-		DAC697211F8B5845008071E4 /* Primitive_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697201F8B5845008071E4 /* Primitive_Extension.swift */; };
 		DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */; };
 		DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */; };
 		DAC6BF0B1F8C95D700702485 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6BF0A1F8C95D700702485 /* TestViewController.swift */; };
@@ -58,7 +78,6 @@
 		DAD3D63B1F7A30CE00FC029D /* PaperModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D6391F7A30CE00FC029D /* PaperModel.xcdatamodeld */; };
 		DAD3D63F1F7A36CF00FC029D /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D63E1F7A36CF00FC029D /* CoreData.swift */; };
 		DAD3D6411F7A378A00FC029D /* PianoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D6401F7A378A00FC029D /* PianoTextView.swift */; };
-		DAD3D6431F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D6421F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift */; };
 		DAD3D6451F7A60A200FC029D /* ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D6441F7A60A200FC029D /* ImageAttachment.swift */; };
 		DAD3D6471F7B1CE500FC029D /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D6461F7B1CE500FC029D /* TagCell.swift */; };
 		DAD3D64B1F7B7D8400FC029D /* TagCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3D64A1F7B7D8400FC029D /* TagCollectionView.swift */; };
@@ -76,6 +95,7 @@
 		DAE92F491F8C32CF0004A824 /* ConvertPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE92F481F8C32CF0004A824 /* ConvertPickerView.swift */; };
 		DAE92F531F8C42430004A824 /* AddTagReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE92F511F8C42430004A824 /* AddTagReusableView.swift */; };
 		DAE92F541F8C42430004A824 /* AddTagReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAE92F521F8C42430004A824 /* AddTagReusableView.xib */; };
+		DAECF2D81F9F05EF000681BF /* UIKit_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECF2D71F9F05EF000681BF /* UIKit_Extension.swift */; };
 		DAFDCCB71F982BCD00C0CDE6 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFDCCB61F982BCD00C0CDE6 /* ToolbarButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,8 +108,25 @@
 		DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperTransition.swift; sourceTree = "<group>"; };
 		DA50B2101F9DF29F00EC5A0E /* FormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormManager.swift; sourceTree = "<group>"; };
 		DA6EE2B81F96DEC000176169 /* FontSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSlider.swift; sourceTree = "<group>"; };
+		DA70A67E1FA0C13800349DDC /* PaperTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperTableView.swift; sourceTree = "<group>"; };
+		DA7114341FA0D5000000911D /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
+		DA7114381FA2B7E70000911D /* PaperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperCell.swift; sourceTree = "<group>"; };
+		DA71143A1FA2BCB80000911D /* PaperHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperHeaderView.swift; sourceTree = "<group>"; };
 		DA7D30691F946B9B00A659E6 /* TagPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagPickerView.swift; sourceTree = "<group>"; };
 		DA7D306B1F946BC300A659E6 /* TagPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagPickerView.xib; sourceTree = "<group>"; };
+		DA8FC3CC1F9EA5FE00EADAF5 /* Paper-mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paper-mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA8FC3CE1F9EA5FE00EADAF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DA8FC3D01F9EA5FE00EADAF5 /* PaperListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperListViewController.swift; sourceTree = "<group>"; };
+		DA8FC3D21F9EA5FE00EADAF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DA8FC3D51F9EA5FE00EADAF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DA8FC3D71F9EA5FE00EADAF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA8FC3D81F9EA5FE00EADAF5 /* Paper_mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paper_mac.entitlements; sourceTree = "<group>"; };
+		DA8FC3FB1F9EB02A00EADAF5 /* Global_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global_iOS.swift; sourceTree = "<group>"; };
+		DA8FC3FF1F9EB5CC00EADAF5 /* FormManager_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormManager_iOS.swift; sourceTree = "<group>"; };
+		DA8FC4011F9EC04E00EADAF5 /* FormManager_mac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormManager_mac.swift; sourceTree = "<group>"; };
+		DA8FC4081F9EC9D500EADAF5 /* Reference_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference_iOS.swift; sourceTree = "<group>"; };
+		DA8FC40A1F9ECA0F00EADAF5 /* Reference_mac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference_mac.swift; sourceTree = "<group>"; };
+		DA8FC40E1F9EF8D400EADAF5 /* Share_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Share_Extension.swift; sourceTree = "<group>"; };
 		DA9133141F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagViewController_KeyboardNotification.swift; sourceTree = "<group>"; };
 		DA9133161F956B3F002C4DBE /* AddTagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagCollectionView.swift; sourceTree = "<group>"; };
 		DA9133181F95B2FE002C4DBE /* AddTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagCell.swift; sourceTree = "<group>"; };
@@ -102,7 +139,6 @@
 		DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperNavigationViewController.swift; sourceTree = "<group>"; };
 		DABEC0151F9AF1AD005D75AC /* PaperForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperForm.swift; sourceTree = "<group>"; };
 		DAC6971E1F8B57A7008071E4 /* PianoTextView_Paste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Paste.swift; sourceTree = "<group>"; };
-		DAC697201F8B5845008071E4 /* Primitive_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitive_Extension.swift; sourceTree = "<group>"; };
 		DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Effectable.swift; sourceTree = "<group>"; };
 		DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Cursor.swift; sourceTree = "<group>"; };
 		DAC6BF0A1F8C95D700702485 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -133,7 +169,6 @@
 		DAD3D63A1F7A30CE00FC029D /* PaperModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PaperModel.xcdatamodel; sourceTree = "<group>"; };
 		DAD3D63E1F7A36CF00FC029D /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		DAD3D6401F7A378A00FC029D /* PianoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView.swift; sourceTree = "<group>"; };
-		DAD3D6421F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString_Extension.swift; sourceTree = "<group>"; };
 		DAD3D6441F7A60A200FC029D /* ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachment.swift; sourceTree = "<group>"; };
 		DAD3D6461F7B1CE500FC029D /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		DAD3D64A1F7B7D8400FC029D /* TagCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionView.swift; sourceTree = "<group>"; };
@@ -151,10 +186,18 @@
 		DAE92F481F8C32CF0004A824 /* ConvertPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertPickerView.swift; sourceTree = "<group>"; };
 		DAE92F511F8C42430004A824 /* AddTagReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagReusableView.swift; sourceTree = "<group>"; };
 		DAE92F521F8C42430004A824 /* AddTagReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTagReusableView.xib; sourceTree = "<group>"; };
+		DAECF2D71F9F05EF000681BF /* UIKit_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit_Extension.swift; sourceTree = "<group>"; };
 		DAFDCCB61F982BCD00C0CDE6 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DA8FC3C91F9EA5FE00EADAF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAD3D60F1F7A291C00FC029D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -186,17 +229,39 @@
 				DAAA7F5D1F9E19EC00C27549 /* ActivityIndicator.swift */,
 				DABEC0151F9AF1AD005D75AC /* PaperForm.swift */,
 				DA50B2101F9DF29F00EC5A0E /* FormManager.swift */,
+				DA8FC3FF1F9EB5CC00EADAF5 /* FormManager_iOS.swift */,
+				DA8FC4011F9EC04E00EADAF5 /* FormManager_mac.swift */,
 				DAAA7F5B1F9E19A600C27549 /* DocumentRenderer.swift */,
 				DAD3D63E1F7A36CF00FC029D /* CoreData.swift */,
 				DA3F2BAD1F83A2FA00A556F5 /* AnimatorFactory.swift */,
 				DA3F2BB11F85D19900A556F5 /* PaperTransition.swift */,
 				DAD3D62D1F7A2C3C00FC029D /* Reusable.swift */,
 				DA3F2BAB1F836B4500A556F5 /* Global.swift */,
-				DAD3D6421F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift */,
-				DAC697201F8B5845008071E4 /* Primitive_Extension.swift */,
+				DA8FC3FB1F9EB02A00EADAF5 /* Global_iOS.swift */,
+				DAECF2D71F9F05EF000681BF /* UIKit_Extension.swift */,
+				DA8FC40E1F9EF8D400EADAF5 /* Share_Extension.swift */,
 				DACE45941F90CA8100E22091 /* AppNavigator.swift */,
+				DA8FC4081F9EC9D500EADAF5 /* Reference_iOS.swift */,
+				DA8FC40A1F9ECA0F00EADAF5 /* Reference_mac.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		DA8FC3CD1F9EA5FE00EADAF5 /* Paper-mac */ = {
+			isa = PBXGroup;
+			children = (
+				DA8FC3CE1F9EA5FE00EADAF5 /* AppDelegate.swift */,
+				DA8FC3D01F9EA5FE00EADAF5 /* PaperListViewController.swift */,
+				DA70A67E1FA0C13800349DDC /* PaperTableView.swift */,
+				DA7114341FA0D5000000911D /* TagCollectionView.swift */,
+				DA8FC3D21F9EA5FE00EADAF5 /* Assets.xcassets */,
+				DA8FC3D41F9EA5FE00EADAF5 /* Main.storyboard */,
+				DA71143A1FA2BCB80000911D /* PaperHeaderView.swift */,
+				DA7114381FA2B7E70000911D /* PaperCell.swift */,
+				DA8FC3D71F9EA5FE00EADAF5 /* Info.plist */,
+				DA8FC3D81F9EA5FE00EADAF5 /* Paper_mac.entitlements */,
+			);
+			path = "Paper-mac";
 			sourceTree = "<group>";
 		};
 		DA9133131F95660D002C4DBE /* AddTagViewController */ = {
@@ -283,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				DAD3D6141F7A291C00FC029D /* Paper */,
+				DA8FC3CD1F9EA5FE00EADAF5 /* Paper-mac */,
 				DAD3D6131F7A291C00FC029D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -291,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				DAD3D6121F7A291C00FC029D /* Paper.app */,
+				DA8FC3CC1F9EA5FE00EADAF5 /* Paper-mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -307,6 +374,11 @@
 				DAB994251F8B0CEE007AF6CD /* PaperNavigationController */,
 				DAD3D63C1F7A30D400FC029D /* PaperListViewController */,
 				DAD3D63D1F7A35D400FC029D /* PaperViewController */,
+				DAE92F4A1F8C32D90004A824 /* AuxToolbar */,
+				DACBCAE71F8B530A003DEC7F /* Mirroring */,
+				DACBCAE81F8B5319003DEC7F /* InputView */,
+				DACBCAE91F8B532D003DEC7F /* PianoTextView */,
+				DA6E02391F8858F10082576A /* Piano */,
 				DA9133131F95660D002C4DBE /* AddTagViewController */,
 			);
 			path = Paper;
@@ -331,11 +403,6 @@
 				DAD3D6291F7A29DA00FC029D /* PaperViewController.swift */,
 				DAE92F2E1F8B9E810004A824 /* PaperViewController_KeyboardNotification.swift */,
 				DA9F066F1F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift */,
-				DAE92F4A1F8C32D90004A824 /* AuxToolbar */,
-				DACBCAE71F8B530A003DEC7F /* Mirroring */,
-				DACBCAE81F8B5319003DEC7F /* InputView */,
-				DACBCAE91F8B532D003DEC7F /* PianoTextView */,
-				DA6E02391F8858F10082576A /* Piano */,
 			);
 			path = PaperViewController;
 			sourceTree = "<group>";
@@ -366,6 +433,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DA8FC3CB1F9EA5FE00EADAF5 /* Paper-mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA8FC3D91F9EA5FE00EADAF5 /* Build configuration list for PBXNativeTarget "Paper-mac" */;
+			buildPhases = (
+				DA8FC3C81F9EA5FE00EADAF5 /* Sources */,
+				DA8FC3C91F9EA5FE00EADAF5 /* Frameworks */,
+				DA8FC3CA1F9EA5FE00EADAF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Paper-mac";
+			productName = "Paper-mac";
+			productReference = DA8FC3CC1F9EA5FE00EADAF5 /* Paper-mac.app */;
+			productType = "com.apple.product-type.application";
+		};
 		DAD3D6111F7A291C00FC029D /* Paper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAD3D6241F7A291C00FC029D /* Build configuration list for PBXNativeTarget "Paper" */;
@@ -393,6 +477,10 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Piano;
 				TargetAttributes = {
+					DA8FC3CB1F9EA5FE00EADAF5 = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+					};
 					DAD3D6111F7A291C00FC029D = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -413,11 +501,21 @@
 			projectRoot = "";
 			targets = (
 				DAD3D6111F7A291C00FC029D /* Paper */,
+				DA8FC3CB1F9EA5FE00EADAF5 /* Paper-mac */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DA8FC3CA1F9EA5FE00EADAF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA8FC3D31F9EA5FE00EADAF5 /* Assets.xcassets in Resources */,
+				DA8FC3D61F9EA5FE00EADAF5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAD3D6101F7A291C00FC029D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -440,11 +538,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA8FC3C81F9EA5FE00EADAF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA8FC3FA1F9EAFC600EADAF5 /* Global.swift in Sources */,
+				DA7114391FA2B7E70000911D /* PaperCell.swift in Sources */,
+				DA8FC3FD1F9EB06F00EADAF5 /* PaperForm.swift in Sources */,
+				DA8FC4021F9EC04E00EADAF5 /* FormManager_mac.swift in Sources */,
+				DA71143B1FA2BCB80000911D /* PaperHeaderView.swift in Sources */,
+				DA8FC3D11F9EA5FE00EADAF5 /* PaperListViewController.swift in Sources */,
+				DA8FC4031F9EC2A500EADAF5 /* CoreData.swift in Sources */,
+				DA7114351FA0D5000000911D /* TagCollectionView.swift in Sources */,
+				DA8FC4101F9EF8D400EADAF5 /* Share_Extension.swift in Sources */,
+				DA71143C1FA313080000911D /* Reusable.swift in Sources */,
+				DA8FC40C1F9ECA1200EADAF5 /* Reference_mac.swift in Sources */,
+				DA8FC3F91F9EAFB800EADAF5 /* PaperModel.xcdatamodeld in Sources */,
+				DA8FC40D1F9EF66A00EADAF5 /* FormManager.swift in Sources */,
+				DA8FC3CF1F9EA5FE00EADAF5 /* AppDelegate.swift in Sources */,
+				DA70A67F1FA0C13800349DDC /* PaperTableView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAD3D60E1F7A291C00FC029D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DA6EE2B91F96DEC000176169 /* FontSlider.swift in Sources */,
+				DA8FC3FC1F9EB02A00EADAF5 /* Global_iOS.swift in Sources */,
 				DA3F2BAA1F82AE6200A556F5 /* DefaultViewController.swift in Sources */,
 				DAD3D64D1F7B7F3E00FC029D /* PaperTableView.swift in Sources */,
 				DACE45951F90CA8100E22091 /* AppNavigator.swift in Sources */,
@@ -453,6 +574,7 @@
 				DACBCAE41F8B51F4003DEC7F /* ImageCell.swift in Sources */,
 				DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */,
 				DA9F066E1F8F50BC00EA5F18 /* MirroringButton.swift in Sources */,
+				DAECF2D81F9F05EF000681BF /* UIKit_Extension.swift in Sources */,
 				DA7D306A1F946B9B00A659E6 /* TagPickerView.swift in Sources */,
 				DAD3D6161F7A291C00FC029D /* AppDelegate.swift in Sources */,
 				DACBCAE21F8B505F003DEC7F /* PianoTextView_PhotoViewDelegate.swift in Sources */,
@@ -471,6 +593,7 @@
 				DA50B2111F9DF29F00EC5A0E /* FormManager.swift in Sources */,
 				DADD555D1F8297E500822753 /* PaperListHeaderView.swift in Sources */,
 				DAAA7F5E1F9E19EC00C27549 /* ActivityIndicator.swift in Sources */,
+				DA8FC40F1F9EF8D400EADAF5 /* Share_Extension.swift in Sources */,
 				DACBCAE01F8B4FA0003DEC7F /* PhotoView.swift in Sources */,
 				DA3F2BAC1F836B4500A556F5 /* Global.swift in Sources */,
 				DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */,
@@ -479,7 +602,6 @@
 				DAC6971F1F8B57A7008071E4 /* PianoTextView_Paste.swift in Sources */,
 				DA0F0E341F8F90E600729572 /* ColorPickerButton.swift in Sources */,
 				DAE92F531F8C42430004A824 /* AddTagReusableView.swift in Sources */,
-				DAD3D6431F7A5F7200FC029D /* NSMutableAttributedString_Extension.swift in Sources */,
 				DA9F06701F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift in Sources */,
 				DAE92F411F8C322C0004A824 /* ColorPickerView.swift in Sources */,
 				DACBCADC1F8B3906003DEC7F /* PianoControl.swift in Sources */,
@@ -487,6 +609,7 @@
 				DAD3D62C1F7A2C2C00FC029D /* PaperCell.swift in Sources */,
 				DA3F2BB21F85D19900A556F5 /* PaperTransition.swift in Sources */,
 				DACBCAE61F8B5302003DEC7F /* MirrorScrollView.swift in Sources */,
+				DA8FC4001F9EB5CC00EADAF5 /* FormManager_iOS.swift in Sources */,
 				DAD3D62A1F7A29DA00FC029D /* PaperViewController.swift in Sources */,
 				DA9133191F95B2FE002C4DBE /* AddTagCell.swift in Sources */,
 				DAD3D6451F7A60A200FC029D /* ImageAttachment.swift in Sources */,
@@ -495,19 +618,27 @@
 				DAE92F3B1F8C31DB0004A824 /* TagPickerCell.swift in Sources */,
 				DAD3D63B1F7A30CE00FC029D /* PaperModel.xcdatamodeld in Sources */,
 				DA9133171F956B3F002C4DBE /* AddTagCollectionView.swift in Sources */,
-				DAC697211F8B5845008071E4 /* Primitive_Extension.swift in Sources */,
 				DA9F066C1F8F4B1300EA5F18 /* PhotoCollectionView.swift in Sources */,
 				DACBCAD61F8B35D3003DEC7F /* PianoView.swift in Sources */,
 				DAFDCCB71F982BCD00C0CDE6 /* ToolbarButton.swift in Sources */,
 				DA9133151F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift in Sources */,
 				DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */,
 				DAD3D62E1F7A2C3C00FC029D /* Reusable.swift in Sources */,
+				DA8FC4091F9EC9D500EADAF5 /* Reference_iOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		DA8FC3D41F9EA5FE00EADAF5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA8FC3D51F9EA5FE00EADAF5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		DAD3D6191F7A291C00FC029D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -527,6 +658,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DA8FC3DA1F9EA5FE00EADAF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Paper-mac/Paper_mac.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U9KHV9D7LV;
+				INFOPLIST_FILE = "Paper-mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.piano.Paper-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		DA8FC3DB1F9EA5FE00EADAF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Paper-mac/Paper_mac.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U9KHV9D7LV;
+				INFOPLIST_FILE = "Paper-mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.piano.Paper-mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		DAD3D6221F7A291C00FC029D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -575,7 +744,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -626,7 +795,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -669,6 +838,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA8FC3D91F9EA5FE00EADAF5 /* Build configuration list for PBXNativeTarget "Paper-mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA8FC3DA1F9EA5FE00EADAF5 /* Debug */,
+				DA8FC3DB1F9EA5FE00EADAF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DAD3D60D1F7A291C00FC029D /* Build configuration list for PBXProject "Paper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

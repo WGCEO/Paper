@@ -6,14 +6,43 @@
 //  Copyright © 2017년 Piano. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import CoreGraphics
 
 protocol Cursorable: class {
     var cursorRange: NSRange { get set }
     func insertNewLine()
 }
 
+protocol TextAttributes {
+    associatedtype Color
+    associatedtype MutableParagraphStyle
+    associatedtype Font
+    
+    var colors: [Color] { get }
+    var textColor: Color { get }
+    var defaultFontSize: CGFloat { get }
+    var headIndent: CGFloat { get }
+    var tailIndent: CGFloat { get }
+    var defaultParagraphStyle: MutableParagraphStyle { get }
+    var paperFont: Font { get }
+    var paperColor: Color { get }
+    
+    
+    func transformToFont(name: String) -> Font
+    func transFormToColor(name: String) -> Color
+    
+    func calculateFormKern(formStr: String) -> CGFloat
+    func calculateDefaultAttributes() -> [NSAttributedStringKey : Any]
+    func calculateDefaultAttributesWithoutParagraph() -> [NSAttributedStringKey : Any]
+    func numParagraphStyle(gapRange: NSRange, attributedText: NSAttributedString) -> MutableParagraphStyle
+    func formParagraphStyle(form: PaperForm, gapRange: NSRange, attributedText: NSAttributedString) -> MutableParagraphStyle
+    
+    func addAttributeFor(form: PaperForm, paraRange: NSRange, mutableAttrString: NSMutableAttributedString)
+}
+
 class FormManager {
+    
     static let sharedInstance = FormManager()
     weak var delegate: Cursorable?
     
@@ -29,21 +58,12 @@ class FormManager {
     let formOne = "•"
     let formTwo = "★"
     let formThree = "※"
-    
-    let defaultFontSize: CGFloat = Global.iphone ? 17 : 23
-    let headIndent: CGFloat = Global.iphone ? 30 : 40
-    let tailIndent: CGFloat = Global.iphone ? -20 : -30
+ 
     let lineSpacing: CGFloat = 10
     
     
-    let colors: [UIColor] = [
-        UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1),
-        UIColor(red: 6/255, green: 196/255, blue: 153/255, alpha: 1),
-        UIColor(red: 249/255, green: 168/255, blue: 37/255, alpha: 1)]
-    
     let colorStrs: [String] = ["red", "mint", "gold"]
     let fontStrs: [String] = ["xSmall", "small", "medium", "large", "xLarge"]
-    let textColor = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
     
     lazy var defaultAttributes: [NSAttributedStringKey : Any] = {
         return calculateDefaultAttributes()
@@ -65,15 +85,6 @@ class FormManager {
         return calculateFormKern(formStr: formThree)
     }()
     
-    lazy var defaultParagraphStyle: NSMutableParagraphStyle = {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.firstLineHeadIndent = headIndent
-        paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = tailIndent
-        paragraphStyle.lineSpacing = lineSpacing
-        return paragraphStyle
-    }()
-    
     internal func updateAllFormAttributes(){
         defaultAttributes = calculateDefaultAttributes()
         defaultAttributesWithoutParaStyle = calculateDefaultAttributesWithoutParagraph()
@@ -82,85 +93,12 @@ class FormManager {
         threeKern = calculateFormKern(formStr: formThree)
     }
     
-    
-    internal func transformToFont(name: String) -> UIFont {
-        switch name {
-        case "xSmall":
-            return UIFont.systemFont(ofSize: defaultFontSize - 2)
-        case "small":
-            return UIFont.systemFont(ofSize: defaultFontSize)
-        case "medium":
-            return UIFont.systemFont(ofSize: defaultFontSize + 2)
-        case "large":
-            return UIFont.systemFont(ofSize: defaultFontSize + 4)
-        case "xLarge":
-            return UIFont.systemFont(ofSize: defaultFontSize + 6)
-        default:
-            return UIFont.systemFont(ofSize: defaultFontSize)
-        }
-    }
-    
-    internal func transFormToColor(name: String) -> UIColor {
-        switch name {
-        case "red":
-            return colors[0]
-        case "mint":
-            return colors[1]
-        case "gold":
-            return colors[2]
-        default:
-            return colors[0]
-        }
-    }
-    
 }
 
 //MARK: calculate
 extension FormManager {
-    internal var paperFont: UIFont {
-        get {
-            let fontStr = CoreData.sharedInstance.paper.font!
-            return transformToFont(name: fontStr)
-        }
-    }
     
-    internal var paperColor: UIColor {
-        let colorStr = CoreData.sharedInstance.paper.color!
-        return transFormToColor(name: colorStr)
-    }
-    
-    internal func calculateFormKern(formStr: String) -> CGFloat {
-        let font = paperFont
-        let numberingFont = UIFont(name: "Avenir Next", size: font.pointSize)!
-        let num = NSAttributedString(string: "4", attributes: [
-            .font : numberingFont]).size()
-        let dot = NSAttributedString(string: ".", attributes: [
-            .font : font]).size()
-        let form = NSAttributedString(string: formStr, attributes: [
-            .font : font]).size()
-        return form.width > num.width + dot.width ? 0 : (num.width + dot.width - form.width)/2
-    }
-    
-    internal func calculateDefaultAttributes() -> [NSAttributedStringKey : Any] {
-        return [.paragraphStyle : defaultParagraphStyle,
-                .font : paperFont,
-                .foregroundColor: textColor,
-                .backgroundColor: UIColor.clear,
-                .underlineStyle: 0,
-                .strikethroughStyle: 0,
-                .kern: 0
-        ]
-    }
-    
-    internal func calculateDefaultAttributesWithoutParagraph() -> [NSAttributedStringKey : Any] {
-        return [.font : paperFont,
-                .foregroundColor: textColor,
-                .backgroundColor: UIColor.clear,
-                .underlineStyle: 0,
-                .strikethroughStyle: 0,
-                .kern: 0
-        ]
-    }
+
     
     //특정 서식이 4.의 width 보다 좁다면,
     //(4.의 width - 서식의 width)/2 를 커닝값으로 하고,
@@ -170,47 +108,8 @@ extension FormManager {
     //커닝값은 0이며
     //indent는 Global.headIndent - (띄어쓰기 + 서식 width)로 해야한다.
     
-    
-    
-    internal func numParagraphStyle(gapRange: NSRange, attributedText: NSAttributedString) -> NSMutableParagraphStyle {
-        let paragraphStyle = NSMutableParagraphStyle()
-        let font = paperFont
-        let numberingFont = UIFont(name: "Avenir Next", size: font.pointSize)!
-        let num = NSAttributedString(string: "4", attributes: [.font : numberingFont])
-        let dotAndSpace = NSAttributedString(string: ". ", attributes: [.font : font])
-        let firstLineHeadIndent = self.headIndent - (num.size().width + dotAndSpace.size().width)
-        let headIndent = self.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
-        paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
-        paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = tailIndent
-        paragraphStyle.lineSpacing = lineSpacing
-        return paragraphStyle
-    }
-    
-    internal func formParagraphStyle(form: PaperForm, gapRange: NSRange, attributedText: NSAttributedString) -> NSMutableParagraphStyle {
-        let paragraphStyle = NSMutableParagraphStyle()
-        let font = paperFont
-        
-        let numberingFont = UIFont(name: "Avenir Next", size: font.pointSize)!
-        let num = NSAttributedString(string: "4", attributes: [
-            .font : numberingFont]).size()
-        let dot = NSAttributedString(string: ".", attributes: [
-            .font : font]).size()
-        let space = NSAttributedString(string: " ", attributes: [
-            .font : font]).size()
-        let form = NSAttributedString(string: form.type.converted, attributes: [
-            .font : font]).size()
-        let firstLineHeadIndent = form.width > num.width + dot.width ?
-            self.headIndent - (space.width + form.width) :
-            self.headIndent - (space.width + (num.width + dot.width + form.width )/2)
-        let headIndent = self.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
-        
-        paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
-        paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = tailIndent
-        paragraphStyle.lineSpacing = lineSpacing
-        return paragraphStyle
-    }
+
+
 }
 
 extension FormManager {
@@ -309,46 +208,6 @@ extension FormManager {
             
             currentParaRange = (mutableAttrString.string as NSString).paragraphRange(for: form.range)
         }
-    }
-    
-    private func addAttributeFor(form: PaperForm, paraRange: NSRange, mutableAttrString: NSMutableAttributedString) {
-        if form.type != .number {
-            let range = form.range
-            let gapRange = NSMakeRange(paraRange.location, range.location - paraRange.location)
-            
-            let kern: CGFloat
-            switch form.type {
-            case .number:
-                kern = 0
-            case .one:
-                kern = oneKern
-            case .two:
-                kern = twoKern
-            case .three:
-                kern = threeKern
-            }
-            
-            mutableAttrString.addAttributes([
-                .font : paperFont,
-                .foregroundColor : paperColor,
-                .kern : kern], range: range)
-            mutableAttrString.addAttributes([.paragraphStyle : formParagraphStyle(form: form, gapRange: gapRange, attributedText: mutableAttrString)], range: paraRange)
-        } else {
-            let numberingFont = UIFont(name: "Avenir Next",
-                                       size: paperFont.pointSize)!
-            
-            let dotRange = NSMakeRange(form.range.location + form.range.length, 1)
-            let gapRange = NSMakeRange(paraRange.location, form.range.location - paraRange.location)
-            mutableAttrString.addAttributes([.font : numberingFont,
-                                             .foregroundColor : paperColor],
-                                            range: form.range)
-            mutableAttrString.addAttributes([.foregroundColor : UIColor.lightGray,
-                                             .font : paperFont],
-                                            range: dotRange)
-            mutableAttrString.addAttributes([.paragraphStyle : numParagraphStyle(gapRange: gapRange, attributedText: mutableAttrString)],
-                                            range: paraRange)
-        }
-        
     }
     
     internal func paperForm(text: String, range: NSRange) -> PaperForm? {

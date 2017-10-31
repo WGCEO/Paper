@@ -23,7 +23,7 @@ class FontPickerView: UIView {
         //1. 애니메이션으로 비동기를 준비한다.
         
         //2. 폰트사이즈가 다른 것들의 범위를 다 찾아내고, 기존 폰트와의 크기 차이를 구한다.
-        guard let textView = CoreData.sharedInstance.textView,
+        guard let textView = Reference.sharedInstance.textView,
             let paper = CoreData.sharedInstance.paper else { return }
         
         let range = NSMakeRange(0, textView.attributedText.length)
@@ -59,7 +59,7 @@ class FontPickerView: UIView {
             }
             
             textView.textStorage.addAttributes([.font: newFont], range: tuple.range)
-            CoreData.sharedInstance.textView?.userEdited = true
+            Reference.sharedInstance.textView?.userEdited = true
         }
         
         //5. 폰트에 영향 받는 것들 업데이트한다.

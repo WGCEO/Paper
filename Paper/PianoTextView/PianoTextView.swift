@@ -62,7 +62,7 @@ extension PianoTextView {
         textContainerInset.top = 20
         textContainerInset.bottom = 120
         //코어데이터 세팅
-        CoreData.sharedInstance.textView = self
+        Reference.sharedInstance.textView = self
         
         //typingAttribute의 문단 세팅
         for (key, value) in formManager.defaultAttributes {

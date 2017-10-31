@@ -4,7 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,13 +16,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="CaY-ne-4yV" customClass="TagPickerCollectionView" customModule="Paper" customModuleProvider="target">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="C6E-yF-43Q" customClass="TagPickerCollectionView" customModule="Paper" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="16" width="375" height="32"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="32" id="Iox-yZ-GiZ"/>
+                        <constraint firstAttribute="height" constant="32" id="s5g-dV-0rs"/>
                     </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iGa-d7-Buj">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="noh-Xb-l5i">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -31,9 +32,9 @@
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CaY-ne-4yV" secondAttribute="trailing" id="bjV-T5-mWm"/>
-                <constraint firstItem="CaY-ne-4yV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="mia-vc-M81"/>
-                <constraint firstItem="CaY-ne-4yV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zES-Rw-M8b"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="C6E-yF-43Q" secondAttribute="trailing" id="Qhn-5c-Q3Q"/>
+                <constraint firstItem="C6E-yF-43Q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="SMh-nl-153"/>
+                <constraint firstItem="C6E-yF-43Q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="usQ-mv-PQZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

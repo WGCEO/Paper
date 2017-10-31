@@ -15,9 +15,9 @@ class AddTagCollectionView: UICollectionView {
         let context = CoreData.sharedInstance.viewContext
         let request: NSFetchRequest<Tag> = Tag.fetchRequest()
         //TODO: Pag.papers가 nil일 경우에 에러가 안나는 지 체크하기
-        let sort1 = NSSortDescriptor(key: #keyPath(Tag.papersCount), ascending: false)
-        let sort2 = NSSortDescriptor(key: #keyPath(Tag.date), ascending: false)
-        request.sortDescriptors = [sort1, sort2]
+//        let sort1 = NSSortDescriptor(key: #keyPath(Tag.papersCount), ascending: false)
+        let sort2 = NSSortDescriptor(key: #keyPath(Tag.date), ascending: true)
+        request.sortDescriptors = [sort2]
         let tagResultsController = NSFetchedResultsController(fetchRequest: request,
                                                               managedObjectContext: context,
                                                               sectionNameKeyPath: nil,
@@ -65,10 +65,10 @@ extension AddTagCollectionView: UICollectionViewDataSource {
         let tag = tagResultsController.object(at: indexPath)
         cell.label.text = tag.name
         
-        if let tags = CoreData.sharedInstance.paper.tags, tags.contains(tag) {
-            cell.isSelected = true
+        if let paperTag = CoreData.sharedInstance.paper.tags, paperTag == tag {
+            cell.userSelected = true
         } else {
-            cell.isSelected = false
+            cell.userSelected = false
         }
     }
 }
@@ -76,20 +76,21 @@ extension AddTagCollectionView: UICollectionViewDataSource {
 extension AddTagCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! AddTagCell
-        //TODO: 카운드 측정해보고, 0이면 걍 지워버리고, 0이 아니면 경고하고 지우기
-        let tag = tagResultsController.object(at: indexPath)
-        deleteTagIfNeeded(tag: tag)
-    }
-    
-    private func deleteTagIfNeeded(tag: Tag){
-        let count = tag.papers?.count ?? 0
+        cell.userSelected = !cell.userSelected
         
-        if count != 0 {
-            
+        if cell.userSelected {
+            let hashTag = tagResultsController.object(at: indexPath)
+            CoreData.sharedInstance.paper.tags = hashTag
         } else {
-            
+            CoreData.sharedInstance.paper.tags = nil
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! TagCell
+        cell.userSelected = false
+    }
+    
 }
 
 extension AddTagCollectionView: UICollectionViewDelegateFlowLayout {
@@ -97,11 +98,11 @@ extension AddTagCollectionView: UICollectionViewDelegateFlowLayout {
         guard let nameString = tagResultsController.object(at: indexPath).name
             else { return CGSize.zero }
         let nameSize = (nameString as NSString).size(withAttributes: [.font: UIFont.systemFont(ofSize: 14)])
-        return CGSize(width: 36 + nameSize.width , height: 32)
+        return CGSize(width: 16 + nameSize.width , height: 32)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(0, 20, 0, 20)
+        return UIEdgeInsetsMake(0, 8, 0, 8)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -164,8 +165,8 @@ extension AddTagCollectionView: NSFetchedResultsControllerDelegate {
         }
     }
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>)
+    {
         performBatchUpdates({ [weak self] in
             guard let strongSelf = self else { return }
             for operation in strongSelf.batchUpdateOperation {

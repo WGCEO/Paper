@@ -1,14 +1,14 @@
 //
-//  TagCell.swift
+//  TagPickerCell.swift
 //  Paper
 //
-//  Created by changi kim on 2017. 9. 27..
+//  Created by changi kim on 2017. 10. 10..
 //  Copyright © 2017년 Piano. All rights reserved.
 //
 
 import UIKit
 
-class TagCell: UICollectionViewCell, Reusable {
+class TagPickerCell: UICollectionViewCell, Reusable {
     @IBOutlet weak var label: UILabel!
     
     var userSelected: Bool = false {
@@ -21,4 +21,5 @@ class TagCell: UICollectionViewCell, Reusable {
         backgroundColor = userSelected ? .darkGray : .white
         label.textColor = userSelected ? .white : .darkGray
     }
+    
 }
