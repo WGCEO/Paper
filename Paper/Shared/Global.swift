@@ -11,6 +11,7 @@ import CoreGraphics
 
 struct Global {
     
+    static let pdfFontSize: CGFloat = 12
     static let duration: Double = 0.2
     static let opacity: CGFloat = 1
     static let transparent: CGFloat = 0.3

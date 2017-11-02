@@ -66,8 +66,8 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
                 let textView = from.viewWithTag(20) as! PianoTextView
                 
                 let offsetY = !isNavigationBarHidden ?
-                    (statusBarHeight + navHeight + textView.textContainerInset.top - 4) :
-                    (statusBarHeight + textView.textContainerInset.top - 4)
+                    (statusBarHeight + navHeight + textView.textContainerInset.top) :
+                    (statusBarHeight + textView.textContainerInset.top)
                 
                 textView.contentOffset.y += offsetY
                 from.frame = cell.label.convert(cell.label.bounds, to: from)
@@ -77,8 +77,8 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
                 let textView = from.viewWithTag(20) as! PianoTextView
                 
                 let offsetY = !isNavigationBarHidden ?
-                    (statusBarHeight + navHeight + textView.textContainerInset.top - 4) :
-                    (statusBarHeight + textView.textContainerInset.top - 4)
+                    (statusBarHeight + navHeight + textView.textContainerInset.top) :
+                    (statusBarHeight + textView.textContainerInset.top)
                 
                 textView.contentOffset.y += offsetY
                 from.frame = button.convert(button.bounds, to: from)

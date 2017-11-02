@@ -25,7 +25,7 @@ class PaperListViewController: DefaultViewController {
         
         //TODO: paper가 nil이 아니고, length = 0이면 지우기
         if let paper = CoreData.sharedInstance.paper,
-            let data = paper.fullContent,
+            let data = paper.thumbnailContent,
             let attrString = NSKeyedUnarchiver.unarchiveObject(with: data) as? NSAttributedString,
             attrString.length == 0 {
             CoreData.sharedInstance.viewContext.delete(paper)

@@ -109,7 +109,7 @@ class MirrorScrollView: UIScrollView {
         isTapped = true
         let range = (textView.text as NSString).paragraphRange(for: textView.selectedRange)
         
-        if let character = text.characters.last, character == "\n" {
+        if let character = text.last, character == "\n" {
             textView.selectedRange.location = range.location + index - 1
         } else {
             textView.selectedRange.location = range.location + index

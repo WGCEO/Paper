@@ -101,6 +101,14 @@ class PaperViewController: DefaultViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PDFViewController", let pdfGenerator = sender as? PDFGenerator {
+            let nav = segue.destination as! UINavigationController
+            let desVC = nav.topViewController as! PDFViewController
+            desVC.pdfGenerator = pdfGenerator
+        }
+    }
+    
     private func setButtonsDeselected(exceptFor button: UIButton){
         for toolbarButton in toolbarButtons {
             if toolbarButton != button {

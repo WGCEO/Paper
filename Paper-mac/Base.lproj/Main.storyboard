@@ -761,7 +761,7 @@
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.25" horizontal="YES" id="Hbn-O6-B5j">
+                                <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Hbn-O6-B5j">
                                     <rect key="frame" x="1" y="253" width="478" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -783,6 +783,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="tap:" target="XfG-lQ-9wD" id="ouu-nJ-j72"/>
+                                    <segue destination="93M-JV-FT8" kind="custom" customClass="PaperSegue" customModule="Paper_mac" customModuleProvider="target" id="Mk3-fG-boH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -799,18 +800,54 @@
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
-        <!--View Controller-->
+        <!--Paper View Controller-->
         <scene sceneID="0G4-pP-avJ">
             <objects>
-                <viewController storyboardIdentifier="Hello" id="93M-JV-FT8" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Hello" id="93M-JV-FT8" customClass="PaperViewController" customModule="Paper_mac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="UwN-UO-bCv">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3s-I3-UEE">
+                                <rect key="frame" x="0.0" y="200" width="450" height="100"/>
+                                <clipView key="contentView" id="ZRL-8l-91Y">
+                                    <rect key="frame" x="1" y="1" width="448" height="98"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="uwf-wT-ZD1">
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="98"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="448" height="98"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="WNb-ao-ueZ"/>
+                                </constraints>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="olF-jD-oAP">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="DrJ-Mr-weS">
+                                    <rect key="frame" x="433" y="1" width="16" height="98"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="P3s-I3-UEE" firstAttribute="leading" secondItem="UwN-UO-bCv" secondAttribute="leading" id="AoU-VI-oCK"/>
+                            <constraint firstAttribute="trailing" secondItem="P3s-I3-UEE" secondAttribute="trailing" id="wye-cv-QdI"/>
+                            <constraint firstItem="P3s-I3-UEE" firstAttribute="top" secondItem="UwN-UO-bCv" secondAttribute="top" id="yMn-c2-NdU"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="w9r-5W-uvm" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="640"/>
+            <point key="canvasLocation" x="652" y="655"/>
         </scene>
     </scenes>
 </document>

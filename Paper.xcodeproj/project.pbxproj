@@ -47,8 +47,28 @@
 		DA9F06701F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9F066F1F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift */; };
 		DAAA7F5C1F9E19A600C27549 /* DocumentRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA7F5B1F9E19A600C27549 /* DocumentRenderer.swift */; };
 		DAAA7F5E1F9E19EC00C27549 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA7F5D1F9E19EC00C27549 /* ActivityIndicator.swift */; };
+		DAAC42951FA978400058344E /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42941FA978400058344E /* PDFViewController.swift */; };
+		DAAC42A71FA9B5C40058344E /* PDFGenerator+DocumentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42971FA9B5C20058344E /* PDFGenerator+DocumentInfo.swift */; };
+		DAAC42A81FA9B5C40058344E /* PDFGenerator+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42981FA9B5C20058344E /* PDFGenerator+Image.swift */; };
+		DAAC42A91FA9B5C40058344E /* PDFGenerator+Lines.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42991FA9B5C20058344E /* PDFGenerator+Lines.swift */; };
+		DAAC42AA1FA9B5C40058344E /* PDFInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC429A1FA9B5C30058344E /* PDFInfo.swift */; };
+		DAAC42AB1FA9B5C40058344E /* PDFGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC429B1FA9B5C30058344E /* PDFGenerator.swift */; };
+		DAAC42AC1FA9B5C40058344E /* TableStyle+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC429C1FA9B5C30058344E /* TableStyle+Defaults.swift */; };
+		DAAC42AD1FA9B5C40058344E /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC429D1FA9B5C30058344E /* Command.swift */; };
+		DAAC42AE1FA9B5C40058344E /* PDFGenerator+Generation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC429E1FA9B5C30058344E /* PDFGenerator+Generation.swift */; };
+		DAAC42AF1FA9B5C40058344E /* PageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC429F1FA9B5C30058344E /* PageFormat.swift */; };
+		DAAC42B01FA9B5C40058344E /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42A01FA9B5C30058344E /* Container.swift */; };
+		DAAC42B11FA9B5C40058344E /* TableStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42A11FA9B5C30058344E /* TableStyle.swift */; };
+		DAAC42B21FA9B5C40058344E /* PDFGenerator+Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42A21FA9B5C30058344E /* PDFGenerator+Calculations.swift */; };
+		DAAC42B31FA9B5C40058344E /* PDFGenerator+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42A31FA9B5C30058344E /* PDFGenerator+Table.swift */; };
+		DAAC42B41FA9B5C40058344E /* PDFGenerator+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42A41FA9B5C40058344E /* PDFGenerator+Text.swift */; };
+		DAAC42B51FA9B5C40058344E /* PDFGenerator+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42A51FA9B5C40058344E /* PDFGenerator+Methods.swift */; };
+		DAAC42B61FA9B5C40058344E /* PDFGenerator+Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAC42A61FA9B5C40058344E /* PDFGenerator+Initialization.swift */; };
 		DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */; };
 		DABEC0161F9AF1AD005D75AC /* PaperForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABEC0151F9AF1AD005D75AC /* PaperForm.swift */; };
+		DAC26ADF1FA85B7E00A520F1 /* PaperSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC26ADE1FA85B7E00A520F1 /* PaperSegue.swift */; };
+		DAC26AE31FA85BE800A520F1 /* PaperPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC26AE21FA85BE800A520F1 /* PaperPresentationAnimator.swift */; };
+		DAC26AE51FA8628F00A520F1 /* PaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC26AE41FA8628F00A520F1 /* PaperViewController.swift */; };
 		DAC6971F1F8B57A7008071E4 /* PianoTextView_Paste.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6971E1F8B57A7008071E4 /* PianoTextView_Paste.swift */; };
 		DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */; };
 		DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */; };
@@ -136,8 +156,28 @@
 		DA9F066F1F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViewController_UITextViewDelegate.swift; sourceTree = "<group>"; };
 		DAAA7F5B1F9E19A600C27549 /* DocumentRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentRenderer.swift; sourceTree = "<group>"; };
 		DAAA7F5D1F9E19EC00C27549 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		DAAC42941FA978400058344E /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		DAAC42971FA9B5C20058344E /* PDFGenerator+DocumentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+DocumentInfo.swift"; sourceTree = "<group>"; };
+		DAAC42981FA9B5C20058344E /* PDFGenerator+Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+Image.swift"; sourceTree = "<group>"; };
+		DAAC42991FA9B5C20058344E /* PDFGenerator+Lines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+Lines.swift"; sourceTree = "<group>"; };
+		DAAC429A1FA9B5C30058344E /* PDFInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFInfo.swift; sourceTree = "<group>"; };
+		DAAC429B1FA9B5C30058344E /* PDFGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFGenerator.swift; sourceTree = "<group>"; };
+		DAAC429C1FA9B5C30058344E /* TableStyle+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableStyle+Defaults.swift"; sourceTree = "<group>"; };
+		DAAC429D1FA9B5C30058344E /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		DAAC429E1FA9B5C30058344E /* PDFGenerator+Generation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+Generation.swift"; sourceTree = "<group>"; };
+		DAAC429F1FA9B5C30058344E /* PageFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageFormat.swift; sourceTree = "<group>"; };
+		DAAC42A01FA9B5C30058344E /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		DAAC42A11FA9B5C30058344E /* TableStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableStyle.swift; sourceTree = "<group>"; };
+		DAAC42A21FA9B5C30058344E /* PDFGenerator+Calculations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+Calculations.swift"; sourceTree = "<group>"; };
+		DAAC42A31FA9B5C30058344E /* PDFGenerator+Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+Table.swift"; sourceTree = "<group>"; };
+		DAAC42A41FA9B5C40058344E /* PDFGenerator+Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+Text.swift"; sourceTree = "<group>"; };
+		DAAC42A51FA9B5C40058344E /* PDFGenerator+Methods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+Methods.swift"; sourceTree = "<group>"; };
+		DAAC42A61FA9B5C40058344E /* PDFGenerator+Initialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PDFGenerator+Initialization.swift"; sourceTree = "<group>"; };
 		DAB994231F8B0AE1007AF6CD /* PaperNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperNavigationViewController.swift; sourceTree = "<group>"; };
 		DABEC0151F9AF1AD005D75AC /* PaperForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperForm.swift; sourceTree = "<group>"; };
+		DAC26ADE1FA85B7E00A520F1 /* PaperSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperSegue.swift; sourceTree = "<group>"; };
+		DAC26AE21FA85BE800A520F1 /* PaperPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperPresentationAnimator.swift; sourceTree = "<group>"; };
+		DAC26AE41FA8628F00A520F1 /* PaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaperViewController.swift; sourceTree = "<group>"; };
 		DAC6971E1F8B57A7008071E4 /* PianoTextView_Paste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Paste.swift; sourceTree = "<group>"; };
 		DAC697221F8B59A7008071E4 /* PianoTextView_Effectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Effectable.swift; sourceTree = "<group>"; };
 		DAC697241F8B5A10008071E4 /* PianoTextView_Cursor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoTextView_Cursor.swift; sourceTree = "<group>"; };
@@ -256,6 +296,9 @@
 				DA7114341FA0D5000000911D /* TagCollectionView.swift */,
 				DA8FC3D21F9EA5FE00EADAF5 /* Assets.xcassets */,
 				DA8FC3D41F9EA5FE00EADAF5 /* Main.storyboard */,
+				DAC26AE41FA8628F00A520F1 /* PaperViewController.swift */,
+				DAC26AE21FA85BE800A520F1 /* PaperPresentationAnimator.swift */,
+				DAC26ADE1FA85B7E00A520F1 /* PaperSegue.swift */,
 				DA71143A1FA2BCB80000911D /* PaperHeaderView.swift */,
 				DA7114381FA2B7E70000911D /* PaperCell.swift */,
 				DA8FC3D71F9EA5FE00EADAF5 /* Info.plist */,
@@ -273,6 +316,29 @@
 				DA9133181F95B2FE002C4DBE /* AddTagCell.swift */,
 			);
 			path = AddTagViewController;
+			sourceTree = "<group>";
+		};
+		DAAC42961FA9B5880058344E /* TPPDF */ = {
+			isa = PBXGroup;
+			children = (
+				DAAC429D1FA9B5C30058344E /* Command.swift */,
+				DAAC42A01FA9B5C30058344E /* Container.swift */,
+				DAAC429F1FA9B5C30058344E /* PageFormat.swift */,
+				DAAC429B1FA9B5C30058344E /* PDFGenerator.swift */,
+				DAAC42A21FA9B5C30058344E /* PDFGenerator+Calculations.swift */,
+				DAAC42971FA9B5C20058344E /* PDFGenerator+DocumentInfo.swift */,
+				DAAC429E1FA9B5C30058344E /* PDFGenerator+Generation.swift */,
+				DAAC42981FA9B5C20058344E /* PDFGenerator+Image.swift */,
+				DAAC42A61FA9B5C40058344E /* PDFGenerator+Initialization.swift */,
+				DAAC42991FA9B5C20058344E /* PDFGenerator+Lines.swift */,
+				DAAC42A51FA9B5C40058344E /* PDFGenerator+Methods.swift */,
+				DAAC42A31FA9B5C30058344E /* PDFGenerator+Table.swift */,
+				DAAC42A41FA9B5C40058344E /* PDFGenerator+Text.swift */,
+				DAAC429A1FA9B5C30058344E /* PDFInfo.swift */,
+				DAAC42A11FA9B5C30058344E /* TableStyle.swift */,
+				DAAC429C1FA9B5C30058344E /* TableStyle+Defaults.swift */,
+			);
+			path = TPPDF;
 			sourceTree = "<group>";
 		};
 		DAB994251F8B0CEE007AF6CD /* PaperNavigationController */ = {
@@ -303,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				DAD3D6191F7A291C00FC029D /* Main.storyboard */,
+				DAAC42941FA978400058344E /* PDFViewController.swift */,
 				DAC6BF0A1F8C95D700702485 /* TestViewController.swift */,
 				DAD3D61E1F7A291C00FC029D /* LaunchScreen.storyboard */,
 				DAD3D61C1F7A291C00FC029D /* Assets.xcassets */,
@@ -365,6 +432,7 @@
 		DAD3D6141F7A291C00FC029D /* Paper */ = {
 			isa = PBXGroup;
 			children = (
+				DAAC42961FA9B5880058344E /* TPPDF */,
 				DAD3D6211F7A291C00FC029D /* Info.plist */,
 				DAD3D6151F7A291C00FC029D /* AppDelegate.swift */,
 				DACBCAD01F8B1964003DEC7F /* Assets */,
@@ -554,8 +622,11 @@
 				DA71143C1FA313080000911D /* Reusable.swift in Sources */,
 				DA8FC40C1F9ECA1200EADAF5 /* Reference_mac.swift in Sources */,
 				DA8FC3F91F9EAFB800EADAF5 /* PaperModel.xcdatamodeld in Sources */,
+				DAC26ADF1FA85B7E00A520F1 /* PaperSegue.swift in Sources */,
+				DAC26AE51FA8628F00A520F1 /* PaperViewController.swift in Sources */,
 				DA8FC40D1F9EF66A00EADAF5 /* FormManager.swift in Sources */,
 				DA8FC3CF1F9EA5FE00EADAF5 /* AppDelegate.swift in Sources */,
+				DAC26AE31FA85BE800A520F1 /* PaperPresentationAnimator.swift in Sources */,
 				DA70A67F1FA0C13800349DDC /* PaperTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -564,18 +635,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAAC42AC1FA9B5C40058344E /* TableStyle+Defaults.swift in Sources */,
 				DA6EE2B91F96DEC000176169 /* FontSlider.swift in Sources */,
+				DAAC42AB1FA9B5C40058344E /* PDFGenerator.swift in Sources */,
+				DAAC42A91FA9B5C40058344E /* PDFGenerator+Lines.swift in Sources */,
 				DA8FC3FC1F9EB02A00EADAF5 /* Global_iOS.swift in Sources */,
+				DAAC42A81FA9B5C40058344E /* PDFGenerator+Image.swift in Sources */,
 				DA3F2BAA1F82AE6200A556F5 /* DefaultViewController.swift in Sources */,
 				DAD3D64D1F7B7F3E00FC029D /* PaperTableView.swift in Sources */,
 				DACE45951F90CA8100E22091 /* AppNavigator.swift in Sources */,
 				DA0F0E321F8F898E00729572 /* PianoPickerButton.swift in Sources */,
 				DAC6BF0B1F8C95D700702485 /* TestViewController.swift in Sources */,
+				DAAC42B41FA9B5C40058344E /* PDFGenerator+Text.swift in Sources */,
 				DACBCAE41F8B51F4003DEC7F /* ImageCell.swift in Sources */,
 				DAC697251F8B5A10008071E4 /* PianoTextView_Cursor.swift in Sources */,
 				DA9F066E1F8F50BC00EA5F18 /* MirroringButton.swift in Sources */,
+				DAAC42B21FA9B5C40058344E /* PDFGenerator+Calculations.swift in Sources */,
 				DAECF2D81F9F05EF000681BF /* UIKit_Extension.swift in Sources */,
 				DA7D306A1F946B9B00A659E6 /* TagPickerView.swift in Sources */,
+				DAAC42AA1FA9B5C40058344E /* PDFInfo.swift in Sources */,
 				DAD3D6161F7A291C00FC029D /* AppDelegate.swift in Sources */,
 				DACBCAE21F8B505F003DEC7F /* PianoTextView_PhotoViewDelegate.swift in Sources */,
 				DAD3D6411F7A378A00FC029D /* PianoTextView.swift in Sources */,
@@ -591,21 +669,27 @@
 				DACE45971F90CD0400E22091 /* AddTagViewController.swift in Sources */,
 				DAE92F3D1F8C31FB0004A824 /* TagPickerCollectionView.swift in Sources */,
 				DA50B2111F9DF29F00EC5A0E /* FormManager.swift in Sources */,
+				DAAC42A71FA9B5C40058344E /* PDFGenerator+DocumentInfo.swift in Sources */,
 				DADD555D1F8297E500822753 /* PaperListHeaderView.swift in Sources */,
 				DAAA7F5E1F9E19EC00C27549 /* ActivityIndicator.swift in Sources */,
 				DA8FC40F1F9EF8D400EADAF5 /* Share_Extension.swift in Sources */,
 				DACBCAE01F8B4FA0003DEC7F /* PhotoView.swift in Sources */,
+				DAAC42B51FA9B5C40058344E /* PDFGenerator+Methods.swift in Sources */,
+				DAAC42B11FA9B5C40058344E /* TableStyle.swift in Sources */,
 				DA3F2BAC1F836B4500A556F5 /* Global.swift in Sources */,
 				DAB994241F8B0AE1007AF6CD /* PaperNavigationViewController.swift in Sources */,
 				DAE92F491F8C32CF0004A824 /* ConvertPickerView.swift in Sources */,
+				DAAC42AE1FA9B5C40058344E /* PDFGenerator+Generation.swift in Sources */,
 				DABEC0161F9AF1AD005D75AC /* PaperForm.swift in Sources */,
 				DAC6971F1F8B57A7008071E4 /* PianoTextView_Paste.swift in Sources */,
 				DA0F0E341F8F90E600729572 /* ColorPickerButton.swift in Sources */,
 				DAE92F531F8C42430004A824 /* AddTagReusableView.swift in Sources */,
 				DA9F06701F8F63B900EA5F18 /* PaperViewController_UITextViewDelegate.swift in Sources */,
 				DAE92F411F8C322C0004A824 /* ColorPickerView.swift in Sources */,
+				DAAC42AF1FA9B5C40058344E /* PageFormat.swift in Sources */,
 				DACBCADC1F8B3906003DEC7F /* PianoControl.swift in Sources */,
 				DAD3D63F1F7A36CF00FC029D /* CoreData.swift in Sources */,
+				DAAC42B31FA9B5C40058344E /* PDFGenerator+Table.swift in Sources */,
 				DAD3D62C1F7A2C2C00FC029D /* PaperCell.swift in Sources */,
 				DA3F2BB21F85D19900A556F5 /* PaperTransition.swift in Sources */,
 				DACBCAE61F8B5302003DEC7F /* MirrorScrollView.swift in Sources */,
@@ -617,13 +701,17 @@
 				DAE92F2F1F8B9E810004A824 /* PaperViewController_KeyboardNotification.swift in Sources */,
 				DAE92F3B1F8C31DB0004A824 /* TagPickerCell.swift in Sources */,
 				DAD3D63B1F7A30CE00FC029D /* PaperModel.xcdatamodeld in Sources */,
+				DAAC42B01FA9B5C40058344E /* Container.swift in Sources */,
+				DAAC42951FA978400058344E /* PDFViewController.swift in Sources */,
 				DA9133171F956B3F002C4DBE /* AddTagCollectionView.swift in Sources */,
 				DA9F066C1F8F4B1300EA5F18 /* PhotoCollectionView.swift in Sources */,
 				DACBCAD61F8B35D3003DEC7F /* PianoView.swift in Sources */,
 				DAFDCCB71F982BCD00C0CDE6 /* ToolbarButton.swift in Sources */,
 				DA9133151F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift in Sources */,
+				DAAC42AD1FA9B5C40058344E /* Command.swift in Sources */,
 				DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */,
 				DAD3D62E1F7A2C3C00FC029D /* Reusable.swift in Sources */,
+				DAAC42B61FA9B5C40058344E /* PDFGenerator+Initialization.swift in Sources */,
 				DA8FC4091F9EC9D500EADAF5 /* Reference_iOS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
