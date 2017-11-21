@@ -14,7 +14,11 @@ class CoreData: NSPersistentContainer {
         return createContainer()
     }()
     
-    internal var paper: Paper!
+//    internal var paper: Paper!
+    
+    
+    weak var textView: PianoTextView?
+    
     internal lazy var privateMOC: NSManagedObjectContext = {
         let moc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         moc.parent = self.viewContext
@@ -58,10 +62,6 @@ extension CoreData {
         return container
     }
     
-    private func deleteImage(){
-        
-    }
-    
     internal func asyncSave(attrString: NSAttributedString, to paper: Paper){
         
         //1. 캐시에 임시로 저장
@@ -96,7 +96,7 @@ extension CoreData {
     internal func syncSaveAllNote(){
         //TODO: 프라이빗 큐에서 정상 저장되는 지 체크해보기, unowned self가 되는지 체크
 
-        guard let attrText = Reference.sharedInstance.attrText?.copy() as? NSAttributedString else { return }
+        guard let attrText = textView?.attributedText.copy() as? NSAttributedString else { return }
         cache[attrText] = paper
         privateMOC.performAndWait { [unowned self] in
             for (attrString, paper) in self.cache {
@@ -117,12 +117,11 @@ extension CoreData {
         }
     }
     
-    //외부 큐에서는 이 메서드 사용(?)
     internal func saveViewContext() {
         do {
             try viewContext.save()
         } catch {
-            print("에러발생!!! \(error.localizedDescription)")
+            print("saveViewContext in CoreData \n error: \(error.localizedDescription)")
         }
     }
     
@@ -147,23 +146,6 @@ extension CoreData {
             print("could not delete \(error.localizedDescription)")
         }
     }
-    
-    //카테고리 없다면 생성하기
-//    internal func createCategoryIfNeeded(){
-//        do {
-//            let categoryRequest: NSFetchRequest<Category> = Category.fetchRequest()
-//            let count = try viewContext.count(for: categoryRequest)
-//            if count == 0 {
-//                let category = Category(context: viewContext)
-//                category.name = "Piano Note"
-//
-//                saveViewContext()
-//            }
-//
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//    }
     
     //세팅 없다면 생성하기
     internal func createPreferenceIfNeeded(){

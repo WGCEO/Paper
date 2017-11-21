@@ -76,9 +76,9 @@ extension PianoTextView {
             
             //폰트, 글자 색상 변경
             let formManager = FormManager.sharedInstance
-            mutableAttrText.addAttributes([.foregroundColor : formManager.textColor,
+            mutableAttrText.addAttributes([.foregroundColor : Global.textColor,
                                            .font: formManager.paperFont,
-                                           .paragraphStyle: formManager.defaultParagraphStyle],
+                                           .paragraphStyle: Global.defaultParagraphStyle],
                                           range: NSMakeRange(0, mutableAttrText.length))
             attrString = mutableAttrText
         }

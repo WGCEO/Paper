@@ -9,28 +9,18 @@
 import Foundation
 import CoreGraphics
 
-protocol Cursorable: class {
+protocol TextInputable: class {
     var cursorRange: NSRange { get set }
     func insertNewLine()
 }
 
 protocol TextAttributes {
     associatedtype Color
-    associatedtype MutableParagraphStyle
     associatedtype Font
+    associatedtype MutableParagraphStyle
     
-    var colors: [Color] { get }
-    var textColor: Color { get }
-    var defaultFontSize: CGFloat { get }
-    var headIndent: CGFloat { get }
-    var tailIndent: CGFloat { get }
-    var defaultParagraphStyle: MutableParagraphStyle { get }
-    var paperFont: Font { get }
-    var paperColor: Color { get }
-    
-    
-    func transformToFont(name: String) -> Font
-    func transFormToColor(name: String) -> Color
+//    var paperFont: Font { get set }
+//    var paperColor: Color { get set }
     
     func calculateFormKern(formStr: String) -> CGFloat
     func calculateDefaultAttributes() -> [NSAttributedStringKey : Any]
@@ -43,27 +33,23 @@ protocol TextAttributes {
 
 class FormManager {
     
-    static let sharedInstance = FormManager()
-    weak var delegate: Cursorable?
+    //legacy code
+//    static let sharedInstance = FormManager()
     
-    //TODO: 폰트를 제작 후에 regex를 변환전과 변환 후로 나눠서
-    let numRegex = "^\\s*(\\d+)(?=\\. )"
-    //    static let listRegex = "^\\s*([-•])(?= )"
-    //    static let asteriskRegex = "^\\s*([\\*\\★])(?= )"
-    //    static let atRegex = "^\\s*([@※])(?= )"
-    let oneRegex = "^\\s*([1•])(?= )"
-    let twoRegex = "^\\s*([2★])(?= )"
-    let threeRegex = "^\\s*([3※])(?= )"
+    let mutableAttrString: NSMutableAttributedString
+    var font: Font
+    var color: Color
+    var delegate: TextInputable?
     
-    let formOne = "•"
-    let formTwo = "★"
-    let formThree = "※"
- 
-    let lineSpacing: CGFloat = 10
+    init(mutableAttrString: NSMutableAttributedString, font: Font, color: Color, delegate: TextInputable? = nil) {
+        self.mutableAttrString = mutableAttrString
+        self.font = font
+        self.color = color
+        self.delegate = delegate
+    }
     
     
-    let colorStrs: [String] = ["red", "mint", "gold"]
-    let fontStrs: [String] = ["xSmall", "small", "medium", "large", "xLarge"]
+    
     
     lazy var defaultAttributes: [NSAttributedStringKey : Any] = {
         return calculateDefaultAttributes()
@@ -74,23 +60,23 @@ class FormManager {
     }()
     
     lazy var oneKern: CGFloat = {
-        return calculateFormKern(formStr: formOne)
+        return calculateFormKern(formStr: Global.formOne)
     }()
     
     lazy var twoKern: CGFloat = {
-        return calculateFormKern(formStr: formTwo)
+        return calculateFormKern(formStr: Global.formTwo)
     }()
     
     lazy var threeKern: CGFloat = {
-        return calculateFormKern(formStr: formThree)
+        return calculateFormKern(formStr: Global.formThree)
     }()
     
     internal func updateAllFormAttributes(){
         defaultAttributes = calculateDefaultAttributes()
         defaultAttributesWithoutParaStyle = calculateDefaultAttributesWithoutParagraph()
-        oneKern = calculateFormKern(formStr: formOne)
-        twoKern = calculateFormKern(formStr: formTwo)
-        threeKern = calculateFormKern(formStr: formThree)
+        oneKern = calculateFormKern(formStr: Global.formOne)
+        twoKern = calculateFormKern(formStr: Global.formTwo)
+        threeKern = calculateFormKern(formStr: Global.formThree)
     }
     
 }
@@ -131,7 +117,7 @@ extension FormManager {
                 addAttributeFor(form: paperForm, paraRange: paraRange, mutableAttrString: mutableAttrString)
             }
         } else {
-            mutableAttrString.addAttributes([.paragraphStyle : defaultParagraphStyle], range: paraRange)
+            mutableAttrString.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: paraRange)
         }
     }
     
@@ -158,7 +144,7 @@ extension FormManager {
         let prevParaRange = (mutableAttrString.string as NSString)
             .paragraphRange(for: NSMakeRange(currentParaRange.location - 1, 0))
         
-        guard let prevNumRange = formRange(text: mutableAttrString.string, range: prevParaRange, regex: numRegex)
+        guard let prevNumRange = formRange(text: mutableAttrString.string, range: prevParaRange, regex: Global.numRegex)
             else { return }
         let prevGapRange = NSMakeRange(prevParaRange.location,
                                        prevNumRange.location - prevParaRange.location)
@@ -187,7 +173,7 @@ extension FormManager {
         while currentParaRange.location + currentParaRange.length < mutableAttrString.length {
             let nextParaRange = (mutableAttrString.string as NSString).paragraphRange(for: NSMakeRange(currentParaRange.location + currentParaRange.length + 1, 0))
 
-            guard let nextNumRange = formRange(text: mutableAttrString.string, range: nextParaRange, regex: numRegex)
+            guard let nextNumRange = formRange(text: mutableAttrString.string, range: nextParaRange, regex: Global.numRegex)
                 
                 else { return }
             let nextGapRange = NSMakeRange(nextParaRange.location,
@@ -254,8 +240,8 @@ extension FormManager {
         //텍스트가 없다면 해당 패러그랲 스타일 리셋시켜버리고 다 지워버리기
         mutableAttrString.addAttributes([
             .font : paperFont,
-            .foregroundColor : textColor,
-            .paragraphStyle : defaultParagraphStyle],
+            .foregroundColor : Global.textColor,
+            .paragraphStyle : Global.defaultParagraphStyle],
                                   range: paraRange)
         //다음 행이 있다면 지워졌던 개행도 삽입해줘야함
         let existNextParagraph = mutableAttrString.length > paraRange.location + paraRange.length
@@ -272,15 +258,15 @@ extension FormManager {
             let resetRange = form.range
             let mutableAttrText = NSMutableAttributedString(string: resetStr, attributes: [
                 .font : paperFont,
-                .foregroundColor : textColor])
+                .foregroundColor : Global.textColor])
             mutableAttrString.replaceCharacters(in: resetRange, with: mutableAttrText)
-            mutableAttrString.addAttributes([.paragraphStyle : defaultParagraphStyle], range: paraRange)
+            mutableAttrString.addAttributes([.paragraphStyle : Global.defaultParagraphStyle], range: paraRange)
         } else {
             let resetRange = NSMakeRange(form.range.location, form.range.length + 1)
-            mutableAttrString.addAttributes([.foregroundColor : textColor,
+            mutableAttrString.addAttributes([.foregroundColor : Global.textColor,
                                        .font : paperFont],
                                       range: resetRange)
-            mutableAttrString.addAttributes([.paragraphStyle : defaultParagraphStyle],
+            mutableAttrString.addAttributes([.paragraphStyle : Global.defaultParagraphStyle],
                                       range: paraRange)
         }
     }

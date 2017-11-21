@@ -25,13 +25,13 @@ enum PaperFormType: EnumCollection {
         get {
             switch self {
             case .number:
-                return FormManager.sharedInstance.numRegex
+                return Global.numRegex
             case .one:
-                return FormManager.sharedInstance.oneRegex
+                return Global.oneRegex
             case .two:
-                return FormManager.sharedInstance.twoRegex
+                return Global.twoRegex
             case .three:
-                return FormManager.sharedInstance.threeRegex
+                return Global.threeRegex
             }
         }
     }

@@ -14,6 +14,8 @@ class PianoTextView: UITextView {
     var userEdited: Bool = false
     @IBOutlet weak var mirrorScrollView: MirrorScrollView!
     @IBOutlet weak var mirrorScrollViewBottom: NSLayoutConstraint!
+    var paper: Paper!
+    let formManager
     
     override var typingAttributes: [String : Any] {
         get {
@@ -26,10 +28,6 @@ class PianoTextView: UITextView {
         }
     }
     
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        super.init(frame: frame, textContainer: textContainer)
-    }
-    
     //MARK: Init
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -39,10 +37,6 @@ class PianoTextView: UITextView {
     //MARK: Piano
     public var control = PianoControl()
     internal var coverView: UIView?
- 
-
-    
-    
 }
 
 //MARK: setup
@@ -51,7 +45,7 @@ extension PianoTextView {
         
         let formManager = FormManager.sharedInstance
         formManager.delegate = self
-        textColor = formManager.textColor
+        textColor = Global.textColor
         font = formManager.paperFont
         attributedText = CoreData.sharedInstance.paperFullContent()
         tintColor = formManager.paperColor
@@ -62,7 +56,7 @@ extension PianoTextView {
         textContainerInset.top = 20
         textContainerInset.bottom = 120
         //코어데이터 세팅
-        Reference.sharedInstance.textView = self
+        CoreData.sharedInstance.textView = self
         
         //typingAttribute의 문단 세팅
         for (key, value) in formManager.defaultAttributes {
@@ -79,7 +73,7 @@ extension PianoTextView {
     }
 }
 
-extension PianoTextView: Cursorable {
+extension PianoTextView: TextInputable {
     var cursorRange: NSRange {
         get {
             return selectedRange

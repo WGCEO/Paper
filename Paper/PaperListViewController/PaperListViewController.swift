@@ -46,13 +46,13 @@ class PaperListViewController: DefaultViewController {
     @IBAction func tapCreatePaperButton(_ sender: UIButton) {
         //1. 페이퍼 생성
         let formManager = FormManager.sharedInstance
-        let paragraphStyle = formManager.defaultParagraphStyle
+        let paragraphStyle = Global.defaultParagraphStyle
         let defaultFontStr = "small"
         let defaultColorStr = "red"
         let attrString = NSAttributedString(string: "", attributes: [
-            .font : formManager.transformToFont(name: defaultFontStr),
+            .font : Global.transformToFont(name: defaultFontStr),
             .paragraphStyle : paragraphStyle,
-            .foregroundColor : formManager.textColor])
+            .foregroundColor : Global.textColor])
         let data = NSKeyedArchiver.archivedData(withRootObject: attrString)
         let newPaper = Paper(context: CoreData.sharedInstance.viewContext)
         newPaper.fullContent = data

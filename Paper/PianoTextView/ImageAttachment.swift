@@ -17,7 +17,7 @@ class ImageAttachment: NSTextAttachment {
         
         if let image = self.image {
             let imageSize: CGSize = image.size
-            let headIndent = FormManager.sharedInstance.headIndent
+            let headIndent = Global.headIndent
             if lineFrag.width - (headIndent * 2) < imageSize.width {
                 scalingFactor = (lineFrag.width - (headIndent * 2)) / imageSize.width
             }

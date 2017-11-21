@@ -443,7 +443,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                         <outletCollection property="toolbarButtons" destination="h95-0R-w8z" collectionClass="NSMutableArray" id="efJ-Us-5r7"/>
                         <outletCollection property="toolbarButtons" destination="9Le-9S-dOh" collectionClass="NSMutableArray" id="nxF-Nz-sHn"/>
                         <segue destination="dkI-jj-CzQ" kind="presentation" identifier="AddTagViewController" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Usn-uj-p7P"/>
-                        <segue destination="bec-zX-SZa" kind="modal" identifier="PDFViewController" id="gDF-C9-g5B"/>
+                        <segue destination="bec-zX-SZa" kind="presentation" identifier="PDFViewController" id="gDF-C9-g5B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Zp-LN-i8i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -631,7 +631,7 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VK6-Vf-B9e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1727.2" y="771.36431784107947"/>
+            <point key="canvasLocation" x="1727" y="957"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VTm-kb-DBO">
