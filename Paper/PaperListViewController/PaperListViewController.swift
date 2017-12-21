@@ -18,6 +18,7 @@ class PaperListViewController: DefaultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        print("hello List")
     }
     
     override func viewDidAppear(_ animated: Bool) {

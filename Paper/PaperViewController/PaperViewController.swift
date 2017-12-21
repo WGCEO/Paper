@@ -29,6 +29,7 @@ class PaperViewController: DefaultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        print("hello ViewC")
 
         //TODO: 화면 방향 바뀌면 다시 세팅해줘야 하는 것들:
         descriptionViewHeight.constant = topMargin()
