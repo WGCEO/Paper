@@ -18,6 +18,7 @@ class PDFViewController: UIViewController {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         view = webView
+        print("hello PDF")
     }
 
     override func viewDidLoad() {
