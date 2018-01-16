@@ -76,6 +76,11 @@ extension PianoTextView {
         inputAssistantItem.leadingBarButtonGroups = []
         inputAssistantItem.trailingBarButtonGroups = []
         allowsEditingTextAttributes = true
+        
+        attributedText.enumerateAttribute(.attachment, in: NSMakeRange(0, attributedText.length), options: []) { [weak self](value, range, stop) in
+            self?.layoutManager.invalidateDisplay(forCharacterRange: range)
+        }
+        
     }
 }
 

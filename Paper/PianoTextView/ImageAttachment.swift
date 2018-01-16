@@ -9,10 +9,10 @@
 import UIKit
 
 class ImageAttachment: NSTextAttachment {
+
     
     
     override func attachmentBounds(for textContainer: NSTextContainer?, proposedLineFragment lineFrag: CGRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> CGRect {
-        
         var scalingFactor: CGFloat = 1.0
         
         if let image = self.image {
