@@ -29,6 +29,7 @@ class PaperTableView: UITableView {
     private func setupPaperResultsController(selectedTag: Tag?){
         let context = CoreData.sharedInstance.viewContext
         let request: NSFetchRequest<Paper> = Paper.fetchRequest()
+        request.fetchBatchSize = 10
         
         let predicate: NSPredicate
         if let selectedTag = selectedTag {

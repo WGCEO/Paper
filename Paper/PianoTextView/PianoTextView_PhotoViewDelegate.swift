@@ -29,13 +29,20 @@ extension PianoTextView: PhotoViewDelegate {
         //왼쪽 범위가 존재하고 && 왼쪽에 개행이 아니면 개행 삽입하기
         insertNewLineToLeftSideIfNeeded(location: selectedRange.location)
         
+       
+        let imageURL = NSURL(string: "https://www.cocoanetics.com/files/Cocoanetics_Square.jpg")!
+        let attachment = AsyncTextAttachment(imageURL: imageURL)
+        //        attachment.displaySize = CGSize(width: 100, height: 134)
+        //        attachment.image = UIImage.placeholder(UIColor.grayColor(), size: attachment.displaySize!)
+        let attrString = NSMutableAttributedString(attributedString:NSAttributedString(attachment: attachment))
         
-        let attachment = ImageAttachment()
-        attachment.image = image
-        let attrString = NSMutableAttributedString(attributedString: NSAttributedString(attachment: attachment))
+        /*let attachment = ImageAttachment()
+        attachment.image = image.transform3by4AndFitScreen()
+//        attachment.contents = "Hii".data(using: .utf8)
+        let attrString = NSMutableAttributedString(attributedString: NSAttributedString(attachment: attachment))*/
         attrString.addAttributes(FormManager.sharedInstance.defaultAttributes, range: NSMakeRange(0, attrString.length))
         textStorage.replaceCharacters(in: selectedRange, with: attrString)
-        CoreData.sharedInstance.textView?.userEdited = true
+        Reference.sharedInstance.textView?.userEdited = true
         
         selectedRange = NSMakeRange(selectedRange.location + 1, 0)
         

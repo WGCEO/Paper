@@ -16,23 +16,81 @@ extension FormManager: TextAttributes {
    
     //TODO: 상수는 모두 FormManager의 프로퍼티에 박아두고 여기에는 변수로 참조하기
     
-//    var paperFont: UIFont {
-//        get {
-//            return font
-//        } set {
-//            self.font = newValue
-//        }
-//    }
-//    
-//    var paperColor: UIColor {
-//        get {
-//            return color
-//        } set {
-//            self.color = newValue
-//        }
-//    }
+    var paperFont: UIFont {
+        let fontStr = CoreData.sharedInstance.paper.font!
+        return transformToFont(name: fontStr)
+    }
     
-
+    var paperColor: UIColor {
+        let colorStr = CoreData.sharedInstance.paper.color!
+        return transFormToColor(name: colorStr)
+    }
+    
+    var iphone: Bool {
+        return UIDevice.current.userInterfaceIdiom == .phone
+    }
+    
+    var colors: [UIColor] {
+        return [
+            UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1),
+            UIColor(red: 6/255, green: 196/255, blue: 153/255, alpha: 1),
+            UIColor(red: 249/255, green: 168/255, blue: 37/255, alpha: 1)]
+    }
+    
+    var defaultFontSize: CGFloat {
+        return iphone ? 17 : 23
+    }
+    
+    var headIndent: CGFloat {
+        return iphone ? 30 : 40
+    }
+    
+    var tailIndent: CGFloat {
+        return iphone ? -20 : -30
+    }
+    
+    var textColor: UIColor {
+        return UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1)
+    }
+    
+    var defaultParagraphStyle: NSMutableParagraphStyle {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.firstLineHeadIndent = headIndent
+        paragraphStyle.headIndent = headIndent
+        paragraphStyle.tailIndent = tailIndent
+        paragraphStyle.lineSpacing = lineSpacing
+        return paragraphStyle
+    }
+    
+    func transformToFont(name: String) -> UIFont {
+        switch name {
+        case "xSmall":
+            return UIFont.systemFont(ofSize: defaultFontSize - 2)
+        case "small":
+            return UIFont.systemFont(ofSize: defaultFontSize)
+        case "medium":
+            return UIFont.systemFont(ofSize: defaultFontSize + 2)
+        case "large":
+            return UIFont.systemFont(ofSize: defaultFontSize + 4)
+        case "xLarge":
+            return UIFont.systemFont(ofSize: defaultFontSize + 6)
+        default:
+            return UIFont.systemFont(ofSize: defaultFontSize)
+        }
+    }
+    
+    func transFormToColor(name: String) -> UIColor {
+        switch name {
+        case "red":
+            return colors[0]
+        case "mint":
+            return colors[1]
+        case "gold":
+            return colors[2]
+        default:
+            return colors[0]
+        }
+    }
     
     func calculateFormKern(formStr: String) -> CGFloat {
         let font = paperFont
@@ -47,9 +105,9 @@ extension FormManager: TextAttributes {
     }
     
     func calculateDefaultAttributes() -> [NSAttributedStringKey : Any] {
-        return [.paragraphStyle : Global.defaultParagraphStyle,
+        return [.paragraphStyle : defaultParagraphStyle,
                 .font : paperFont,
-                .foregroundColor: Global.textColor,
+                .foregroundColor: textColor,
                 .backgroundColor: UIColor.clear,
                 .underlineStyle: 0,
                 .strikethroughStyle: 0,
@@ -59,7 +117,7 @@ extension FormManager: TextAttributes {
     
     func calculateDefaultAttributesWithoutParagraph() -> [NSAttributedStringKey : Any] {
         return [.font : paperFont,
-                .foregroundColor: Global.textColor,
+                .foregroundColor: textColor,
                 .backgroundColor: UIColor.clear,
                 .underlineStyle: 0,
                 .strikethroughStyle: 0,
@@ -73,12 +131,12 @@ extension FormManager: TextAttributes {
         let numberingFont = UIFont(name: "Avenir Next", size: font.pointSize)!
         let num = NSAttributedString(string: "4", attributes: [.font : numberingFont])
         let dotAndSpace = NSAttributedString(string: ". ", attributes: [.font : font])
-        let firstLineHeadIndent = Global.headIndent - (num.size().width + dotAndSpace.size().width)
-        let headIndent = Global.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
+        let firstLineHeadIndent = self.headIndent - (num.size().width + dotAndSpace.size().width)
+        let headIndent = self.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
         paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
         paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = Global.tailIndent
-        paragraphStyle.lineSpacing = Global.lineSpacing
+        paragraphStyle.tailIndent = tailIndent
+        paragraphStyle.lineSpacing = lineSpacing
         return paragraphStyle
     }
     
@@ -96,14 +154,14 @@ extension FormManager: TextAttributes {
         let form = NSAttributedString(string: form.type.converted, attributes: [
             .font : font]).size()
         let firstLineHeadIndent = form.width > num.width + dot.width ?
-            Global.headIndent - (space.width + form.width) :
-            Global.headIndent - (space.width + (num.width + dot.width + form.width )/2)
-        let headIndent = Global.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
+            self.headIndent - (space.width + form.width) :
+            self.headIndent - (space.width + (num.width + dot.width + form.width )/2)
+        let headIndent = self.headIndent + attributedText.attributedSubstring(from: gapRange).size().width
         
         paragraphStyle.firstLineHeadIndent = firstLineHeadIndent
         paragraphStyle.headIndent = headIndent
-        paragraphStyle.tailIndent = Global.tailIndent
-        paragraphStyle.lineSpacing = Global.lineSpacing
+        paragraphStyle.tailIndent = tailIndent
+        paragraphStyle.lineSpacing = lineSpacing
         return paragraphStyle
     }
     

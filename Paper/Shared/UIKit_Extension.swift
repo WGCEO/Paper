@@ -51,6 +51,7 @@ extension UIColor {
 }
 
 extension UIImage {
+    
     static func placeholder(color: UIColor, size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         
@@ -83,19 +84,30 @@ extension UIImage {
         guard let resultImage = croppedImage else { return nil }
         
         //2. 크기 줄이기 ifNeeded
+        
         let ratio = UIScreen.main.bounds.width / resultImage.size.width
         if ratio < 1 {
-            let size = resultImage.size.applying(CGAffineTransform(scaleX: ratio, y: ratio))
+            var size = CGSize(width: 480, height: 360)//resultImage.size.applying(CGAffineTransform(scaleX: ratio, y: ratio))
+            size.width *= 0.05
+            size.height *= 0.05
             UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
             resultImage.draw(in: CGRect(origin: CGPoint.zero, size: size))
-            let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+            var scaledImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
+//            scaledImage = UIImage(data: UIImageJPEGRepresentation(scaledImage!, 0.0)!)
             
+//            print("\(resultImage.getCount()) \(scaledImage?.getCount()) \(UIImagePNGRepresentation(scaledImage!)?.count) \(UIImageJPEGRepresentation(scaledImage!, 0.0))")
             if let resultImage = scaledImage {
                 return resultImage
             }
         }
         return resultImage
+    }
+}
+
+extension UIImage {
+    func getCount() -> Int {
+        return (self.cgImage?.height ?? 0) * (self.cgImage?.bytesPerRow ?? 0)
     }
 }
 

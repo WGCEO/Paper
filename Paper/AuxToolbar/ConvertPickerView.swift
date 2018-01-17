@@ -16,7 +16,7 @@ class ConvertPickerView: UIView {
         ActivityIndicator.startAnimating()
         
         DispatchQueue.main.async {
-            guard let textView = CoreData.sharedInstance.textView,
+            guard let textView = Reference.sharedInstance.textView,
                 let attrString = textView.attributedText else { return }
             
             //해당 페이퍼의 크기를 가져와서 pdf 기본 폰트 (11?)와의 차이값을 모든 폰트 사이즈에서 빼주기

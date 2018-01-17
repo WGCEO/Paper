@@ -9,20 +9,29 @@
 import UIKit
 
 class ImageAttachment: NSTextAttachment {
+
     
+//    override func image(forBounds imageBounds: CGRect, textContainer: NSTextContainer?, characterIndex charIndex: Int) -> UIImage? {
+//
+//        return UIImage(named: "high-resolution-wallpapers-25")?.transform3by4AndFitScreen()
+//    }
     
     override func attachmentBounds(for textContainer: NSTextContainer?, proposedLineFragment lineFrag: CGRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> CGRect {
         
-        var scalingFactor: CGFloat = 1.0
+        let headIndent = FormManager.sharedInstance.headIndent
+        return CGRect(x: headIndent, y:0, width:240, height: 180)
+        var scalingFactor: CGFloat = 3.0
+   
+
         
         if let image = self.image {
             let imageSize: CGSize = image.size
-            let headIndent = Global.headIndent
+            let headIndent = FormManager.sharedInstance.headIndent
             if lineFrag.width - (headIndent * 2) < imageSize.width {
                 scalingFactor = (lineFrag.width - (headIndent * 2)) / imageSize.width
             }
             let rect = CGRect(x: headIndent, y: 0, width: imageSize.width * scalingFactor, height: imageSize.height * scalingFactor)
-            return rect
+            return CGRect(x: headIndent, y:0, width:249, height: 187)
         } else {
             return CGRect.zero
         }

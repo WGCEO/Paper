@@ -19,11 +19,11 @@ class FontPickerView: UIView {
     @IBAction func fontChanged(_ sender: UISlider) {
         let value = lroundf(sender.value)
         sender.setValue(Float(value), animated: true)
-        let fontStr = Global.fontStrs[value]
+        let fontStr = FormManager.sharedInstance.fontStrs[value]
         //1. 애니메이션으로 비동기를 준비한다.
         
         //2. 폰트사이즈가 다른 것들의 범위를 다 찾아내고, 기존 폰트와의 크기 차이를 구한다.
-        guard let textView = CoreData.sharedInstance.textView,
+        guard let textView = Reference.sharedInstance.textView,
             let paper = CoreData.sharedInstance.paper else { return }
         
         let range = NSMakeRange(0, textView.attributedText.length)
@@ -39,11 +39,11 @@ class FontPickerView: UIView {
 
         //3. 노트의 폰트, 텍스트뷰 자체의 폰트 값을 세팅해버린다.
         paper.font = fontStr
-        textView.font = Global.transformToFont(name: fontStr)
+        textView.font = FormManager.sharedInstance.transformToFont(name: fontStr)
         
         //4. 크기가 다른 것들에 대해 크기 바꾼다.
         for tuple in tuplesForUpdateSize {
-            let font = Global.transformToFont(name: fontStr)
+            let font = FormManager.sharedInstance.transformToFont(name: fontStr)
             
             let newSize = font.pointSize + CGFloat(tuple.sizeDifference)
             let newFont: UIFont
@@ -59,7 +59,7 @@ class FontPickerView: UIView {
             }
             
             textView.textStorage.addAttributes([.font: newFont], range: tuple.range)
-            CoreData.sharedInstance.textView?.userEdited = true
+            Reference.sharedInstance.textView?.userEdited = true
         }
         
         //5. 폰트에 영향 받는 것들 업데이트한다.

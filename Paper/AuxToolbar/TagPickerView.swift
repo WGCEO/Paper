@@ -10,11 +10,6 @@ import UIKit
 
 class TagPickerView: UIView {
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-    }
-    
     
 
 }

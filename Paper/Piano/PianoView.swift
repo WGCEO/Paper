@@ -102,6 +102,7 @@ class PianoView: UIView {
             mutableAttrText.addAttributes(attributeStyle.removeAttr(), range: NSMakeRange(0, mutableAttrText.length))
             labelInfo.label.attributedText = mutableAttrText
             labelInfo.label.bounds.size = mutableAttrText.size()
+            
         }
     }
     
