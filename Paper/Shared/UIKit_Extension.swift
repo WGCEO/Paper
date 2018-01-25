@@ -81,15 +81,18 @@ extension UIImage {
             }
         }
         
-        guard let resultImage = croppedImage else { return nil }
+        guard let resultImage = UIImage(data: UIImageJPEGRepresentation(croppedImage ?? UIImage(), 0.0) ?? Data()) else { return nil }
         
         //2. 크기 줄이기 ifNeeded
         
         let ratio = UIScreen.main.bounds.width / resultImage.size.width
         if ratio < 1 {
-            var size = CGSize(width: 480, height: 360)//resultImage.size.applying(CGAffineTransform(scaleX: ratio, y: ratio))
-            size.width *= 0.05
-            size.height *= 0.05
+            let imageSize: CGSize = resultImage.size
+//            let size = CGSize(width: 240, height: imageSize.height * 240/imageSize.width)
+            let size = CGSize(width: 240, height: 180)
+//            var size = resultImage.size.applying(CGAffineTransform(scaleX: ratio, y: ratio))
+//            size.width *= 0.05
+//            size.height *= 0.05
             UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
             resultImage.draw(in: CGRect(origin: CGPoint.zero, size: size))
             var scaledImage = UIGraphicsGetImageFromCurrentImageContext()

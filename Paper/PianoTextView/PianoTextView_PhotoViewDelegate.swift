@@ -31,15 +31,16 @@ extension PianoTextView: PhotoViewDelegate {
         
        
         let imageURL = NSURL(string: "https://www.cocoanetics.com/files/Cocoanetics_Square.jpg")!
-        let attachment = AsyncTextAttachment(imageURL: imageURL)
+//        let attachment = ImageAttachment(data: <#T##Data?#>, ofType: <#T##String?#>)//AsyncTextAttachment(imageURL: imageURL)
         //        attachment.displaySize = CGSize(width: 100, height: 134)
         //        attachment.image = UIImage.placeholder(UIColor.grayColor(), size: attachment.displaySize!)
-        let attrString = NSMutableAttributedString(attributedString:NSAttributedString(attachment: attachment))
+//        let attrString = NSMutableAttributedString(attributedString:NSAttributedString(attachment: attachment))
         
-        /*let attachment = ImageAttachment()
-        attachment.image = image.transform3by4AndFitScreen()
+        let attachment = ImageTextAttachment()
+        attachment.image = image
+//        attachment.parentTextView = self
 //        attachment.contents = "Hii".data(using: .utf8)
-        let attrString = NSMutableAttributedString(attributedString: NSAttributedString(attachment: attachment))*/
+        let attrString = NSMutableAttributedString(attributedString: NSAttributedString(attachment: attachment))
         attrString.addAttributes(FormManager.sharedInstance.defaultAttributes, range: NSMakeRange(0, attrString.length))
         textStorage.replaceCharacters(in: selectedRange, with: attrString)
         Reference.sharedInstance.textView?.userEdited = true

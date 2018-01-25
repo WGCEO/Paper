@@ -106,13 +106,13 @@ class PaperTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAni
         //2. 나타날 뷰에 대한 세팅
         let originalFrame = to.frame
         if let cell = paperCell {
-            let textView = to.viewWithTag(20) as! PianoTextView
-            to.frame = cell.label.convert(cell.label.bounds, to: to)
-            to.frame.origin.y -= textView.textContainerInset.top
+//            let textView = to.viewWithTag(20) as! PianoTextView
+//            to.frame = cell.label.convert(cell.label.bounds, to: to)
+//            to.frame.origin.y -= textView.textContainerInset.top
         } else if let button = createPaperButton {
-            let textView = to.viewWithTag(20) as! PianoTextView
-            to.frame = button.convert(button.bounds, to: to)
-            to.frame.origin.y -= textView.textContainerInset.top
+//            let textView = to.viewWithTag(20) as! PianoTextView
+//            to.frame = button.convert(button.bounds, to: to)
+//            to.frame.origin.y -= textView.textContainerInset.top
         }
         
         let animator = UIViewPropertyAnimator(duration: duration, curve: .easeInOut)

@@ -10,6 +10,7 @@ import UIKit
 
 extension PaperViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        
         if let textView = textView as? PianoTextView,
             CoreData.sharedInstance.preference.showMirroring,
             kbHeight != nil {
@@ -26,7 +27,7 @@ extension PaperViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard let textView = textView as? PianoTextView else { return true }
         let currentParagraphRange = textView.rangeForCurrentParagraph()
-        
+        textView.isTyping = true
         if textView.attributedText.containsAttachments(in: currentParagraphRange)
             && !textView.attributedText.containsAttachments(in: range)
             && text != "\n"
@@ -50,16 +51,29 @@ extension PaperViewController: UITextViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let textView = scrollView as? PianoTextView, !textView.isEditable else { return }
         textView.attachControl()
+        
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         guard let textView = scrollView as? PianoTextView, !textView.isEditable, !decelerate else { return }
         textView.attachControl()
+        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         guard let textView = scrollView as? PianoTextView, !textView.isEditable else { return }
         textView.detachControl()
+        
     }
-
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if textView.isTyping {
+            let lowerRange = NSMakeRange(0, textView.visibleRange?.location ?? 0)
+            let upperRange = NSMakeRange(textView.visibleRange?.location ?? 0, textView.attributedText.length)
+            textView.layoutManager.invalidateDisplay(forGlyphRange: lowerRange)
+            textView.layoutManager.invalidateDisplay(forGlyphRange: upperRange)
+        }
+        textView.isTyping = false
+//        textView.layoutManager.invalidateDisplay(forGlyphRange: textView.visibleRange ?? NSMakeRange(0, 0))
+    }
 }

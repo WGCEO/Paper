@@ -72,6 +72,7 @@ class MirrorScrollView: UIScrollView {
             attrText.length != 0
             else { return }
         
+        
         //2. 미러링 커서 위치 지정. 만약 미러링된 글자들보다 왼쪽에 터치한 경우, 커서를 가장 왼쪽으로 이동
         let cursorIndex = touch.x < 0 ? glyphIndex : glyphIndex + 1
         let frontAttrText = attrText.attributedSubstring(from: NSMakeRange(0, cursorIndex))
@@ -106,6 +107,7 @@ class MirrorScrollView: UIScrollView {
     }
     
     private func setTextViewSelectedRange(textView: UITextView, byFrontText text: String, byCursorIndex index: Int) {
+        
         isTapped = true
         let range = (textView.text as NSString).paragraphRange(for: textView.selectedRange)
         

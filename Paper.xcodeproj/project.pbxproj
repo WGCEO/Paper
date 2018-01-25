@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C42F66E2017244E00340B0B /* FastLayoutTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C42F66D2017244E00340B0B /* FastLayoutTextView.swift */; };
+		6C42F6702017249B00340B0B /* ViewTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C42F66F2017249B00340B0B /* ViewTextAttachment.swift */; };
 		6CE27F80200F01DC00867CC3 /* AsyncTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE27F7D200F01DB00867CC3 /* AsyncTextAttachment.swift */; };
 		6CE27F81200F01DC00867CC3 /* NSLayoutManager+Attachments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE27F7E200F01DC00867CC3 /* NSLayoutManager+Attachments.swift */; };
 		DA0F0E321F8F898E00729572 /* PianoPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0F0E311F8F898E00729572 /* PianoPickerButton.swift */; };
@@ -122,6 +124,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C42F66D2017244E00340B0B /* FastLayoutTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastLayoutTextView.swift; sourceTree = "<group>"; };
+		6C42F66F2017249B00340B0B /* ViewTextAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTextAttachment.swift; sourceTree = "<group>"; };
 		6CE27F7D200F01DB00867CC3 /* AsyncTextAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncTextAttachment.swift; sourceTree = "<group>"; };
 		6CE27F7E200F01DC00867CC3 /* NSLayoutManager+Attachments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutManager+Attachments.swift"; sourceTree = "<group>"; };
 		DA0F0E311F8F898E00729572 /* PianoPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoPickerButton.swift; sourceTree = "<group>"; };
@@ -252,6 +256,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C42F66C2017244E00340B0B /* FastLayoutTextView */ = {
+			isa = PBXGroup;
+			children = (
+				6C42F66D2017244E00340B0B /* FastLayoutTextView.swift */,
+				6C42F66F2017249B00340B0B /* ViewTextAttachment.swift */,
+			);
+			path = FastLayoutTextView;
+			sourceTree = "<group>";
+		};
 		6CE27F83200F01DE00867CC3 /* AsyncAttachment */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +463,7 @@
 				DAD3D6211F7A291C00FC029D /* Info.plist */,
 				DAD3D6151F7A291C00FC029D /* AppDelegate.swift */,
 				DACBCAD01F8B1964003DEC7F /* Assets */,
+				6C42F66C2017244E00340B0B /* FastLayoutTextView */,
 				DAB994261F8B0D05007AF6CD /* Model */,
 				DA6E023E1F885AB10082576A /* Shared */,
 				DAB994271F8B0D1B007AF6CD /* DefaultViewController */,
@@ -719,12 +733,14 @@
 				DAD3D63B1F7A30CE00FC029D /* PaperModel.xcdatamodeld in Sources */,
 				DAAC42B01FA9B5C40058344E /* Container.swift in Sources */,
 				DAAC42951FA978400058344E /* PDFViewController.swift in Sources */,
+				6C42F6702017249B00340B0B /* ViewTextAttachment.swift in Sources */,
 				DA9133171F956B3F002C4DBE /* AddTagCollectionView.swift in Sources */,
 				DA9F066C1F8F4B1300EA5F18 /* PhotoCollectionView.swift in Sources */,
 				DACBCAD61F8B35D3003DEC7F /* PianoView.swift in Sources */,
 				DAFDCCB71F982BCD00C0CDE6 /* ToolbarButton.swift in Sources */,
 				DA9133151F95693E002C4DBE /* AddTagViewController_KeyboardNotification.swift in Sources */,
 				DAAC42AD1FA9B5C40058344E /* Command.swift in Sources */,
+				6C42F66E2017244E00340B0B /* FastLayoutTextView.swift in Sources */,
 				DAC697231F8B59A7008071E4 /* PianoTextView_Effectable.swift in Sources */,
 				DAD3D62E1F7A2C3C00FC029D /* Reusable.swift in Sources */,
 				DAAC42B61FA9B5C40058344E /* PDFGenerator+Initialization.swift in Sources */,
@@ -916,7 +932,7 @@
 				INFOPLIST_FILE = Paper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.piano.Paper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.piano.fastPaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
@@ -933,7 +949,7 @@
 				INFOPLIST_FILE = Paper/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.piano.Paper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.piano.fastPaper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;

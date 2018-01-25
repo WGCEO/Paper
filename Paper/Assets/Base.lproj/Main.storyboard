@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q5t-9d-Dgm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q5t-9d-Dgm">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -245,8 +245,8 @@ sr3tl5jtlZjqsowg65CgIOqyg+ydtOudvCDsnpDrtoDtlanri4jri6QuA
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
-                                    <outlet property="mirrorScrollView" destination="ntm-AW-Gwr" id="xi9-fK-eQ3"/>
-                                    <outlet property="mirrorScrollViewBottom" destination="JpB-iE-saq" id="bEe-mY-WqU"/>
+                                    <outlet property="mirrorScrollView" destination="ntm-AW-Gwr" id="fEf-s6-2dq"/>
+                                    <outlet property="mirrorScrollViewBottom" destination="JpB-iE-saq" id="5g6-UC-SpY"/>
                                 </connections>
                             </textView>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntm-AW-Gwr" customClass="MirrorScrollView" customModule="Paper" customModuleProvider="target">

@@ -32,6 +32,9 @@ class PaperViewController: DefaultViewController {
 
         //TODO: 화면 방향 바뀌면 다시 세팅해줘야 하는 것들:
         descriptionViewHeight.constant = topMargin()
+        textView.delegate = self
+//        textView.layoutManager.allowsNonContiguousLayout = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
